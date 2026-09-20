@@ -23,13 +23,13 @@
 <script src="/assets/calc-core.js" defer></script>
 </head>
 <body>
-<header class="site"><div class="wrap"><a class="logo" href="/"><img src="/assets/logo.png" alt="Quick JSON Tools" width="60" height="34"></a><nav class="site"><a href="/json-formatter/">JSON Formatter</a><a href="/base64-decode/">Base64</a><a href="/unix-timestamp-converter/">Timestamp</a><a href="/json-viewer/">JSON Viewer</a></nav></div></header>
+<header class="site"><div class="wrap"><a class="logo" href="/"><img src="/assets/logo.png" alt="Quick JSON Tools" width="60" height="34"></a><button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="site-nav"><span></span></button><nav class="site" id="site-nav"><a href="/json-formatter/">JSON Formatter</a><a href="/base64-decode/">Base64</a><a href="/unix-timestamp-converter/">Timestamp</a><a href="/json-viewer/">JSON Viewer</a></nav></div></header>
 <main><div class="wrap">
 <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Quick JSON Tools</a> › Base64 Decode and Encode</nav>
 <h1>Base64 Decode and Encode</h1>
-<p class="answer">To <strong>Base64 decode</strong>, map each character back to its 6-bit value and regroup the bits into bytes: every 4 characters give 3 bytes. <a href="https://www.rfc-editor.org/rfc/rfc4648" rel="nofollow noopener">RFC 4648</a> (October 2006) defines the 64-character alphabet and the = padding. Paste Base64 and press Decode to read it as UTF-8 text, or Encode to go the other way, locally.</p>
-<p class="updated">Updated <time datetime="2026-09-20">September 20, 2026</time> · By <a href="/about/">Quick JSON Tools</a></p>
 <div id="calculator" data-calc="base64"><noscript>This tool needs JavaScript turned on.</noscript></div>
+<div class="answer-panel"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.6c.6.5 1 1.2 1 2.4h6c0-1.2.4-1.9 1-2.4A7 7 0 0 0 12 2z"/></svg></span><div><p class="answer">To <strong>Base64 decode</strong>, map each character back to its 6-bit value and regroup the bits into bytes: every 4 characters give 3 bytes. <a href="https://www.rfc-editor.org/rfc/rfc4648" rel="nofollow noopener">RFC 4648</a> (October 2006) defines the 64-character alphabet and the = padding. Paste Base64 and press Decode to read it as UTF-8 text, or Encode to go the other way, locally.</p>
+<p class="updated">Updated <time datetime="2026-09-20">September 20, 2026</time> · By <a href="/about/">Quick JSON Tools</a></p></div></div>
 <div class="ad-slot"><!-- Ad slot 1 (below the tool). Empty until the ad network is approved; reserve its height in CSS first. --></div>
 <h2>How do I decode Base64?</h2>
 <p>Paste the Base64 string and press <strong>Decode</strong>. The tool trims spaces and line breaks, accepts the URL-safe characters - and _, adds any missing = padding, decodes the bytes and reads them as UTF-8 text. Invalid input, or bytes that are not UTF-8 text, produce an error instead of garbled output.</p><p>Worked examples from the tool’s tests:</p><div class="table-wrap"><table class="data"><thead><tr><th>Base64</th><th>Decoded text</th></tr></thead><tbody><tr><td><code>aMOpbGxvIHfDtnJsZCDinJM=</code></td><td><code>héllo wörld ✓</code></td></tr><tr><td><code>aGk_Pz8</code> (URL-safe, no padding)</td><td><code>hi???</code></td></tr></tbody></table></div><p>The first shows why UTF-8 handling matters: é, ö and ✓ each take two or three bytes. <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/atob" rel="nofollow noopener">MDN notes</a> (updated June 24, 2025) that the browser’s <code>atob</code> returns one character per byte, so decoding without a UTF-8 step turns those letters into symbols. This tool adds that step.</p><p>The error “This is not valid Base64, or it decodes to bytes that are not UTF-8 text” means one of two things: the input contains characters outside the alphabet, or it encodes binary data such as an image or a ZIP file. This tool shows text only; it does not save decoded files.</p><pre><code>// JavaScript (UTF-8 safe)
@@ -62,7 +62,7 @@ echo 'aGVsbG8=' | base64 -d</code></pre>
 <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/atob" rel="nofollow noopener">MDN — Window: atob() method</a></li>
 </ul>
 <h2>Related tools</h2>
-<ul>
+<ul class="related-tools">
 <li><a href="/jwt-decoder/">JWT Decoder</a></li>
 <li><a href="/json-to-csv/">JSON to CSV Converter</a></li>
 <li><a href="/json-to-yaml/">JSON to YAML and XML Converter</a></li>
@@ -81,5 +81,6 @@ echo 'aGVsbG8=' | base64 -d</code></pre>
 <div class="footer-bottom"><p>Tools run locally in your browser. Provided as-is.</p><p>© <span id="y"></span> Quick JSON Tools</p></div>
 </div></footer>
 <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+<script src="/assets/nav.js" defer></script>
 </body>
 </html>

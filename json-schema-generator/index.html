@@ -23,13 +23,13 @@
 <script src="/assets/calc-core.js" defer></script>
 </head>
 <body>
-<header class="site"><div class="wrap"><a class="logo" href="/"><img src="/assets/logo.png" alt="Quick JSON Tools" width="60" height="34"></a><nav class="site"><a href="/json-formatter/">JSON Formatter</a><a href="/base64-decode/">Base64</a><a href="/unix-timestamp-converter/">Timestamp</a><a href="/json-viewer/">JSON Viewer</a></nav></div></header>
+<header class="site"><div class="wrap"><a class="logo" href="/"><img src="/assets/logo.png" alt="Quick JSON Tools" width="60" height="34"></a><button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="site-nav"><span></span></button><nav class="site" id="site-nav"><a href="/json-formatter/">JSON Formatter</a><a href="/base64-decode/">Base64</a><a href="/unix-timestamp-converter/">Timestamp</a><a href="/json-viewer/">JSON Viewer</a></nav></div></header>
 <main><div class="wrap">
 <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Quick JSON Tools</a> › JSON Schema Generator</nav>
 <h1>JSON Schema Generator</h1>
-<p class="answer">To go from <strong>JSON to schema</strong>, paste a sample document and press Generate schema. The tool writes a draft 2020-12 <a href="https://json-schema.org/specification" rel="nofollow noopener">JSON Schema</a> that records each value’s type, describes nested objects and arrays, and lists every key in the sample as required. Treat it as a starting point to refine, not a finished contract.</p>
-<p class="updated">Updated <time datetime="2026-09-20">September 20, 2026</time> · By <a href="/about/">Quick JSON Tools</a></p>
 <div id="calculator" data-calc="jsonSchema"><noscript>This tool needs JavaScript turned on.</noscript></div>
+<div class="answer-panel"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.6c.6.5 1 1.2 1 2.4h6c0-1.2.4-1.9 1-2.4A7 7 0 0 0 12 2z"/></svg></span><div><p class="answer">To go from <strong>JSON to schema</strong>, paste a sample document and press Generate schema. The tool writes a draft 2020-12 <a href="https://json-schema.org/specification" rel="nofollow noopener">JSON Schema</a> that records each value’s type, describes nested objects and arrays, and lists every key in the sample as required. Treat it as a starting point to refine, not a finished contract.</p>
+<p class="updated">Updated <time datetime="2026-09-20">September 20, 2026</time> · By <a href="/about/">Quick JSON Tools</a></p></div></div>
 <div class="ad-slot"><!-- Ad slot 1 (below the tool). Empty until the ad network is approved; reserve its height in CSS first. --></div>
 <h2>How do I create a JSON Schema from JSON?</h2>
 <p>Paste a representative JSON document and press <strong>Generate schema</strong>. The tool walks the sample and, for each value, writes its type: object, array, string, integer, number, boolean or null. Objects get properties and a required list, and arrays get an items schema built from their contents.</p><p>Worked example from the tool’s tests:</p><pre><code>{"id": 1, "name": "x", "tags": ["a"], "meta": {"ok": true}}</code></pre><p>produces</p><pre><code>{
@@ -75,7 +75,7 @@
 <li><a href="https://json-schema.org/understanding-json-schema/reference/object" rel="nofollow noopener">JSON Schema — Understanding JSON Schema: object</a></li>
 </ul>
 <h2>Related tools</h2>
-<ul>
+<ul class="related-tools">
 <li><a href="/json-formatter/">JSON Formatter &amp; Validator</a></li>
 <li><a href="/json-validator/">JSON Validator</a></li>
 <li><a href="/json-viewer/">JSON Viewer</a></li>
@@ -94,5 +94,6 @@
 <div class="footer-bottom"><p>Tools run locally in your browser. Provided as-is.</p><p>© <span id="y"></span> Quick JSON Tools</p></div>
 </div></footer>
 <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+<script src="/assets/nav.js" defer></script>
 </body>
 </html>

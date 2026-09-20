@@ -24,13 +24,13 @@
 <script src="/assets/calc-core.js" defer></script>
 </head>
 <body>
-<header class="site"><div class="wrap"><a class="logo" href="/"><img src="/assets/logo.png" alt="Quick JSON Tools" width="60" height="34"></a><nav class="site"><a href="/json-formatter/">JSON Formatter</a><a href="/base64-decode/">Base64</a><a href="/unix-timestamp-converter/">Timestamp</a><a href="/json-viewer/">JSON Viewer</a></nav></div></header>
+<header class="site"><div class="wrap"><a class="logo" href="/"><img src="/assets/logo.png" alt="Quick JSON Tools" width="60" height="34"></a><button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="site-nav"><span></span></button><nav class="site" id="site-nav"><a href="/json-formatter/">JSON Formatter</a><a href="/base64-decode/">Base64</a><a href="/unix-timestamp-converter/">Timestamp</a><a href="/json-viewer/">JSON Viewer</a></nav></div></header>
 <main><div class="wrap">
 <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Quick JSON Tools</a> › SQL Formatter</nav>
 <h1>SQL Formatter</h1>
-<p class="answer">A <strong>SQL formatter</strong> rewrites a query with each clause on its own line and consistent indentation, and can uppercase keywords. This one uses the MIT-licensed <a href="https://github.com/sql-formatter-org/sql-formatter" rel="nofollow noopener">sql-formatter</a> library with dialects for standard SQL, PostgreSQL, MySQL, SQL Server, SQLite and BigQuery, running in your browser.</p>
-<p class="updated">Updated <time datetime="2026-09-20">September 20, 2026</time> · By <a href="/about/">Quick JSON Tools</a></p>
 <div id="calculator" data-calc="sqlFormatter"><noscript>This tool needs JavaScript turned on.</noscript></div>
+<div class="answer-panel"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.6c.6.5 1 1.2 1 2.4h6c0-1.2.4-1.9 1-2.4A7 7 0 0 0 12 2z"/></svg></span><div><p class="answer">A <strong>SQL formatter</strong> rewrites a query with each clause on its own line and consistent indentation, and can uppercase keywords. This one uses the MIT-licensed <a href="https://github.com/sql-formatter-org/sql-formatter" rel="nofollow noopener">sql-formatter</a> library with dialects for standard SQL, PostgreSQL, MySQL, SQL Server, SQLite and BigQuery, running in your browser.</p>
+<p class="updated">Updated <time datetime="2026-09-20">September 20, 2026</time> · By <a href="/about/">Quick JSON Tools</a></p></div></div>
 <div class="ad-slot"><!-- Ad slot 1 (below the tool). Empty until the ad network is approved; reserve its height in CSS first. --></div>
 <h2>How do I format a SQL query?</h2>
 <p>Paste the query, pick the dialect your database uses, choose whether to uppercase keywords, and press <strong>Format SQL</strong>. The library breaks the statement into clauses such as SELECT, FROM, WHERE and ORDER BY, puts each on its own line, and indents the columns and conditions under them. Copy the result back into your editor.</p><p>A typical one-line query to try, from the tool’s placeholder:</p><pre><code>select id, name from users where active = 1 order by name</code></pre><p>With “Uppercase keywords” ticked, the keywords come back as SELECT, FROM, WHERE and ORDER BY on separate lines, with the column list indented beneath SELECT. Untick it to keep your original keyword case.</p><p>Why the dialect matters: databases disagree on quoting and syntax. MySQL quotes identifiers with backticks, SQL Server uses square brackets, and PostgreSQL has operators such as <code>::</code> for casts. Picking the matching dialect helps the formatter read those correctly instead of splitting them in odd places.</p><p>The sql-formatter project states that it formats whitespace and does not validate SQL, and that it does not support stored procedures. It is also in maintenance mode, with bug fixes but no new features planned. If a procedure body comes out oddly, format the individual statements instead.</p><p>If the page shows that the formatter library is not loaded, the page is missing its vendored copy of the library; nothing is fetched from elsewhere.</p>
@@ -54,7 +54,7 @@ update MY_TABLE set A = 5;   -- same statement</code></pre><p>Identifiers are di
 <li><a href="https://www.postgresql.org/docs/current/sql-syntax-lexical.html" rel="nofollow noopener">PostgreSQL 18 documentation — Lexical Structure</a></li>
 </ul>
 <h2>Related tools</h2>
-<ul>
+<ul class="related-tools">
 <li><a href="/diff-checker/">Diff Checker</a></li>
 <li><a href="/regex-tester/">Regex Tester</a></li>
 <li><a href="/yaml-validator/">YAML Validator</a></li>
@@ -73,5 +73,6 @@ update MY_TABLE set A = 5;   -- same statement</code></pre><p>Identifiers are di
 <div class="footer-bottom"><p>Tools run locally in your browser. Provided as-is.</p><p>© <span id="y"></span> Quick JSON Tools</p></div>
 </div></footer>
 <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+<script src="/assets/nav.js" defer></script>
 </body>
 </html>

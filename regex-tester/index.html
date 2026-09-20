@@ -23,13 +23,13 @@
 <script src="/assets/calc-core.js" defer></script>
 </head>
 <body>
-<header class="site"><div class="wrap"><a class="logo" href="/"><img src="/assets/logo.png" alt="Quick JSON Tools" width="60" height="34"></a><nav class="site"><a href="/json-formatter/">JSON Formatter</a><a href="/base64-decode/">Base64</a><a href="/unix-timestamp-converter/">Timestamp</a><a href="/json-viewer/">JSON Viewer</a></nav></div></header>
+<header class="site"><div class="wrap"><a class="logo" href="/"><img src="/assets/logo.png" alt="Quick JSON Tools" width="60" height="34"></a><button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="site-nav"><span></span></button><nav class="site" id="site-nav"><a href="/json-formatter/">JSON Formatter</a><a href="/base64-decode/">Base64</a><a href="/unix-timestamp-converter/">Timestamp</a><a href="/json-viewer/">JSON Viewer</a></nav></div></header>
 <main><div class="wrap">
 <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Quick JSON Tools</a> › Regex Tester</nav>
 <h1>Regex Tester</h1>
-<p class="answer">A <strong>regex tester</strong> runs your regular expression against sample text and lists every match with its position and capture groups. This one uses JavaScript’s regex engine, as described in <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions" rel="nofollow noopener">MDN’s regular expressions guide</a> (updated March 17, 2026), and stops any pattern still running after 2 seconds so a runaway pattern cannot freeze the page.</p>
-<p class="updated">Updated <time datetime="2026-09-20">September 20, 2026</time> · By <a href="/about/">Quick JSON Tools</a></p>
 <div id="calculator" data-calc="regexTester"><noscript>This tool needs JavaScript turned on.</noscript></div>
+<div class="answer-panel"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.6c.6.5 1 1.2 1 2.4h6c0-1.2.4-1.9 1-2.4A7 7 0 0 0 12 2z"/></svg></span><div><p class="answer">A <strong>regex tester</strong> runs your regular expression against sample text and lists every match with its position and capture groups. This one uses JavaScript’s regex engine, as described in <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions" rel="nofollow noopener">MDN’s regular expressions guide</a> (updated March 17, 2026), and stops any pattern still running after 2 seconds so a runaway pattern cannot freeze the page.</p>
+<p class="updated">Updated <time datetime="2026-09-20">September 20, 2026</time> · By <a href="/about/">Quick JSON Tools</a></p></div></div>
 <div class="ad-slot"><!-- Ad slot 1 (below the tool). Empty until the ad network is approved; reserve its height in CSS first. --></div>
 <h2>How do I test a regular expression?</h2>
 <p>Type the pattern without the surrounding slashes, enter flags such as g or gi, paste your test text and press <strong>Test</strong>. The tool lists up to 200 matches in a table: the match number, the index where it starts, the matched text and each capture group in order. It counts up to 1,000 matches in total.</p><p>Worked example from the test suite: the pattern <code>(\w+)@(\w+)\.com</code> with flag g against <code>a@b.com, c@d.com</code> finds 2 matches. The first starts at index 0 with groups a and b; the second starts at index 9 with groups c and d. A group that did not take part in a match shows as ∅.</p><p>Some details of how the tool behaves:</p><ul><li>Without the g flag, only the first match is shown, just as <code>RegExp.prototype.exec</code> returns one match.</li><li>Patterns that can match an empty string, such as <code>\b</code>, do not loop forever: after an empty match the tool steps forward one character. <code>\b</code> on <code>hi there</code> reports 4 zero-length matches, at indexes 0, 2, 3 and 8.</li><li>A syntax error comes back as the engine’s message; an unclosed <code>(</code> gives “Invalid regular expression: /(/g: Unterminated group” in Chrome.</li><li>Named groups such as <code>(?&lt;user&gt;\w+)</code> work; their values appear in the Groups column in order.</li></ul><p>Type the pattern exactly as you would inside a regex literal. In a JavaScript string passed to <code>new RegExp()</code>, every backslash has to be doubled:</p><pre><code>const a = /\d{4}-\d{2}/g;              // literal
@@ -63,7 +63,7 @@ re.findall(r"(\w+)@(\w+)\.com", "a@b.com, c@d.com")  # [('a', 'b'), ('c', 'd')]<
 <li><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/regex/Pattern.html" rel="nofollow noopener">Oracle — Java SE 21 API: java.util.regex.Pattern</a></li>
 </ul>
 <h2>Related tools</h2>
-<ul>
+<ul class="related-tools">
 <li><a href="/diff-checker/">Diff Checker</a></li>
 <li><a href="/yaml-validator/">YAML Validator</a></li>
 <li><a href="/xml-formatter/">XML Formatter</a></li>
@@ -82,5 +82,6 @@ re.findall(r"(\w+)@(\w+)\.com", "a@b.com, c@d.com")  # [('a', 'b'), ('c', 'd')]<
 <div class="footer-bottom"><p>Tools run locally in your browser. Provided as-is.</p><p>© <span id="y"></span> Quick JSON Tools</p></div>
 </div></footer>
 <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+<script src="/assets/nav.js" defer></script>
 </body>
 </html>

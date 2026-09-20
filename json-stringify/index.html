@@ -23,13 +23,13 @@
 <script src="/assets/calc-core.js" defer></script>
 </head>
 <body>
-<header class="site"><div class="wrap"><a class="logo" href="/"><img src="/assets/logo.png" alt="Quick JSON Tools" width="60" height="34"></a><nav class="site"><a href="/json-formatter/">JSON Formatter</a><a href="/base64-decode/">Base64</a><a href="/unix-timestamp-converter/">Timestamp</a><a href="/json-viewer/">JSON Viewer</a></nav></div></header>
+<header class="site"><div class="wrap"><a class="logo" href="/"><img src="/assets/logo.png" alt="Quick JSON Tools" width="60" height="34"></a><button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="site-nav"><span></span></button><nav class="site" id="site-nav"><a href="/json-formatter/">JSON Formatter</a><a href="/base64-decode/">Base64</a><a href="/unix-timestamp-converter/">Timestamp</a><a href="/json-viewer/">JSON Viewer</a></nav></div></header>
 <main><div class="wrap">
 <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Quick JSON Tools</a> › JSON Stringify and Escape</nav>
 <h1>JSON Stringify and Escape</h1>
-<p class="answer">Use this <strong>JSON stringify online</strong> tool to turn any text into an escaped JSON string, parse an escaped string back to plain text, or minify JSON to one line. Quotes, backslashes and control characters are escaped as <a href="https://www.rfc-editor.org/rfc/rfc8259" rel="nofollow noopener">RFC 8259</a> requires, using the same JSON.stringify your JavaScript code runs, locally in your browser.</p>
-<p class="updated">Updated <time datetime="2026-09-20">September 20, 2026</time> · By <a href="/about/">Quick JSON Tools</a></p>
 <div id="calculator" data-calc="jsonStringify"><noscript>This tool needs JavaScript turned on.</noscript></div>
+<div class="answer-panel"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.6c.6.5 1 1.2 1 2.4h6c0-1.2.4-1.9 1-2.4A7 7 0 0 0 12 2z"/></svg></span><div><p class="answer">Use this <strong>JSON stringify online</strong> tool to turn any text into an escaped JSON string, parse an escaped string back to plain text, or minify JSON to one line. Quotes, backslashes and control characters are escaped as <a href="https://www.rfc-editor.org/rfc/rfc8259" rel="nofollow noopener">RFC 8259</a> requires, using the same JSON.stringify your JavaScript code runs, locally in your browser.</p>
+<p class="updated">Updated <time datetime="2026-09-20">September 20, 2026</time> · By <a href="/about/">Quick JSON Tools</a></p></div></div>
 <div class="ad-slot"><!-- Ad slot 1 (below the tool). Empty until the ad network is approved; reserve its height in CSS first. --></div>
 <h2>What does JSON.stringify do?</h2>
 <p>JSON.stringify converts a JavaScript value into JSON text. Objects and arrays become JSON syntax, strings are wrapped in double quotes with special characters escaped, and values JSON cannot represent are dropped or replaced. An optional third argument adds indentation.</p><p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify" rel="nofollow noopener">MDN’s reference</a> (updated August 28, 2026) lists the edge cases that catch people out:</p><ul><li>undefined, functions and symbols are left out of objects and become null inside arrays.</li><li>NaN and Infinity become null.</li><li>BigInt values and circular references throw a TypeError.</li><li>Dates are written as ISO strings through their toISOString method.</li><li>A numeric indent is capped at 10 spaces.</li></ul><pre><code>JSON.stringify({ a: undefined, b: [undefined, NaN], c: new Date(0) })
@@ -57,7 +57,7 @@ inner = json.loads(json.loads(escaped))          # Python</code></pre>
 <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify" rel="nofollow noopener">MDN — JSON.stringify()</a></li>
 </ul>
 <h2>Related tools</h2>
-<ul>
+<ul class="related-tools">
 <li><a href="/json-formatter/">JSON Formatter &amp; Validator</a></li>
 <li><a href="/json-validator/">JSON Validator</a></li>
 <li><a href="/json-viewer/">JSON Viewer</a></li>
@@ -76,5 +76,6 @@ inner = json.loads(json.loads(escaped))          # Python</code></pre>
 <div class="footer-bottom"><p>Tools run locally in your browser. Provided as-is.</p><p>© <span id="y"></span> Quick JSON Tools</p></div>
 </div></footer>
 <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+<script src="/assets/nav.js" defer></script>
 </body>
 </html>

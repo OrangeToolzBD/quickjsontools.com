@@ -23,13 +23,13 @@
 <script src="/assets/calc-core.js" defer></script>
 </head>
 <body>
-<header class="site"><div class="wrap"><a class="logo" href="/"><img src="/assets/logo.png" alt="Quick JSON Tools" width="60" height="34"></a><nav class="site"><a href="/json-formatter/">JSON Formatter</a><a href="/base64-decode/">Base64</a><a href="/unix-timestamp-converter/">Timestamp</a><a href="/json-viewer/">JSON Viewer</a></nav></div></header>
+<header class="site"><div class="wrap"><a class="logo" href="/"><img src="/assets/logo.png" alt="Quick JSON Tools" width="60" height="34"></a><button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="site-nav"><span></span></button><nav class="site" id="site-nav"><a href="/json-formatter/">JSON Formatter</a><a href="/base64-decode/">Base64</a><a href="/unix-timestamp-converter/">Timestamp</a><a href="/json-viewer/">JSON Viewer</a></nav></div></header>
 <main><div class="wrap">
 <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Quick JSON Tools</a> › Case Converter</nav>
 <h1>Case Converter</h1>
-<p class="answer">A <strong>case converter</strong> rewrites text in a different capitalization style with one click: UPPER, lower, Title Case, Sentence case, camelCase, PascalCase, snake_case, kebab-case or CONSTANT_CASE. For example, “hello world of code” becomes “Hello World of Code” in title case and helloWorldOfCode in camelCase. Conversion runs in your browser.</p>
-<p class="updated">Updated <time datetime="2026-09-20">September 20, 2026</time> · By <a href="/about/">Quick JSON Tools</a></p>
 <div id="calculator" data-calc="caseConverter"><noscript>This tool needs JavaScript turned on.</noscript></div>
+<div class="answer-panel"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.6c.6.5 1 1.2 1 2.4h6c0-1.2.4-1.9 1-2.4A7 7 0 0 0 12 2z"/></svg></span><div><p class="answer">A <strong>case converter</strong> rewrites text in a different capitalization style with one click: UPPER, lower, Title Case, Sentence case, camelCase, PascalCase, snake_case, kebab-case or CONSTANT_CASE. For example, “hello world of code” becomes “Hello World of Code” in title case and helloWorldOfCode in camelCase. Conversion runs in your browser.</p>
+<p class="updated">Updated <time datetime="2026-09-20">September 20, 2026</time> · By <a href="/about/">Quick JSON Tools</a></p></div></div>
 <div class="ad-slot"><!-- Ad slot 1 (below the tool). Empty until the ad network is approved; reserve its height in CSS first. --></div>
 <h2>How do I convert text to title case?</h2>
 <p>Paste your text and press <strong>Title Case</strong>. The tool lowercases everything, then capitalizes the first letter of each word, except short function words such as “of”, “the” and “and”, which stay lowercase unless they are the first or last word.</p><p>Worked examples:</p><div class="table-wrap"><table class="data"><thead><tr><th>Input</th><th>Title Case</th></tr></thead><tbody><tr><td>hello world of code</td><td>Hello World of Code</td></tr><tr><td>the lord of the rings</td><td>The Lord of the Rings</td></tr><tr><td>what is it for</td><td>What Is It For</td></tr><tr><td>NASA launches e-mail tool</td><td>Nasa Launches E-mail Tool</td></tr></tbody></table></div><p>The last row shows the two limits to watch. Because the text is lowercased first, acronyms lose their capitals, so fix NASA, API or JSON by hand. Words are split on spaces only, so in a hyphenated word only the first part is capitalized.</p><p><strong>Sentence case</strong> works the same way but capitalizes only the first letter of the text and the first letter after a period, exclamation mark or question mark: “hello. world! ok” becomes “Hello. World! Ok”. Proper nouns end up lowercase, so read the result before using it.</p>
@@ -50,7 +50,7 @@
 <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions" rel="nofollow noopener">MDN — Regular expressions</a></li>
 </ul>
 <h2>Related tools</h2>
-<ul>
+<ul class="related-tools">
 <li><a href="/diff-checker/">Diff Checker</a></li>
 <li><a href="/regex-tester/">Regex Tester</a></li>
 <li><a href="/yaml-validator/">YAML Validator</a></li>
@@ -69,5 +69,6 @@
 <div class="footer-bottom"><p>Tools run locally in your browser. Provided as-is.</p><p>© <span id="y"></span> Quick JSON Tools</p></div>
 </div></footer>
 <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+<script src="/assets/nav.js" defer></script>
 </body>
 </html>

@@ -23,13 +23,13 @@
 <script src="/assets/calc-core.js" defer></script>
 </head>
 <body>
-<header class="site"><div class="wrap"><a class="logo" href="/"><img src="/assets/logo.png" alt="Quick JSON Tools" width="60" height="34"></a><nav class="site"><a href="/json-formatter/">JSON Formatter</a><a href="/base64-decode/">Base64</a><a href="/unix-timestamp-converter/">Timestamp</a><a href="/json-viewer/">JSON Viewer</a></nav></div></header>
+<header class="site"><div class="wrap"><a class="logo" href="/"><img src="/assets/logo.png" alt="Quick JSON Tools" width="60" height="34"></a><button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="site-nav"><span></span></button><nav class="site" id="site-nav"><a href="/json-formatter/">JSON Formatter</a><a href="/base64-decode/">Base64</a><a href="/unix-timestamp-converter/">Timestamp</a><a href="/json-viewer/">JSON Viewer</a></nav></div></header>
 <main><div class="wrap">
 <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Quick JSON Tools</a> › URL Encode and Decode</nav>
 <h1>URL Encode and Decode</h1>
-<p class="answer">To <strong>URL decode</strong> a string, turn each % followed by two hex digits back into its byte, then read the bytes as UTF-8: %20 is a space, %3D is = and %C3%A9 is é. That percent-encoding is defined in <a href="https://www.rfc-editor.org/rfc/rfc3986" rel="nofollow noopener">RFC 3986</a> (January 2005). This tool encodes and decodes in your browser.</p>
-<p class="updated">Updated <time datetime="2026-09-20">September 20, 2026</time> · By <a href="/about/">Quick JSON Tools</a></p>
 <div id="calculator" data-calc="urlCode"><noscript>This tool needs JavaScript turned on.</noscript></div>
+<div class="answer-panel"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.6c.6.5 1 1.2 1 2.4h6c0-1.2.4-1.9 1-2.4A7 7 0 0 0 12 2z"/></svg></span><div><p class="answer">To <strong>URL decode</strong> a string, turn each % followed by two hex digits back into its byte, then read the bytes as UTF-8: %20 is a space, %3D is = and %C3%A9 is é. That percent-encoding is defined in <a href="https://www.rfc-editor.org/rfc/rfc3986" rel="nofollow noopener">RFC 3986</a> (January 2005). This tool encodes and decodes in your browser.</p>
+<p class="updated">Updated <time datetime="2026-09-20">September 20, 2026</time> · By <a href="/about/">Quick JSON Tools</a></p></div></div>
 <div class="ad-slot"><!-- Ad slot 1 (below the tool). Empty until the ad network is approved; reserve its height in CSS first. --></div>
 <h2>How do I URL-encode a string?</h2>
 <p>Paste the text and press <strong>Encode</strong>. By default the tool encodes it as a single URL component, such as a query value, so every character with a special meaning in URLs is escaped. Letters, digits and - . _ ~ are never encoded, because RFC 3986 lists them as unreserved.</p><p>Worked example from the tool’s tests: <code>a b&amp;c=d/é</code> encodes to <code>a%20b%26c%3Dd%2F%C3%A9</code>. The space, &, = and / are escaped, and é becomes two percent-encoded bytes because it takes two bytes in UTF-8.</p><p>To decode, paste the encoded text and press <strong>Decode</strong>. A % that is not followed by two hex digits, as in <code>100%</code>, gives “Malformed percent-encoding”; write a literal percent sign as <code>%25</code>.</p><pre><code>encodeURIComponent("a b&amp;c=d/é")      // "a%20b%26c%3Dd%2F%C3%A9"
@@ -62,7 +62,7 @@ u.searchParams.set("q", userInput);</code></pre>
 <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent" rel="nofollow noopener">MDN — encodeURIComponent()</a></li>
 </ul>
 <h2>Related tools</h2>
-<ul>
+<ul class="related-tools">
 <li><a href="/jwt-decoder/">JWT Decoder</a></li>
 <li><a href="/json-to-csv/">JSON to CSV Converter</a></li>
 <li><a href="/json-to-yaml/">JSON to YAML and XML Converter</a></li>
@@ -81,5 +81,6 @@ u.searchParams.set("q", userInput);</code></pre>
 <div class="footer-bottom"><p>Tools run locally in your browser. Provided as-is.</p><p>© <span id="y"></span> Quick JSON Tools</p></div>
 </div></footer>
 <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+<script src="/assets/nav.js" defer></script>
 </body>
 </html>

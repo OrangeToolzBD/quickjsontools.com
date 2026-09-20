@@ -23,13 +23,13 @@
 <script src="/assets/calc-core.js" defer></script>
 </head>
 <body>
-<header class="site"><div class="wrap"><a class="logo" href="/"><img src="/assets/logo.png" alt="Quick JSON Tools" width="60" height="34"></a><nav class="site"><a href="/json-formatter/">JSON Formatter</a><a href="/base64-decode/">Base64</a><a href="/unix-timestamp-converter/">Timestamp</a><a href="/json-viewer/">JSON Viewer</a></nav></div></header>
+<header class="site"><div class="wrap"><a class="logo" href="/"><img src="/assets/logo.png" alt="Quick JSON Tools" width="60" height="34"></a><button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="site-nav"><span></span></button><nav class="site" id="site-nav"><a href="/json-formatter/">JSON Formatter</a><a href="/base64-decode/">Base64</a><a href="/unix-timestamp-converter/">Timestamp</a><a href="/json-viewer/">JSON Viewer</a></nav></div></header>
 <main><div class="wrap">
 <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Quick JSON Tools</a> › XML Formatter</nav>
 <h1>XML Formatter</h1>
-<p class="answer">An <strong>XML formatter</strong> re-indents XML so every element starts on its own line, one level deeper than its parent. Paste XML, pick 2 spaces, 4 spaces or tabs, and press Format, or press Minify to strip the whitespace between tags. It also checks that each closing tag matches, following <a href="https://www.w3.org/TR/xml/" rel="nofollow noopener">XML 1.0</a> (Fifth Edition, 2008), in your browser.</p>
-<p class="updated">Updated <time datetime="2026-09-20">September 20, 2026</time> · By <a href="/about/">Quick JSON Tools</a></p>
 <div id="calculator" data-calc="xmlFormatter"><noscript>This tool needs JavaScript turned on.</noscript></div>
+<div class="answer-panel"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.6c.6.5 1 1.2 1 2.4h6c0-1.2.4-1.9 1-2.4A7 7 0 0 0 12 2z"/></svg></span><div><p class="answer">An <strong>XML formatter</strong> re-indents XML so every element starts on its own line, one level deeper than its parent. Paste XML, pick 2 spaces, 4 spaces or tabs, and press Format, or press Minify to strip the whitespace between tags. It also checks that each closing tag matches, following <a href="https://www.w3.org/TR/xml/" rel="nofollow noopener">XML 1.0</a> (Fifth Edition, 2008), in your browser.</p>
+<p class="updated">Updated <time datetime="2026-09-20">September 20, 2026</time> · By <a href="/about/">Quick JSON Tools</a></p></div></div>
 <div class="ad-slot"><!-- Ad slot 1 (below the tool). Empty until the ad network is approved; reserve its height in CSS first. --></div>
 <h2>How do I format XML?</h2>
 <p>Paste the XML and press <strong>Format</strong>. Each start tag, end tag, comment, CDATA section, processing instruction and DOCTYPE goes on its own line, indented by depth. An element that holds only text stays on one line, so <code>&lt;b x="1"&gt;t&lt;/b&gt;</code> is not split into three.</p><p>The tool’s test case:</p><pre><code>&lt;a&gt;&lt;b x="1"&gt;t&lt;/b&gt;&lt;c/&gt;&lt;/a&gt;
@@ -66,7 +66,7 @@ console.log(err ? err.textContent : "well-formed");</code></pre><p>Checking agai
 <li><a href="https://www.w3.org/TR/xml/" rel="nofollow noopener">W3C — Extensible Markup Language (XML) 1.0, Fifth Edition (November 26, 2008)</a></li>
 </ul>
 <h2>Related tools</h2>
-<ul>
+<ul class="related-tools">
 <li><a href="/diff-checker/">Diff Checker</a></li>
 <li><a href="/regex-tester/">Regex Tester</a></li>
 <li><a href="/yaml-validator/">YAML Validator</a></li>
@@ -85,5 +85,6 @@ console.log(err ? err.textContent : "well-formed");</code></pre><p>Checking agai
 <div class="footer-bottom"><p>Tools run locally in your browser. Provided as-is.</p><p>© <span id="y"></span> Quick JSON Tools</p></div>
 </div></footer>
 <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+<script src="/assets/nav.js" defer></script>
 </body>
 </html>

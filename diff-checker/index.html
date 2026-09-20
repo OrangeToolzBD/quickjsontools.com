@@ -23,13 +23,13 @@
 <script src="/assets/calc-core.js" defer></script>
 </head>
 <body>
-<header class="site"><div class="wrap"><a class="logo" href="/"><img src="/assets/logo.png" alt="Quick JSON Tools" width="60" height="34"></a><nav class="site"><a href="/json-formatter/">JSON Formatter</a><a href="/base64-decode/">Base64</a><a href="/unix-timestamp-converter/">Timestamp</a><a href="/json-viewer/">JSON Viewer</a></nav></div></header>
+<header class="site"><div class="wrap"><a class="logo" href="/"><img src="/assets/logo.png" alt="Quick JSON Tools" width="60" height="34"></a><button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="site-nav"><span></span></button><nav class="site" id="site-nav"><a href="/json-formatter/">JSON Formatter</a><a href="/base64-decode/">Base64</a><a href="/unix-timestamp-converter/">Timestamp</a><a href="/json-viewer/">JSON Viewer</a></nav></div></header>
 <main><div class="wrap">
 <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Quick JSON Tools</a> › Diff Checker</nav>
 <h1>Diff Checker</h1>
-<p class="answer">A <strong>diff checker</strong> compares two versions of a text and marks every line that was added or removed. Paste the original on the left and the changed version on the right, then press Compare. The comparison runs in your browser with a longest-common-subsequence line diff, so private files are never uploaded.</p>
-<p class="updated">Updated <time datetime="2026-09-20">September 20, 2026</time> · By <a href="/about/">Quick JSON Tools</a></p>
 <div id="calculator" data-calc="diffChecker"><noscript>This tool needs JavaScript turned on.</noscript></div>
+<div class="answer-panel"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.6c.6.5 1 1.2 1 2.4h6c0-1.2.4-1.9 1-2.4A7 7 0 0 0 12 2z"/></svg></span><div><p class="answer">A <strong>diff checker</strong> compares two versions of a text and marks every line that was added or removed. Paste the original on the left and the changed version on the right, then press Compare. The comparison runs in your browser with a longest-common-subsequence line diff, so private files are never uploaded.</p>
+<p class="updated">Updated <time datetime="2026-09-20">September 20, 2026</time> · By <a href="/about/">Quick JSON Tools</a></p></div></div>
 <div class="ad-slot"><!-- Ad slot 1 (below the tool). Empty until the ad network is approved; reserve its height in CSS first. --></div>
 <h2>How do I compare two text files?</h2>
 <p>Open both files, paste the original into “Original text” and the new version into “Changed text”, then press <strong>Compare</strong>. The result starts with a count of added and removed lines, followed by the merged listing: unchanged lines, lines only in the original (marked with a minus) and lines only in the new version (marked with a plus).</p><p>Each marked line carries its line number from its own file, so -2 means line 2 of the original and +2 means line 2 of the changed text. The tool’s test case compares three short lines:</p><div class="table-wrap"><table class="data"><thead><tr><th>Original</th><th>Changed</th><th>Result</th></tr></thead><tbody><tr><td><code>a</code></td><td><code>a</code></td><td>unchanged (line 1)</td></tr><tr><td><code>b</code></td><td><code>B</code></td><td><code>-2 b</code> then <code>+2 B</code></td></tr><tr><td><code>c</code></td><td><code>c</code></td><td>unchanged (line 3)</td></tr></tbody></table></div><p>The summary reads 1 line added and 1 line removed. A diff checker sees an edited line as one removal plus one addition; it does not highlight the changed characters within the line.</p><p>Comparison is exact. Trailing spaces, tabs versus spaces and a different letter case all count as changes, even though they look the same on screen. If a line you expected to match is flagged, turn on visible whitespace in your editor, or trim trailing spaces from both versions before pasting.</p><p>Very large inputs are refused rather than frozen: if the line count of one side times the other exceeds 25 million (5,000 lines against 5,000, for example), the tool asks you to split the text.</p>
@@ -52,7 +52,7 @@ git diff --no-index original.txt changed.txt</code></pre><p>Both print a unified
 <li><a href="https://www.gnu.org/software/diffutils/manual/html_node/diff-Performance.html" rel="nofollow noopener">GNU Diffutils manual — diff Performance Tradeoffs</a></li>
 </ul>
 <h2>Related tools</h2>
-<ul>
+<ul class="related-tools">
 <li><a href="/regex-tester/">Regex Tester</a></li>
 <li><a href="/yaml-validator/">YAML Validator</a></li>
 <li><a href="/xml-formatter/">XML Formatter</a></li>
@@ -71,5 +71,6 @@ git diff --no-index original.txt changed.txt</code></pre><p>Both print a unified
 <div class="footer-bottom"><p>Tools run locally in your browser. Provided as-is.</p><p>© <span id="y"></span> Quick JSON Tools</p></div>
 </div></footer>
 <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+<script src="/assets/nav.js" defer></script>
 </body>
 </html>

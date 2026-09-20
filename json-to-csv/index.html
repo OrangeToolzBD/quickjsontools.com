@@ -23,13 +23,13 @@
 <script src="/assets/calc-core.js" defer></script>
 </head>
 <body>
-<header class="site"><div class="wrap"><a class="logo" href="/"><img src="/assets/logo.png" alt="Quick JSON Tools" width="60" height="34"></a><nav class="site"><a href="/json-formatter/">JSON Formatter</a><a href="/base64-decode/">Base64</a><a href="/unix-timestamp-converter/">Timestamp</a><a href="/json-viewer/">JSON Viewer</a></nav></div></header>
+<header class="site"><div class="wrap"><a class="logo" href="/"><img src="/assets/logo.png" alt="Quick JSON Tools" width="60" height="34"></a><button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="site-nav"><span></span></button><nav class="site" id="site-nav"><a href="/json-formatter/">JSON Formatter</a><a href="/base64-decode/">Base64</a><a href="/unix-timestamp-converter/">Timestamp</a><a href="/json-viewer/">JSON Viewer</a></nav></div></header>
 <main><div class="wrap">
 <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Quick JSON Tools</a> › JSON to CSV Converter</nav>
 <h1>JSON to CSV Converter</h1>
-<p class="answer">To convert <strong>JSON to CSV</strong>, paste an array of objects and press JSON → CSV: each object becomes a row and each key a column, with nested fields flattened to names like address.city. Values containing commas, quotes or line breaks are quoted as <a href="https://www.rfc-editor.org/rfc/rfc4180" rel="nofollow noopener">RFC 4180</a> (October 2005) describes. CSV → JSON works in reverse, all in your browser.</p>
-<p class="updated">Updated <time datetime="2026-09-20">September 20, 2026</time> · By <a href="/about/">Quick JSON Tools</a></p>
 <div id="calculator" data-calc="jsonCsv"><noscript>This tool needs JavaScript turned on.</noscript></div>
+<div class="answer-panel"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.6c.6.5 1 1.2 1 2.4h6c0-1.2.4-1.9 1-2.4A7 7 0 0 0 12 2z"/></svg></span><div><p class="answer">To convert <strong>JSON to CSV</strong>, paste an array of objects and press JSON → CSV: each object becomes a row and each key a column, with nested fields flattened to names like address.city. Values containing commas, quotes or line breaks are quoted as <a href="https://www.rfc-editor.org/rfc/rfc4180" rel="nofollow noopener">RFC 4180</a> (October 2005) describes. CSV → JSON works in reverse, all in your browser.</p>
+<p class="updated">Updated <time datetime="2026-09-20">September 20, 2026</time> · By <a href="/about/">Quick JSON Tools</a></p></div></div>
 <div class="ad-slot"><!-- Ad slot 1 (below the tool). Empty until the ad network is approved; reserve its height in CSS first. --></div>
 <h2>How do I convert JSON to CSV?</h2>
 <p>Paste a JSON array of objects and press <strong>JSON → CSV</strong>, then Copy the result into a .csv file or a spreadsheet. The header row lists every key found in any object, in the order first seen. An object that lacks a key gets an empty cell in that column.</p><p>Worked example from the tool’s tests:</p><pre><code>[{"a": 1, "b": {"c": "x,y"}}, {"a": 2, "d": true}]</code></pre><p>becomes</p><pre><code>a,b.c,d
@@ -61,7 +61,7 @@ Ana,
 <li><a href="https://www.rfc-editor.org/rfc/rfc4180" rel="nofollow noopener">IETF RFC 4180 — Common Format and MIME Type for CSV Files (October 2005)</a></li>
 </ul>
 <h2>Related tools</h2>
-<ul>
+<ul class="related-tools">
 <li><a href="/jwt-decoder/">JWT Decoder</a></li>
 <li><a href="/json-to-yaml/">JSON to YAML and XML Converter</a></li>
 <li><a href="/base64-decode/">Base64 Decode and Encode</a></li>
@@ -80,5 +80,6 @@ Ana,
 <div class="footer-bottom"><p>Tools run locally in your browser. Provided as-is.</p><p>© <span id="y"></span> Quick JSON Tools</p></div>
 </div></footer>
 <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+<script src="/assets/nav.js" defer></script>
 </body>
 </html>

@@ -24,13 +24,13 @@
 <script src="/assets/calc-core.js" defer></script>
 </head>
 <body>
-<header class="site"><div class="wrap"><a class="logo" href="/"><img src="/assets/logo.png" alt="Quick JSON Tools" width="60" height="34"></a><nav class="site"><a href="/json-formatter/">JSON Formatter</a><a href="/base64-decode/">Base64</a><a href="/unix-timestamp-converter/">Timestamp</a><a href="/json-viewer/">JSON Viewer</a></nav></div></header>
+<header class="site"><div class="wrap"><a class="logo" href="/"><img src="/assets/logo.png" alt="Quick JSON Tools" width="60" height="34"></a><button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="site-nav"><span></span></button><nav class="site" id="site-nav"><a href="/json-formatter/">JSON Formatter</a><a href="/base64-decode/">Base64</a><a href="/unix-timestamp-converter/">Timestamp</a><a href="/json-viewer/">JSON Viewer</a></nav></div></header>
 <main><div class="wrap">
 <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Quick JSON Tools</a> › JSON to YAML and XML Converter</nav>
 <h1>JSON to YAML and XML Converter</h1>
-<p class="answer">To convert <strong>JSON to YAML</strong>, paste JSON and press JSON → YAML: objects become indented key: value lines and arrays become dash lists. The same box converts JSON to XML and YAML back to JSON. Since <a href="https://yaml.org/spec/1.2.2/" rel="nofollow noopener">YAML 1.2</a> is a superset of JSON, the data carries over unchanged. Everything runs in your browser.</p>
-<p class="updated">Updated <time datetime="2026-09-20">September 20, 2026</time> · By <a href="/about/">Quick JSON Tools</a></p>
 <div id="calculator" data-calc="jsonConvert"><noscript>This tool needs JavaScript turned on.</noscript></div>
+<div class="answer-panel"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.6c.6.5 1 1.2 1 2.4h6c0-1.2.4-1.9 1-2.4A7 7 0 0 0 12 2z"/></svg></span><div><p class="answer">To convert <strong>JSON to YAML</strong>, paste JSON and press JSON → YAML: objects become indented key: value lines and arrays become dash lists. The same box converts JSON to XML and YAML back to JSON. Since <a href="https://yaml.org/spec/1.2.2/" rel="nofollow noopener">YAML 1.2</a> is a superset of JSON, the data carries over unchanged. Everything runs in your browser.</p>
+<p class="updated">Updated <time datetime="2026-09-20">September 20, 2026</time> · By <a href="/about/">Quick JSON Tools</a></p></div></div>
 <div class="ad-slot"><!-- Ad slot 1 (below the tool). Empty until the ad network is approved; reserve its height in CSS first. --></div>
 <h2>How do I convert JSON to YAML?</h2>
 <p>Paste valid JSON and press <strong>JSON → YAML</strong>. The tool writes 2-space indented YAML: each object key on its own line, arrays as lines starting with a dash, and empty arrays and objects as <code>[]</code> and <code>{}</code>. To go the other way, paste YAML and press <strong>YAML → JSON</strong>.</p><p>Worked example from the tool’s tests:</p><pre><code>{"a": 1, "b": [1, "x"], "c": {"d": null}, "e": "true"}
@@ -68,7 +68,7 @@ e: "true"</code></pre><p>Notice that the string “true” is quoted in the YAML
 <li><a href="https://www.w3.org/TR/xml/" rel="nofollow noopener">W3C — Extensible Markup Language (XML) 1.0, Fifth Edition (November 26, 2008)</a></li>
 </ul>
 <h2>Related tools</h2>
-<ul>
+<ul class="related-tools">
 <li><a href="/jwt-decoder/">JWT Decoder</a></li>
 <li><a href="/json-to-csv/">JSON to CSV Converter</a></li>
 <li><a href="/base64-decode/">Base64 Decode and Encode</a></li>
@@ -87,5 +87,6 @@ e: "true"</code></pre><p>Notice that the string “true” is quoted in the YAML
 <div class="footer-bottom"><p>Tools run locally in your browser. Provided as-is.</p><p>© <span id="y"></span> Quick JSON Tools</p></div>
 </div></footer>
 <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+<script src="/assets/nav.js" defer></script>
 </body>
 </html>

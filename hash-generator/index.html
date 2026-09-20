@@ -23,13 +23,13 @@
 <script src="/assets/calc-core.js" defer></script>
 </head>
 <body>
-<header class="site"><div class="wrap"><a class="logo" href="/"><img src="/assets/logo.png" alt="Quick JSON Tools" width="60" height="34"></a><nav class="site"><a href="/json-formatter/">JSON Formatter</a><a href="/base64-decode/">Base64</a><a href="/unix-timestamp-converter/">Timestamp</a><a href="/json-viewer/">JSON Viewer</a></nav></div></header>
+<header class="site"><div class="wrap"><a class="logo" href="/"><img src="/assets/logo.png" alt="Quick JSON Tools" width="60" height="34"></a><button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="site-nav"><span></span></button><nav class="site" id="site-nav"><a href="/json-formatter/">JSON Formatter</a><a href="/base64-decode/">Base64</a><a href="/unix-timestamp-converter/">Timestamp</a><a href="/json-viewer/">JSON Viewer</a></nav></div></header>
 <main><div class="wrap">
 <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Quick JSON Tools</a> › Hash Generator</nav>
 <h1>Hash Generator</h1>
-<p class="answer">A <strong>hash generator</strong> computes a fixed-length fingerprint of your text. This one shows MD5, SHA-1, SHA-256, SHA-384 and SHA-512 at once, hashing the text as UTF-8. The SHA family comes from your browser’s Web Crypto API and is specified in <a href="https://csrc.nist.gov/pubs/fips/180-4/upd1/final" rel="nofollow noopener">FIPS 180-4</a> (August 2015); MD5 is computed in JavaScript.</p>
-<p class="updated">Updated <time datetime="2026-09-20">September 20, 2026</time> · By <a href="/about/">Quick JSON Tools</a></p>
 <div id="calculator" data-calc="hash"><noscript>This tool needs JavaScript turned on.</noscript></div>
+<div class="answer-panel"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.6c.6.5 1 1.2 1 2.4h6c0-1.2.4-1.9 1-2.4A7 7 0 0 0 12 2z"/></svg></span><div><p class="answer">A <strong>hash generator</strong> computes a fixed-length fingerprint of your text. This one shows MD5, SHA-1, SHA-256, SHA-384 and SHA-512 at once, hashing the text as UTF-8. The SHA family comes from your browser’s Web Crypto API and is specified in <a href="https://csrc.nist.gov/pubs/fips/180-4/upd1/final" rel="nofollow noopener">FIPS 180-4</a> (August 2015); MD5 is computed in JavaScript.</p>
+<p class="updated">Updated <time datetime="2026-09-20">September 20, 2026</time> · By <a href="/about/">Quick JSON Tools</a></p></div></div>
 <div class="ad-slot"><!-- Ad slot 1 (below the tool). Empty until the ad network is approved; reserve its height in CSS first. --></div>
 <h2>What is a hash?</h2>
 <p>A cryptographic hash turns input of any length into a short, fixed-size value. The same input always gives the same hash, and any change, even one character, gives a completely different one. NIST’s standard says digests are used to detect whether messages have changed since the digests were generated.</p><p>Paste text and press <strong>Generate hashes</strong>. The tool’s test vectors for the input abc:</p><div class="table-wrap"><table class="data"><thead><tr><th>Algorithm</th><th>Hash of “abc”</th></tr></thead><tbody><tr><td>MD5</td><td><code>900150983cd24fb0d6963f7d28e17f72</code></td></tr><tr><td>SHA-1</td><td><code>a9993e364706816aba3e25717850c26c9cd0d89d</code></td></tr><tr><td>SHA-256</td><td><code>ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad</code></td></tr></tbody></table></div><p>The MD5 value matches the test suite in <a href="https://www.rfc-editor.org/rfc/rfc1321" rel="nofollow noopener">RFC 1321</a> (April 1992). Hashes are exact, so check the input when results differ: a trailing newline or space changes everything. On the command line, use printf rather than echo, which adds a newline:</p><pre><code>printf 'abc' | sha256sum
@@ -61,7 +61,7 @@ hashlib.sha256("abc".encode()).hexdigest()</code></pre>
 <li><a href="https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html" rel="nofollow noopener">OWASP — Password Storage Cheat Sheet</a></li>
 </ul>
 <h2>Related tools</h2>
-<ul>
+<ul class="related-tools">
 <li><a href="/jwt-decoder/">JWT Decoder</a></li>
 <li><a href="/json-to-csv/">JSON to CSV Converter</a></li>
 <li><a href="/json-to-yaml/">JSON to YAML and XML Converter</a></li>
@@ -80,5 +80,6 @@ hashlib.sha256("abc".encode()).hexdigest()</code></pre>
 <div class="footer-bottom"><p>Tools run locally in your browser. Provided as-is.</p><p>© <span id="y"></span> Quick JSON Tools</p></div>
 </div></footer>
 <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+<script src="/assets/nav.js" defer></script>
 </body>
 </html>

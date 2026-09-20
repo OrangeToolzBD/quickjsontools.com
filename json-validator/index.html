@@ -23,13 +23,13 @@
 <script src="/assets/calc-core.js" defer></script>
 </head>
 <body>
-<header class="site"><div class="wrap"><a class="logo" href="/"><img src="/assets/logo.png" alt="Quick JSON Tools" width="60" height="34"></a><nav class="site"><a href="/json-formatter/">JSON Formatter</a><a href="/base64-decode/">Base64</a><a href="/unix-timestamp-converter/">Timestamp</a><a href="/json-viewer/">JSON Viewer</a></nav></div></header>
+<header class="site"><div class="wrap"><a class="logo" href="/"><img src="/assets/logo.png" alt="Quick JSON Tools" width="60" height="34"></a><button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="site-nav"><span></span></button><nav class="site" id="site-nav"><a href="/json-formatter/">JSON Formatter</a><a href="/base64-decode/">Base64</a><a href="/unix-timestamp-converter/">Timestamp</a><a href="/json-viewer/">JSON Viewer</a></nav></div></header>
 <main><div class="wrap">
 <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Quick JSON Tools</a> › JSON Validator</nav>
 <h1>JSON Validator</h1>
-<p class="answer">A <strong>JSON validator</strong> checks whether text follows the JSON grammar and, if not, tells you where it breaks. Paste your JSON and press Validate: you get either “Valid JSON” with a key count and minified size, or the line and column of the first error, judged against <a href="https://www.rfc-editor.org/rfc/rfc8259" rel="nofollow noopener">RFC 8259</a> (December 2017). Nothing leaves your browser.</p>
-<p class="updated">Updated <time datetime="2026-09-20">September 20, 2026</time> · By <a href="/about/">Quick JSON Tools</a></p>
 <div id="calculator" data-calc="jsonValidator"><noscript>This tool needs JavaScript turned on.</noscript></div>
+<div class="answer-panel"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.6c.6.5 1 1.2 1 2.4h6c0-1.2.4-1.9 1-2.4A7 7 0 0 0 12 2z"/></svg></span><div><p class="answer">A <strong>JSON validator</strong> checks whether text follows the JSON grammar and, if not, tells you where it breaks. Paste your JSON and press Validate: you get either “Valid JSON” with a key count and minified size, or the line and column of the first error, judged against <a href="https://www.rfc-editor.org/rfc/rfc8259" rel="nofollow noopener">RFC 8259</a> (December 2017). Nothing leaves your browser.</p>
+<p class="updated">Updated <time datetime="2026-09-20">September 20, 2026</time> · By <a href="/about/">Quick JSON Tools</a></p></div></div>
 <div class="ad-slot"><!-- Ad slot 1 (below the tool). Empty until the ad network is approved; reserve its height in CSS first. --></div>
 <h2>How do I check if JSON is valid?</h2>
 <p>Paste the text and press <strong>Validate</strong>. The tool runs the browser’s standard JSON parser over it. If parsing succeeds, the JSON is valid and the tool shows it formatted with 2-space indentation, plus a line such as “Valid JSON · 3 keys · 23 bytes minified”. If parsing fails, you get the first error with its position.</p><p>An error message looks like “Invalid JSON — line 1, column 8: Expected double-quoted property name in JSON at position 7”. That is the result for <code>{"a":1,}</code>: column 8 is the closing brace that follows the trailing comma. Fix that error and validate again, because a parser stops at the first problem and later errors only show up once earlier ones are gone.</p><p>This is a syntax check. It confirms the text is well-formed JSON, not that it has the fields your application expects. For that, you need a JSON Schema; the <a href="/json-schema-generator/">JSON Schema generator</a> drafts one from a sample.</p><p>To check files in a script or CI job, both of these exit with an error when the file is invalid:</p><pre><code>python -m json.tool data.json &gt; /dev/null
@@ -54,7 +54,7 @@ node -e "JSON.parse(require('fs').readFileSync('data.json','utf8'))"</code></pre
 <li><a href="https://json5.org/" rel="nofollow noopener">JSON5 — JSON for Humans</a></li>
 </ul>
 <h2>Related tools</h2>
-<ul>
+<ul class="related-tools">
 <li><a href="/json-formatter/">JSON Formatter &amp; Validator</a></li>
 <li><a href="/json-viewer/">JSON Viewer</a></li>
 <li><a href="/json-diff/">JSON Diff</a></li>
@@ -73,5 +73,6 @@ node -e "JSON.parse(require('fs').readFileSync('data.json','utf8'))"</code></pre
 <div class="footer-bottom"><p>Tools run locally in your browser. Provided as-is.</p><p>© <span id="y"></span> Quick JSON Tools</p></div>
 </div></footer>
 <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+<script src="/assets/nav.js" defer></script>
 </body>
 </html>

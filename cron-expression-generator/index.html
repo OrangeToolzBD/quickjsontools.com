@@ -23,13 +23,13 @@
 <script src="/assets/calc-core.js" defer></script>
 </head>
 <body>
-<header class="site"><div class="wrap"><a class="logo" href="/"><img src="/assets/logo.png" alt="Quick JSON Tools" width="60" height="34"></a><nav class="site"><a href="/json-formatter/">JSON Formatter</a><a href="/base64-decode/">Base64</a><a href="/unix-timestamp-converter/">Timestamp</a><a href="/json-viewer/">JSON Viewer</a></nav></div></header>
+<header class="site"><div class="wrap"><a class="logo" href="/"><img src="/assets/logo.png" alt="Quick JSON Tools" width="60" height="34"></a><button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="site-nav"><span></span></button><nav class="site" id="site-nav"><a href="/json-formatter/">JSON Formatter</a><a href="/base64-decode/">Base64</a><a href="/unix-timestamp-converter/">Timestamp</a><a href="/json-viewer/">JSON Viewer</a></nav></div></header>
 <main><div class="wrap">
 <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Quick JSON Tools</a> › Cron Expression Generator</nav>
 <h1>Cron Expression Generator</h1>
-<p class="answer">A <strong>cron expression generator</strong> helps you write and check the five-field schedules cron uses: minute, hour, day of month, month and day of week. Paste an expression such as */15 9-17 * * 1-5 to see it in plain English and its next five run times in UTC, following <a href="https://man7.org/linux/man-pages/man5/crontab.5.html" rel="nofollow noopener">crontab(5)</a> rules for ranges, steps and lists.</p>
-<p class="updated">Updated <time datetime="2026-09-20">September 20, 2026</time> · By <a href="/about/">Quick JSON Tools</a></p>
 <div id="calculator" data-calc="cron"><noscript>This tool needs JavaScript turned on.</noscript></div>
+<div class="answer-panel"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.6c.6.5 1 1.2 1 2.4h6c0-1.2.4-1.9 1-2.4A7 7 0 0 0 12 2z"/></svg></span><div><p class="answer">A <strong>cron expression generator</strong> helps you write and check the five-field schedules cron uses: minute, hour, day of month, month and day of week. Paste an expression such as */15 9-17 * * 1-5 to see it in plain English and its next five run times in UTC, following <a href="https://man7.org/linux/man-pages/man5/crontab.5.html" rel="nofollow noopener">crontab(5)</a> rules for ranges, steps and lists.</p>
+<p class="updated">Updated <time datetime="2026-09-20">September 20, 2026</time> · By <a href="/about/">Quick JSON Tools</a></p></div></div>
 <div class="ad-slot"><!-- Ad slot 1 (below the tool). Empty until the ad network is approved; reserve its height in CSS first. --></div>
 <h2>How do cron expressions work?</h2>
 <p>A cron expression is five fields separated by spaces. Each field lists the values at which the job may run, and the job runs at every minute where all fields match. An asterisk means every value; numbers, ranges, lists and steps narrow it down.</p><div class="table-wrap"><table class="data"><thead><tr><th>Field</th><th>Allowed values</th><th>Names</th></tr></thead><tbody><tr><td>Minute</td><td>0–59</td><td></td></tr><tr><td>Hour</td><td>0–23</td><td></td></tr><tr><td>Day of month</td><td>1–31</td><td></td></tr><tr><td>Month</td><td>1–12</td><td>jan–dec</td></tr><tr><td>Day of week</td><td>0–7 (0 and 7 are Sunday)</td><td>sun–sat</td></tr></tbody></table></div><p>Those ranges come from the crontab(5) manual page. Syntax inside a field: a range such as <code>8-11</code>, a list such as <code>1,2,5,9</code>, and a step such as <code>0-23/2</code>. Paste an expression and press <strong>Explain and show next runs</strong>. Worked examples from the tool’s tests, with the explanation it prints:</p><div class="table-wrap"><table class="data"><thead><tr><th>Expression</th><th>Meaning</th><th>Next run after the start time</th></tr></thead><tbody><tr><td><code>0 9 * * 1-5</code></td><td>At 09:00, on Mon, Tue, Wed, Thu, Fri.</td><td>—</td></tr><tr><td><code>0 0 1 * *</code></td><td>At 00:00, on day(s) 1 of the month.</td><td>2026-10-01 00:00 UTC, from September 16, 2026</td></tr><tr><td><code>30 8 * * MON</code></td><td>At 08:30, on Mon.</td><td>2026-09-21 08:30 UTC, from September 16, 2026</td></tr></tbody></table></div><p>Names are case-insensitive, so MON and mon both work. The tool accepts only the standard five fields. It rejects a sixth seconds field, the @daily-style shortcuts and Quartz symbols such as ?, L and #, with a message naming the problem: “60” in the minute field, for example, gives “Value out of range”.</p><p><strong>Time zone:</strong> the tool shows run times in UTC. Your server’s cron uses its own time zone, and the manual page describes a CRON_TZ variable for setting one, so convert before comparing. The <a href="/unix-timestamp-converter/">Unix timestamp converter</a> helps with that.</p>
@@ -52,7 +52,7 @@
 <li><a href="https://man7.org/linux/man-pages/man5/crontab.5.html" rel="nofollow noopener">Linux man-pages — crontab(5)</a></li>
 </ul>
 <h2>Related tools</h2>
-<ul>
+<ul class="related-tools">
 <li><a href="/unix-timestamp-converter/">Unix Timestamp Converter</a></li>
 <li><a href="/uuid-generator/">UUID Generator</a></li>
 <li><a href="/json-formatter/">JSON Formatter &amp; Validator</a></li>
@@ -71,5 +71,6 @@
 <div class="footer-bottom"><p>Tools run locally in your browser. Provided as-is.</p><p>© <span id="y"></span> Quick JSON Tools</p></div>
 </div></footer>
 <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+<script src="/assets/nav.js" defer></script>
 </body>
 </html>

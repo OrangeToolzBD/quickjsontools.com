@@ -23,13 +23,13 @@
 <script src="/assets/calc-core.js" defer></script>
 </head>
 <body>
-<header class="site"><div class="wrap"><a class="logo" href="/"><img src="/assets/logo.png" alt="Quick JSON Tools" width="60" height="34"></a><nav class="site"><a href="/json-formatter/">JSON Formatter</a><a href="/base64-decode/">Base64</a><a href="/unix-timestamp-converter/">Timestamp</a><a href="/json-viewer/">JSON Viewer</a></nav></div></header>
+<header class="site"><div class="wrap"><a class="logo" href="/"><img src="/assets/logo.png" alt="Quick JSON Tools" width="60" height="34"></a><button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="site-nav"><span></span></button><nav class="site" id="site-nav"><a href="/json-formatter/">JSON Formatter</a><a href="/base64-decode/">Base64</a><a href="/unix-timestamp-converter/">Timestamp</a><a href="/json-viewer/">JSON Viewer</a></nav></div></header>
 <main><div class="wrap">
 <nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Quick JSON Tools</a> › UUID Generator</nav>
 <h1>UUID Generator</h1>
-<p class="answer">A <strong>UUID generator</strong> creates 128-bit identifiers written as 36 characters, such as 018bcfe5-6800-7000-8000-000000000000. This one makes random version 4 or time-ordered version 7 UUIDs, as defined in <a href="https://www.rfc-editor.org/rfc/rfc9562" rel="nofollow noopener">RFC 9562</a> (2024), using your browser’s cryptographic random generator, 1 to 50 at a time.</p>
-<p class="updated">Updated <time datetime="2026-09-20">September 20, 2026</time> · By <a href="/about/">Quick JSON Tools</a></p>
 <div id="calculator" data-calc="uuid"><noscript>This tool needs JavaScript turned on.</noscript></div>
+<div class="answer-panel"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.6c.6.5 1 1.2 1 2.4h6c0-1.2.4-1.9 1-2.4A7 7 0 0 0 12 2z"/></svg></span><div><p class="answer">A <strong>UUID generator</strong> creates 128-bit identifiers written as 36 characters, such as 018bcfe5-6800-7000-8000-000000000000. This one makes random version 4 or time-ordered version 7 UUIDs, as defined in <a href="https://www.rfc-editor.org/rfc/rfc9562" rel="nofollow noopener">RFC 9562</a> (2024), using your browser’s cryptographic random generator, 1 to 50 at a time.</p>
+<p class="updated">Updated <time datetime="2026-09-20">September 20, 2026</time> · By <a href="/about/">Quick JSON Tools</a></p></div></div>
 <div class="ad-slot"><!-- Ad slot 1 (below the tool). Empty until the ad network is approved; reserve its height in CSS first. --></div>
 <h2>What is a UUID?</h2>
 <p>A UUID (Universally Unique IDentifier) is a 128-bit value used to label records, files, events and messages without a central counter. It is written as 32 hex digits in five groups, 8-4-4-4-12. RFC 9562 notes UUIDs are also known as GUIDs, and it replaced the older RFC 4122.</p><p>Two digits carry metadata. The first digit of the third group is the version: 4 for random, 7 for time-ordered. The first digit of the fourth group holds the variant, and for RFC UUIDs it is 8, 9, a or b.</p><pre><code>xxxxxxxx-xxxx-Vxxx-Nxxx-xxxxxxxxxxxx
@@ -55,7 +55,7 @@
 <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Crypto/getRandomValues" rel="nofollow noopener">MDN — Crypto: getRandomValues() method</a></li>
 </ul>
 <h2>Related tools</h2>
-<ul>
+<ul class="related-tools">
 <li><a href="/unix-timestamp-converter/">Unix Timestamp Converter</a></li>
 <li><a href="/cron-expression-generator/">Cron Expression Generator</a></li>
 <li><a href="/json-formatter/">JSON Formatter &amp; Validator</a></li>
@@ -74,5 +74,6 @@
 <div class="footer-bottom"><p>Tools run locally in your browser. Provided as-is.</p><p>© <span id="y"></span> Quick JSON Tools</p></div>
 </div></footer>
 <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+<script src="/assets/nav.js" defer></script>
 </body>
 </html>

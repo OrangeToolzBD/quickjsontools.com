@@ -22,7 +22,7 @@
 
 </head>
 <body>
-<header class="site"><div class="wrap"><a class="logo" href="/"><img src="/assets/logo.png" alt="Quick JSON Tools" width="60" height="34"></a><nav class="site"><a href="/json-formatter/">JSON Formatter</a><a href="/base64-decode/">Base64</a><a href="/unix-timestamp-converter/">Timestamp</a><a href="/json-viewer/">JSON Viewer</a></nav></div></header>
+<header class="site"><div class="wrap"><a class="logo" href="/"><img src="/assets/logo.png" alt="Quick JSON Tools" width="60" height="34"></a><button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="site-nav"><span></span></button><nav class="site" id="site-nav"><a href="/json-formatter/">JSON Formatter</a><a href="/base64-decode/">Base64</a><a href="/unix-timestamp-converter/">Timestamp</a><a href="/json-viewer/">JSON Viewer</a></nav></div></header>
 <main>
 <section class="hero hero-dark"><div class="hero-art" aria-hidden="true"><svg viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M72 28 C50 28 45 39 45 55 V86 C45 97 39 103 28 103 C39 103 45 109 45 120 V151 C45 167 50 178 72 178" stroke-linecap="round" stroke-linejoin="round"/><path d="M128 28 C150 28 155 39 155 55 V86 C155 97 161 103 172 103 C161 103 155 109 155 120 V151 C155 167 150 178 128 178" stroke-linecap="round" stroke-linejoin="round"/><polyline points="88 85 66 103 88 121" stroke-linecap="round" stroke-linejoin="round"/><polyline points="112 85 134 103 112 121" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="wrap-wide">
 <div class="term-chrome" aria-hidden="true"><span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span><span class="term-title">quickjsontools.com</span></div>
@@ -97,5 +97,6 @@
 <div class="footer-bottom"><p>Tools run locally in your browser. Provided as-is.</p><p>© <span id="y"></span> Quick JSON Tools</p></div>
 </div></footer>
 <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+<script src="/assets/nav.js" defer></script>
 </body>
 </html>
