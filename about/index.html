@@ -22,17 +22,17 @@
 
 </head>
 <body>
-<header class="site"><div class="wrap"><a class="logo" href="/"><img src="/assets/logo.png" alt="Quick JSON Tools" width="60" height="34"></a><nav class="site"><a href="/json-formatter/">JSON Formatter</a><a href="/base64-decode/">Base64 Decode and Encode</a><a href="/unix-timestamp-converter/">Unix Timestamp Converter</a><a href="/json-viewer/">JSON Viewer</a></nav></div></header>
+<header class="site"><div class="wrap"><a class="logo" href="/"><img src="/assets/logo.png" alt="Quick JSON Tools" width="60" height="34"></a><nav class="site"><a href="/json-formatter/">JSON Formatter</a><a href="/base64-decode/">Base64</a><a href="/unix-timestamp-converter/">Timestamp</a><a href="/json-viewer/">JSON Viewer</a></nav></div></header>
 <main><div class="wrap">
 <h1>About Quick JSON Tools</h1>
 <p>Quick JSON Tools is a set of free developer utilities that run entirely in the browser, so pasted data is never uploaded.</p>
 <p>Quick JSON Tools is a set of free utilities for everyday developer chores: formatting and validating JSON, comparing text and data, testing regular expressions, decoding JSON Web Tokens, and converting between common formats and encodings.</p><p>The site exists because much of what developers paste into web tools is sensitive: API responses with customer data, configuration files, access tokens, internal queries. Every tool here does its work in your browser. What you paste is not uploaded, logged or stored, and you can confirm that by watching the Network tab in your browser’s developer tools while you use a tool.</p><p>The tools aim to be precise rather than clever. Each one follows a named standard or a documented library, reports errors with enough detail to fix them, and says plainly what it does not do. The JWT decoder, for example, decodes tokens but never claims to verify a signature.</p><p>The site is run by Quick JSON Tools.</p><p><strong>Corrections.</strong> If a tool gives a wrong result, or a page misstates a standard, please report it through the contact page with the input you used and the output you expected. Confirmed errors are fixed, a test case is added so the mistake cannot return, and the page is updated. The <a href="/methodology/">methodology</a> page describes how each tool is built.</p>
 </div></main>
-<footer class="site"><div class="wrap">
-<p><a href="/json-formatter/">JSON Formatter &amp; Validator</a> <a href="/base64-decode/">Base64 Decode and Encode</a> <a href="/unix-timestamp-converter/">Unix Timestamp Converter</a> <a href="/json-viewer/">JSON Viewer</a> <a href="/diff-checker/">Diff Checker</a> <a href="/url-encode-decode/">URL Encode and Decode</a> <a href="/">All tools</a></p>
-<p><a href="/about/">About</a><a href="/methodology/">Methodology</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></p>
-<p>Tools run locally in your browser. Provided as-is.</p>
-<p>© <span id="y"></span> Quick JSON Tools</p>
+<footer class="site"><div class="wrap footer-grid">
+<div class="footer-col footer-brand"><a class="logo" href="/"><img src="/assets/logo.png" alt="Quick JSON Tools" width="60" height="34"></a><p>Free developer utilities that run entirely in your browser — nothing you paste is ever uploaded.</p></div>
+<div class="footer-col"><h4>Tools</h4><a href="/json-formatter/">JSON Formatter &amp; Validator</a><a href="/base64-decode/">Base64 Decode and Encode</a><a href="/unix-timestamp-converter/">Unix Timestamp Converter</a><a href="/json-viewer/">JSON Viewer</a><a href="/diff-checker/">Diff Checker</a><a href="/url-encode-decode/">URL Encode and Decode</a><a href="/">All tools</a></div>
+<div class="footer-col"><h4>Company</h4><a href="/about/">About</a><a href="/methodology/">Methodology</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div>
+<div class="footer-bottom"><p>Tools run locally in your browser. Provided as-is.</p><p>© <span id="y"></span> Quick JSON Tools</p></div>
 </div></footer>
 <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
 </body>

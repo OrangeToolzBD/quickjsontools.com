@@ -22,9 +22,9 @@
 
 </head>
 <body>
-<header class="site"><div class="wrap"><a class="logo" href="/"><img src="/assets/logo.png" alt="Quick JSON Tools" width="60" height="34"></a><nav class="site"><a href="/json-formatter/">JSON Formatter</a><a href="/base64-decode/">Base64 Decode and Encode</a><a href="/unix-timestamp-converter/">Unix Timestamp Converter</a><a href="/json-viewer/">JSON Viewer</a></nav></div></header>
+<header class="site"><div class="wrap"><a class="logo" href="/"><img src="/assets/logo.png" alt="Quick JSON Tools" width="60" height="34"></a><nav class="site"><a href="/json-formatter/">JSON Formatter</a><a href="/base64-decode/">Base64</a><a href="/unix-timestamp-converter/">Timestamp</a><a href="/json-viewer/">JSON Viewer</a></nav></div></header>
 <main>
-<section class="hero"><div class="wrap-wide">
+<section class="hero"><div class="hero-art" aria-hidden="true"><svg viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M72 28 C50 28 45 39 45 55 V86 C45 97 39 103 28 103 C39 103 45 109 45 120 V151 C45 167 50 178 72 178" stroke-linecap="round" stroke-linejoin="round"/><path d="M128 28 C150 28 155 39 155 55 V86 C155 97 161 103 172 103 C161 103 155 109 155 120 V151 C155 167 150 178 128 178" stroke-linecap="round" stroke-linejoin="round"/><polyline points="88 85 66 103 88 121" stroke-linecap="round" stroke-linejoin="round"/><polyline points="112 85 134 103 112 121" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="wrap-wide">
 <span class="eyebrow">Free &amp; private</span>
 <h1>Quick JSON Tools</h1>
 <p class="lede">Quick JSON Tools is a set of free developer utilities that run entirely in the browser, so pasted data is never uploaded.</p>
@@ -89,11 +89,11 @@
 <div class="sources-panel"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 5v6c0 5 3.5 9 8 11 4.5-2 8-6 8-11V5z"></path><path d="m9 12 2 2 4-4"></path></svg></span><div><h2>Where the numbers come from</h2><p>These tools load no outside data. Everything they show is computed in your browser from what you paste, following published standards: <a href="https://www.rfc-editor.org/rfc/rfc8259" rel="nofollow noopener">RFC 8259</a> for JSON, <a href="https://www.rfc-editor.org/rfc/rfc7519" rel="nofollow noopener">RFC 7519</a> for JSON Web Tokens, <a href="https://www.rfc-editor.org/rfc/rfc4648" rel="nofollow noopener">RFC 4648</a> for Base64, <a href="https://www.rfc-editor.org/rfc/rfc3986" rel="nofollow noopener">RFC 3986</a> for URL encoding, <a href="https://www.rfc-editor.org/rfc/rfc9562" rel="nofollow noopener">RFC 9562</a> for UUIDs, <a href="https://csrc.nist.gov/pubs/fips/180-4/upd1/final" rel="nofollow noopener">FIPS 180-4</a> and <a href="https://www.rfc-editor.org/rfc/rfc1321" rel="nofollow noopener">RFC 1321</a> for hashes, the <a href="https://yaml.org/spec/1.2.2/" rel="nofollow noopener">YAML 1.2.2 specification</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions" rel="nofollow noopener">MDN’s guide to JavaScript regular expressions</a> and the <a href="https://man7.org/linux/man-pages/man5/crontab.5.html" rel="nofollow noopener">crontab(5) manual page</a>. Three tools use MIT-licensed libraries served from this site: js-yaml, sql-formatter and js-beautify. Each tool is checked against a suite of known test vectors, and the site is reviewed whenever a cited standard or library changes or a reader reports an error. The site is maintained by Quick JSON Tools. The <a href="/methodology/">methodology</a> page explains how each tool works and what runs where.</p></div></div>
 </div></section>
 </main>
-<footer class="site"><div class="wrap">
-<p><a href="/json-formatter/">JSON Formatter &amp; Validator</a> <a href="/base64-decode/">Base64 Decode and Encode</a> <a href="/unix-timestamp-converter/">Unix Timestamp Converter</a> <a href="/json-viewer/">JSON Viewer</a> <a href="/diff-checker/">Diff Checker</a> <a href="/url-encode-decode/">URL Encode and Decode</a> <a href="/">All tools</a></p>
-<p><a href="/about/">About</a><a href="/methodology/">Methodology</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></p>
-<p>Tools run locally in your browser. Provided as-is.</p>
-<p>© <span id="y"></span> Quick JSON Tools</p>
+<footer class="site"><div class="wrap footer-grid">
+<div class="footer-col footer-brand"><a class="logo" href="/"><img src="/assets/logo.png" alt="Quick JSON Tools" width="60" height="34"></a><p>Free developer utilities that run entirely in your browser — nothing you paste is ever uploaded.</p></div>
+<div class="footer-col"><h4>Tools</h4><a href="/json-formatter/">JSON Formatter &amp; Validator</a><a href="/base64-decode/">Base64 Decode and Encode</a><a href="/unix-timestamp-converter/">Unix Timestamp Converter</a><a href="/json-viewer/">JSON Viewer</a><a href="/diff-checker/">Diff Checker</a><a href="/url-encode-decode/">URL Encode and Decode</a><a href="/">All tools</a></div>
+<div class="footer-col"><h4>Company</h4><a href="/about/">About</a><a href="/methodology/">Methodology</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></div>
+<div class="footer-bottom"><p>Tools run locally in your browser. Provided as-is.</p><p>© <span id="y"></span> Quick JSON Tools</p></div>
 </div></footer>
 <script>document.getElementById('y').textContent=new Date().getFullYear()</script>
 </body>
