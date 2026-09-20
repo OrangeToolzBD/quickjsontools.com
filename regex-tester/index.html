@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Regex Tester — Test Regular Expressions Online</title>
+<meta name="description" content="Test a regular expression against your text and see every match and capture group. JavaScript regex flavor, with a guard against runaway patterns.">
+<link rel="canonical" href="https://quickjsontools.com/regex-tester/">
+<meta property="og:title" content="Regex Tester — Test Regular Expressions Online">
+<meta property="og:description" content="Test a regular expression against your text and see every match and capture group. JavaScript regex flavor, with a guard against runaway patterns.">
+<meta property="og:url" content="https://quickjsontools.com/regex-tester/">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://quickjsontools.com/assets/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://quickjsontools.com/assets/og-image.png">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="icon" type="image/png" href="/assets/favicon.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<style>:root{--brand:#4338ca;--font:ui-sans-serif, system-ui, "Segoe UI", sans-serif}</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://quickjsontools.com/#org","name":"Quick JSON Tools","url":"https://quickjsontools.com/","description":"Quick JSON Tools is a set of free developer utilities that run entirely in the browser, so pasted data is never uploaded."},{"@type":"WebApplication","name":"Regex Tester","url":"https://quickjsontools.com/regex-tester/","description":"Test a regular expression against your text and see every match and capture group. JavaScript regex flavor, with a guard against runaway patterns.","applicationCategory":"DeveloperApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@id":"https://quickjsontools.com/#org"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Quick JSON Tools","item":"https://quickjsontools.com/"},{"@type":"ListItem","position":2,"name":"Regex Tester","item":"https://quickjsontools.com/regex-tester/"}]}]}</script>
+
+<script src="/assets/calculator.js" defer></script>
+<script src="/assets/calc-core.js" defer></script>
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="logo" href="/"><img src="/assets/logo.png" alt="Quick JSON Tools" width="60" height="34"></a><nav class="site"><a href="/json-formatter/">JSON Formatter</a><a href="/base64-decode/">Base64 Decode and Encode</a><a href="/unix-timestamp-converter/">Unix Timestamp Converter</a><a href="/json-viewer/">JSON Viewer</a></nav></div></header>
+<main><div class="wrap">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Quick JSON Tools</a> › Regex Tester</nav>
+<h1>Regex Tester</h1>
+<p class="answer">A <strong>regex tester</strong> runs your regular expression against sample text and lists every match with its position and capture groups. This one uses JavaScript’s regex engine, as described in <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions" rel="nofollow noopener">MDN’s regular expressions guide</a> (updated March 17, 2026), and stops any pattern still running after 2 seconds so a runaway pattern cannot freeze the page.</p>
+<p class="updated">Updated <time datetime="2026-09-20">September 20, 2026</time> · By <a href="/about/">Quick JSON Tools</a></p>
+<div id="calculator" data-calc="regexTester"><noscript>This tool needs JavaScript turned on.</noscript></div>
+<div class="ad-slot"><!-- Ad slot 1 (below the tool). Empty until the ad network is approved; reserve its height in CSS first. --></div>
+<h2>How do I test a regular expression?</h2>
+<p>Type the pattern without the surrounding slashes, enter flags such as g or gi, paste your test text and press <strong>Test</strong>. The tool lists up to 200 matches in a table: the match number, the index where it starts, the matched text and each capture group in order. It counts up to 1,000 matches in total.</p><p>Worked example from the test suite: the pattern <code>(\w+)@(\w+)\.com</code> with flag g against <code>a@b.com, c@d.com</code> finds 2 matches. The first starts at index 0 with groups a and b; the second starts at index 9 with groups c and d. A group that did not take part in a match shows as ∅.</p><p>Some details of how the tool behaves:</p><ul><li>Without the g flag, only the first match is shown, just as <code>RegExp.prototype.exec</code> returns one match.</li><li>Patterns that can match an empty string, such as <code>\b</code>, do not loop forever: after an empty match the tool steps forward one character. <code>\b</code> on <code>hi there</code> reports 4 zero-length matches, at indexes 0, 2, 3 and 8.</li><li>A syntax error comes back as the engine’s message; an unclosed <code>(</code> gives “Invalid regular expression: /(/g: Unterminated group” in Chrome.</li><li>Named groups such as <code>(?&lt;user&gt;\w+)</code> work; their values appear in the Groups column in order.</li></ul><p>Type the pattern exactly as you would inside a regex literal. In a JavaScript string passed to <code>new RegExp()</code>, every backslash has to be doubled:</p><pre><code>const a = /\d{4}-\d{2}/g;              // literal
+const b = new RegExp("\\d{4}-\\d{2}", "g"); // same pattern in a string</code></pre><p>Your pattern and text stay in the browser; the tester does not upload them.</p>
+<h2>What do the regex flags g, i, m, s, u and y do?</h2>
+<p>Flags change how the whole pattern is applied. g finds every match instead of the first, i ignores case, m makes ^ and $ match at line breaks, s lets the dot match newlines, u treats the pattern as Unicode code points, and y matches only at the current position.</p><div class="table-wrap"><table class="data"><thead><tr><th>Flag</th><th>Name</th><th>Effect</th></tr></thead><tbody><tr><td><code>g</code></td><td>global</td><td>Find all matches, not just the first</td></tr><tr><td><code>i</code></td><td>ignore case</td><td><code>/abc/i</code> matches ABC</td></tr><tr><td><code>m</code></td><td>multiline</td><td><code>^</code> and <code>$</code> match at the start and end of each line</td></tr><tr><td><code>s</code></td><td>dotAll</td><td><code>.</code> also matches line breaks</td></tr><tr><td><code>u</code></td><td>unicode</td><td>Code-point matching; enables <code>\p{...}</code> property escapes</td></tr><tr><td><code>y</code></td><td>sticky</td><td>Match only at <code>lastIndex</code>, never further along</td></tr><tr><td><code>d</code></td><td>indices</td><td>Record start and end positions of groups</td></tr><tr><td><code>v</code></td><td>unicodeSets</td><td>An upgraded <code>u</code> mode with more Unicode features</td></tr></tbody></table></div><p>The table follows MDN’s flag list. The flags field accepts any of them; an unknown letter such as x is rejected by the engine with “Invalid flags supplied to RegExp constructor”. For example, <code>^\w+</code> with flags gm on the two lines “one two” and “three four” matches “one” at index 0 and “three” at index 8. Without m, only “one” matches.</p><p>The sticky flag trips people up. <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/lastIndex" rel="nofollow noopener">MDN’s lastIndex page</a> (updated July 20, 2025) explains that with y the engine tries only at the exact position in lastIndex and does not search ahead, which suits tokenizers but surprises anyone expecting a normal search.</p>
+<h2>Why is my regex so slow?</h2>
+<p>Most slow regexes suffer from catastrophic backtracking: nested or overlapping quantifiers give the engine an exponential number of ways to try, and fail, a match. The classic shape is a repeated group that itself repeats, such as <code>(a+)+$</code>, run against a long string that almost matches.</p><p>The <a href="https://community.owasp.org/attacks/Regular_expression_Denial_of_Service_-_ReDoS" rel="nofollow noopener">OWASP page on regular expression denial of service</a> works through <code>^(a+)+$</code>: an input of four a’s and a non-matching character has 16 possible paths, 16 a’s give 65,536, and each extra a doubles the count. The same page lists other risky forms, including <code>([a-zA-Z]+)*$</code>, <code>(a|aa)+$</code> and <code>(a|a?)+$</code>.</p><p>This tester runs your pattern in a <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API" rel="nofollow noopener">Web Worker</a>, a background thread separate from the page. If no answer arrives within 2 seconds, it stops the worker and says the pattern is too slow on this text. That protects the tab, but treat the warning as a bug report: the same pattern will hang a server too.</p><p>Ways to fix it:</p><ul><li>Remove nested quantifiers: <code>(a+)+</code> matches the same strings as <code>a+</code>.</li><li>Make alternatives mutually exclusive, so only one branch can match a given character.</li><li>Anchor the pattern and use specific classes such as <code>[^,]*</code> instead of <code>.*</code>.</li><li>Limit input length before matching untrusted text.</li><li>In Java, and in Python 3.11 or later, possessive quantifiers and atomic groups stop backtracking. JavaScript does not support them.</li></ul><pre><code>// slow on "aaaaaaaaaaaaaaaaaaaaaaaaaaaa!"
+/^(a+)+$/
+// same matches, no nested repetition
+/^a+$/</code></pre>
+<h2>How does JavaScript regex differ from Python and Java?</h2>
+<p>The core syntax is shared, but the three engines differ in named-group syntax, how flags are set, how you find all matches, and which backtracking controls exist. Test here for JavaScript; for Python or Java, check the points below before copying a pattern across.</p><div class="table-wrap"><table class="data"><thead><tr><th>Feature</th><th>JavaScript</th><th>Python (re)</th><th>Java (Pattern)</th></tr></thead><tbody><tr><td>Named group</td><td><code>(?&lt;name&gt;...)</code></td><td><code>(?P&lt;name&gt;...)</code></td><td><code>(?&lt;name&gt;...)</code></td></tr><tr><td>All matches</td><td><code>g</code> flag, <code>matchAll</code></td><td><code>findall</code>, <code>finditer</code> (no g flag)</td><td>loop on <code>Matcher.find()</code></td></tr><tr><td>Flags</td><td>after the literal: <code>/x/im</code></td><td><code>re.I</code>, <code>re.M</code>, <code>re.S</code>, <code>re.X</code></td><td><code>CASE_INSENSITIVE</code> etc., or inline <code>(?i)</code></td></tr><tr><td>Whole-string match</td><td>anchor with <code>^...$</code></td><td><code>re.fullmatch</code></td><td><code>matches()</code></td></tr><tr><td>Possessive / atomic</td><td>not supported</td><td>from Python 3.11</td><td>supported</td></tr><tr><td>Verbose mode</td><td>not supported</td><td><code>re.X</code></td><td><code>COMMENTS</code>, <code>(?x)</code></td></tr><tr><td>String escaping</td><td>double backslashes in strings</td><td>use raw strings <code>r"..."</code></td><td>double backslashes</td></tr></tbody></table></div><p>Sources: the <a href="https://docs.python.org/3/library/re.html" rel="nofollow noopener">Python re documentation</a> and the <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/regex/Pattern.html" rel="nofollow noopener">Java SE 21 Pattern reference</a>. Python’s docs note that lookbehind must be fixed-width. In Java, an unescaped <code>"\b"</code> in a string literal is a backspace character, not a word boundary, so write <code>"\\b"</code>. Python’s <code>re.match</code> only matches at the start of the string, while <code>re.search</code> looks anywhere, which is what a JavaScript regex does by default.</p><pre><code># Python
+import re
+re.findall(r"(\w+)@(\w+)\.com", "a@b.com, c@d.com")  # [('a', 'b'), ('c', 'd')]</code></pre><p>The <a href="/diff-checker/">diff checker</a> is handy for comparing the output of the same pattern in two languages.</p>
+<h2>Frequently asked questions</h2>
+<div class="faq">
+<details><summary>Which regex flavor does this tester use?</summary><p>It uses the JavaScript (ECMAScript) engine built into your browser, so results match what the same pattern does in JavaScript code running in that browser. Most simple patterns behave the same in Python and Java, but named groups, flags and backtracking controls differ, as the comparison table above shows.</p></details>
+<details><summary>Why does my regex find only one match?</summary><p>The g flag is missing. Without it, a JavaScript regex stops after the first match, and this tester does the same. Add g to the flags field to list every match. In Python, use re.findall or re.finditer instead, because Python has no g flag.</p></details>
+<details><summary>Is my test text sent anywhere?</summary><p>No. The pattern and text are handed to a Web Worker created inside your own browser tab, and the result comes back to the page. Nothing is uploaded or stored; the <a href="/methodology/">methodology page</a> explains what runs where. Even so, use sample data rather than real logs that contain tokens or personal information.</p></details>
+</div>
+<h2>Sources</h2>
+<ul class="sources">
+<li><a href="https://www.rfc-editor.org/rfc/rfc8259" rel="nofollow noopener">IETF RFC 8259 — The JSON Data Interchange Format</a></li>
+<li><a href="https://www.rfc-editor.org/rfc/rfc7519" rel="nofollow noopener">IETF RFC 7519 — JSON Web Token (JWT)</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions" rel="nofollow noopener">MDN — Regular expressions</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/lastIndex" rel="nofollow noopener">MDN — RegExp: lastIndex</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API" rel="nofollow noopener">MDN — Web Workers API</a></li>
+<li><a href="https://community.owasp.org/attacks/Regular_expression_Denial_of_Service_-_ReDoS" rel="nofollow noopener">OWASP — Regular expression Denial of Service (ReDoS)</a></li>
+<li><a href="https://docs.python.org/3/library/re.html" rel="nofollow noopener">Python documentation — re: Regular expression operations</a></li>
+<li><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/regex/Pattern.html" rel="nofollow noopener">Oracle — Java SE 21 API: java.util.regex.Pattern</a></li>
+</ul>
+<h2>Related tools</h2>
+<ul>
+<li><a href="/diff-checker/">Diff Checker</a></li>
+<li><a href="/yaml-validator/">YAML Validator</a></li>
+<li><a href="/xml-formatter/">XML Formatter</a></li>
+<li><a href="/case-converter/">Case Converter</a></li>
+<li><a href="/sql-formatter/">SQL Formatter</a></li>
+<li><a href="/html-beautifier/">HTML Beautifier</a></li>
+<li><a href="/json-formatter/">JSON Formatter &amp; Validator</a></li>
+<li><a href="/base64-decode/">Base64 Decode and Encode</a></li>
+</ul>
+<p class="disclaimer">Tools run locally in your browser. Provided as-is.</p>
+</div></main>
+<footer class="site"><div class="wrap">
+<p><a href="/json-formatter/">JSON Formatter &amp; Validator</a> <a href="/base64-decode/">Base64 Decode and Encode</a> <a href="/unix-timestamp-converter/">Unix Timestamp Converter</a> <a href="/json-viewer/">JSON Viewer</a> <a href="/diff-checker/">Diff Checker</a> <a href="/url-encode-decode/">URL Encode and Decode</a> <a href="/">All tools</a></p>
+<p><a href="/about/">About</a><a href="/methodology/">Methodology</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></p>
+<p>Tools run locally in your browser. Provided as-is.</p>
+<p>© <span id="y"></span> Quick JSON Tools</p>
+</div></footer>
+<script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+</body>
+</html>

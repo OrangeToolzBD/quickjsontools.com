@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JSON to CSV Converter (and CSV to JSON)</title>
+<meta name="description" content="Convert JSON arrays to CSV for Excel or Sheets, or CSV back to JSON. Nested fields become columns; conversion happens in your browser.">
+<link rel="canonical" href="https://quickjsontools.com/json-to-csv/">
+<meta property="og:title" content="JSON to CSV Converter (and CSV to JSON)">
+<meta property="og:description" content="Convert JSON arrays to CSV for Excel or Sheets, or CSV back to JSON. Nested fields become columns; conversion happens in your browser.">
+<meta property="og:url" content="https://quickjsontools.com/json-to-csv/">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://quickjsontools.com/assets/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://quickjsontools.com/assets/og-image.png">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="icon" type="image/png" href="/assets/favicon.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<style>:root{--brand:#4338ca;--font:ui-sans-serif, system-ui, "Segoe UI", sans-serif}</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://quickjsontools.com/#org","name":"Quick JSON Tools","url":"https://quickjsontools.com/","description":"Quick JSON Tools is a set of free developer utilities that run entirely in the browser, so pasted data is never uploaded."},{"@type":"WebApplication","name":"JSON to CSV Converter","url":"https://quickjsontools.com/json-to-csv/","description":"Convert JSON arrays to CSV for Excel or Sheets, or CSV back to JSON. Nested fields become columns; conversion happens in your browser.","applicationCategory":"DeveloperApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@id":"https://quickjsontools.com/#org"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Quick JSON Tools","item":"https://quickjsontools.com/"},{"@type":"ListItem","position":2,"name":"JSON to CSV Converter","item":"https://quickjsontools.com/json-to-csv/"}]}]}</script>
+
+<script src="/assets/calculator.js" defer></script>
+<script src="/assets/calc-core.js" defer></script>
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="logo" href="/"><img src="/assets/logo.png" alt="Quick JSON Tools" width="60" height="34"></a><nav class="site"><a href="/json-formatter/">JSON Formatter</a><a href="/base64-decode/">Base64 Decode and Encode</a><a href="/unix-timestamp-converter/">Unix Timestamp Converter</a><a href="/json-viewer/">JSON Viewer</a></nav></div></header>
+<main><div class="wrap">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Quick JSON Tools</a> › JSON to CSV Converter</nav>
+<h1>JSON to CSV Converter</h1>
+<p class="answer">To convert <strong>JSON to CSV</strong>, paste an array of objects and press JSON → CSV: each object becomes a row and each key a column, with nested fields flattened to names like address.city. Values containing commas, quotes or line breaks are quoted as <a href="https://www.rfc-editor.org/rfc/rfc4180" rel="nofollow noopener">RFC 4180</a> (October 2005) describes. CSV → JSON works in reverse, all in your browser.</p>
+<p class="updated">Updated <time datetime="2026-09-20">September 20, 2026</time> · By <a href="/about/">Quick JSON Tools</a></p>
+<div id="calculator" data-calc="jsonCsv"><noscript>This tool needs JavaScript turned on.</noscript></div>
+<div class="ad-slot"><!-- Ad slot 1 (below the tool). Empty until the ad network is approved; reserve its height in CSS first. --></div>
+<h2>How do I convert JSON to CSV?</h2>
+<p>Paste a JSON array of objects and press <strong>JSON → CSV</strong>, then Copy the result into a .csv file or a spreadsheet. The header row lists every key found in any object, in the order first seen. An object that lacks a key gets an empty cell in that column.</p><p>Worked example from the tool’s tests:</p><pre><code>[{"a": 1, "b": {"c": "x,y"}}, {"a": 2, "d": true}]</code></pre><p>becomes</p><pre><code>a,b.c,d
+1,"x,y",
+2,,true</code></pre><p>The nested field b.c became its own column, “x,y” was quoted because it contains a comma, and each row has an empty cell where it had no value.</p><p>Other details:</p><ul><li>A single object, not wrapped in an array, is converted as one row.</li><li>Items that are not objects, such as plain numbers, go in a column named value.</li><li>Double quotes inside a value are doubled, so <code>say "hi"</code> becomes <code>"say ""hi"""</code>, the escaping RFC 4180 specifies.</li><li>Choose comma, semicolon or tab as the delimiter if your spreadsheet expects something other than commas.</li><li>Rows are separated by line feeds. RFC 4180 describes CRLF line breaks, so if a program insists on them, convert the line endings in a text editor.</li></ul><p>To get the CSV into Excel or another spreadsheet, save it as a .csv file and open it, or use the program’s text import so you can set column types. Import is the safer route when a column holds IDs with leading zeros or long numbers.</p>
+<h2>What happens to nested JSON?</h2>
+<p>Nested objects are flattened: each inner key becomes a column named with the full path joined by dots, such as address.city. Arrays are not expanded into extra rows or columns. An array inside a record is written into a single cell as JSON text, for example <code>"[1,2]"</code>.</p><pre><code>[{"name": "Ana", "address": {"city": "Lima", "geo": {"lat": -12}}, "tags": ["a", "b"]}]
+
+name,address.city,address.geo.lat,tags
+Ana,Lima,-12,"[""a"",""b""]"</code></pre><p>The tags cell looks busy because the JSON quotes inside it are doubled, but it reads back correctly. This keeps one row per record, which is usually what you want for a spreadsheet. If you need one row per tag instead, split the array in code before converting:</p><pre><code>// one row per tag
+const rows = data.flatMap(r =&gt; r.tags.map(tag =&gt; ({ ...r, tags: undefined, tag })));</code></pre><p>Before converting a large or unfamiliar document, look at its shape in the <a href="/json-viewer/">JSON viewer</a> to decide which arrays need that treatment.</p>
+<h2>How do I convert CSV to JSON?</h2>
+<p>Paste CSV with a header row and press <strong>CSV → JSON</strong>. Each row becomes an object keyed by the header names. Quoted fields may contain commas, doubled quotes and line breaks. With “Detect numbers and true/false” ticked, plain numbers become numbers and true, false and null become JSON values.</p><p>The test case below shows the quoting and number handling:</p><pre><code>name,age
+"Doe, J",30
+Ana,
+
+[{"name": "Doe, J", "age": 30}, {"name": "Ana", "age": ""}]</code></pre><p>Empty cells become empty strings, and fully blank lines are skipped.</p><p><strong>Watch out for codes that look like numbers.</strong> With detection on, <code>007</code> becomes <code>7</code> and <code>02134</code> becomes <code>2134</code>, which breaks ZIP codes, phone numbers and IDs. Untick the detection option to keep every value as a string. Detection only recognizes plain decimals, so a value such as <code>1e5</code> stays a string either way.</p><p>Pick the same delimiter the file uses; a semicolon-separated file read as comma-separated comes back as one column per row. To read the output comfortably, paste it into the <a href="/json-formatter/">JSON formatter</a>.</p>
+<h2>Frequently asked questions</h2>
+<div class="faq">
+<details><summary>Can I convert JSON into CSV?</summary><p>Yes, when the JSON is a list of similar records. Each record becomes a row and each key a column, with nested objects flattened into dotted column names. Deeply nested data with many arrays does not fit a flat table well, so reshape it in code first if you need one row per array item.</p></details>
+<details><summary>How can I convert a JSON file to a CSV file online?</summary><p>Open the JSON file, copy its contents, paste them above, press JSON → CSV and then Copy. Paste the result into a text editor and save it with a .csv extension. The conversion happens in your browser, so the file is not uploaded anywhere.</p></details>
+<details><summary>How do I turn a JSON file into an Excel spreadsheet?</summary><p>Convert the JSON to CSV here, save the output as a .csv file, and open it in your spreadsheet program. For columns such as ZIP codes or long IDs, use the program’s text import option and set those columns to text, so leading zeros and long numbers are kept.</p></details>
+</div>
+<h2>Sources</h2>
+<ul class="sources">
+<li><a href="https://www.rfc-editor.org/rfc/rfc8259" rel="nofollow noopener">IETF RFC 8259 — The JSON Data Interchange Format</a></li>
+<li><a href="https://www.rfc-editor.org/rfc/rfc7519" rel="nofollow noopener">IETF RFC 7519 — JSON Web Token (JWT)</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions" rel="nofollow noopener">MDN — Regular expressions</a></li>
+<li><a href="https://www.rfc-editor.org/rfc/rfc4180" rel="nofollow noopener">IETF RFC 4180 — Common Format and MIME Type for CSV Files (October 2005)</a></li>
+</ul>
+<h2>Related tools</h2>
+<ul>
+<li><a href="/jwt-decoder/">JWT Decoder</a></li>
+<li><a href="/json-to-yaml/">JSON to YAML and XML Converter</a></li>
+<li><a href="/base64-decode/">Base64 Decode and Encode</a></li>
+<li><a href="/url-encode-decode/">URL Encode and Decode</a></li>
+<li><a href="/hash-generator/">Hash Generator</a></li>
+<li><a href="/json-formatter/">JSON Formatter &amp; Validator</a></li>
+<li><a href="/unix-timestamp-converter/">Unix Timestamp Converter</a></li>
+<li><a href="/json-viewer/">JSON Viewer</a></li>
+</ul>
+<p class="disclaimer">Tools run locally in your browser. Provided as-is.</p>
+</div></main>
+<footer class="site"><div class="wrap">
+<p><a href="/json-formatter/">JSON Formatter &amp; Validator</a> <a href="/base64-decode/">Base64 Decode and Encode</a> <a href="/unix-timestamp-converter/">Unix Timestamp Converter</a> <a href="/json-viewer/">JSON Viewer</a> <a href="/diff-checker/">Diff Checker</a> <a href="/url-encode-decode/">URL Encode and Decode</a> <a href="/">All tools</a></p>
+<p><a href="/about/">About</a><a href="/methodology/">Methodology</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></p>
+<p>Tools run locally in your browser. Provided as-is.</p>
+<p>© <span id="y"></span> Quick JSON Tools</p>
+</div></footer>
+<script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+</body>
+</html>

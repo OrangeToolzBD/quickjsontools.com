@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Base64 Decode &amp; Encode — UTF-8 Safe, Private</title>
+<meta name="description" content="Decode Base64 to text or encode text to Base64, with full UTF-8 support and URL-safe input. Runs locally in your browser.">
+<link rel="canonical" href="https://quickjsontools.com/base64-decode/">
+<meta property="og:title" content="Base64 Decode &amp; Encode — UTF-8 Safe, Private">
+<meta property="og:description" content="Decode Base64 to text or encode text to Base64, with full UTF-8 support and URL-safe input. Runs locally in your browser.">
+<meta property="og:url" content="https://quickjsontools.com/base64-decode/">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://quickjsontools.com/assets/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://quickjsontools.com/assets/og-image.png">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="icon" type="image/png" href="/assets/favicon.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<style>:root{--brand:#4338ca;--font:ui-sans-serif, system-ui, "Segoe UI", sans-serif}</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://quickjsontools.com/#org","name":"Quick JSON Tools","url":"https://quickjsontools.com/","description":"Quick JSON Tools is a set of free developer utilities that run entirely in the browser, so pasted data is never uploaded."},{"@type":"WebApplication","name":"Base64 Decode and Encode","url":"https://quickjsontools.com/base64-decode/","description":"Decode Base64 to text or encode text to Base64, with full UTF-8 support and URL-safe input. Runs locally in your browser.","applicationCategory":"DeveloperApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@id":"https://quickjsontools.com/#org"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Quick JSON Tools","item":"https://quickjsontools.com/"},{"@type":"ListItem","position":2,"name":"Base64 Decode and Encode","item":"https://quickjsontools.com/base64-decode/"}]}]}</script>
+
+<script src="/assets/calculator.js" defer></script>
+<script src="/assets/calc-core.js" defer></script>
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="logo" href="/"><img src="/assets/logo.png" alt="Quick JSON Tools" width="60" height="34"></a><nav class="site"><a href="/json-formatter/">JSON Formatter</a><a href="/base64-decode/">Base64 Decode and Encode</a><a href="/unix-timestamp-converter/">Unix Timestamp Converter</a><a href="/json-viewer/">JSON Viewer</a></nav></div></header>
+<main><div class="wrap">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Quick JSON Tools</a> › Base64 Decode and Encode</nav>
+<h1>Base64 Decode and Encode</h1>
+<p class="answer">To <strong>Base64 decode</strong>, map each character back to its 6-bit value and regroup the bits into bytes: every 4 characters give 3 bytes. <a href="https://www.rfc-editor.org/rfc/rfc4648" rel="nofollow noopener">RFC 4648</a> (October 2006) defines the 64-character alphabet and the = padding. Paste Base64 and press Decode to read it as UTF-8 text, or Encode to go the other way, locally.</p>
+<p class="updated">Updated <time datetime="2026-09-20">September 20, 2026</time> · By <a href="/about/">Quick JSON Tools</a></p>
+<div id="calculator" data-calc="base64"><noscript>This tool needs JavaScript turned on.</noscript></div>
+<div class="ad-slot"><!-- Ad slot 1 (below the tool). Empty until the ad network is approved; reserve its height in CSS first. --></div>
+<h2>How do I decode Base64?</h2>
+<p>Paste the Base64 string and press <strong>Decode</strong>. The tool trims spaces and line breaks, accepts the URL-safe characters - and _, adds any missing = padding, decodes the bytes and reads them as UTF-8 text. Invalid input, or bytes that are not UTF-8 text, produce an error instead of garbled output.</p><p>Worked examples from the tool’s tests:</p><div class="table-wrap"><table class="data"><thead><tr><th>Base64</th><th>Decoded text</th></tr></thead><tbody><tr><td><code>aMOpbGxvIHfDtnJsZCDinJM=</code></td><td><code>héllo wörld ✓</code></td></tr><tr><td><code>aGk_Pz8</code> (URL-safe, no padding)</td><td><code>hi???</code></td></tr></tbody></table></div><p>The first shows why UTF-8 handling matters: é, ö and ✓ each take two or three bytes. <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/atob" rel="nofollow noopener">MDN notes</a> (updated June 24, 2025) that the browser’s <code>atob</code> returns one character per byte, so decoding without a UTF-8 step turns those letters into symbols. This tool adds that step.</p><p>The error “This is not valid Base64, or it decodes to bytes that are not UTF-8 text” means one of two things: the input contains characters outside the alphabet, or it encodes binary data such as an image or a ZIP file. This tool shows text only; it does not save decoded files.</p><pre><code>// JavaScript (UTF-8 safe)
+const text = new TextDecoder().decode(Uint8Array.from(atob(b64), c =&gt; c.charCodeAt(0)));
+
+# Python
+import base64
+text = base64.b64decode(b64).decode("utf-8")
+
+# Linux shell
+echo 'aGVsbG8=' | base64 -d</code></pre>
+<h2>What is Base64 used for?</h2>
+<p>Base64 carries binary data through channels that only handle text. It shows up in email attachments, data: URLs, JSON and XML fields that hold files or keys, the HTTP Basic authentication header, and the parts of a JSON Web Token. The cost is size: every 3 bytes become 4 characters, about a third larger.</p><p>The encoding takes 3 bytes (24 bits) at a time, splits them into four 6-bit groups, and writes each group as one of 64 characters: A–Z, a–z, 0–9, + and /. When the input does not divide evenly by 3, = signs pad the output to a multiple of 4. RFC 4648’s test vectors show this:</p><div class="table-wrap"><table class="data"><thead><tr><th>Input</th><th>Base64</th></tr></thead><tbody><tr><td><code>f</code></td><td><code>Zg==</code></td></tr><tr><td><code>foo</code></td><td><code>Zm9v</code></td></tr><tr><td><code>foobar</code></td><td><code>Zm9vYmFy</code></td></tr></tbody></table></div><p>To encode, paste text and press <strong>Encode</strong>; <code>hello</code> gives <code>aGVsbG8=</code>. Text is converted to UTF-8 bytes first, so any language works. JWTs use the URL-safe variant; to read one, the <a href="/jwt-decoder/">JWT decoder</a> splits and decodes all its parts at once.</p>
+<h2>What is URL-safe Base64?</h2>
+<p>URL-safe Base64, called base64url in RFC 4648, swaps the two characters that clash with URLs and file names: - replaces + and _ replaces /. The padding = is often left off, because RFC 4648 lets a referring specification drop it. JWTs are a common example.</p><p>For example, <code>hi???</code> encodes to <code>aGk/Pz8=</code> in standard Base64 and <code>aGk_Pz8</code> in URL-safe form. In a URL, the / would be read as a path separator and the + could become a space, and = has meaning in query strings too.</p><p>This tool decodes both forms automatically. Its encoder produces standard Base64; convert the result like this:</p><pre><code>const urlSafe = b64.replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");</code></pre><p>If you only need to place a standard Base64 string in a query parameter, percent-encoding it with the <a href="/url-encode-decode/">URL encoder</a> also works.</p>
+<h2>Is Base64 encryption?</h2>
+<p>No. Base64 is an encoding with no key: anyone can reverse it, instantly, with any tool. RFC 4648 says it can visually hide information such as passwords but “does not provide any computational confidentiality.” Treat Base64 text as plain text.</p><p>This matters in practice. An HTTP Basic authentication header is only a Base64 copy of the user name and password, so it must travel over HTTPS. A secret or configuration value stored as Base64 is readable by anyone who can see the file. And a JWT payload, though it looks scrambled, is readable by anyone holding the token.</p><p>Do not paste real credentials or tokens into any online decoder, including this one. Decoding here happens in your browser and nothing is uploaded, but copied secrets can still leak through clipboard history, screenshots or browser extensions. If data needs protecting, encrypt it with a real cipher, then Base64-encode the ciphertext if it must travel as text.</p>
+<h2>Frequently asked questions</h2>
+<div class="faq">
+<details><summary>Why does Base64 end with = or ==?</summary><p>The equals signs are padding. Base64 works in groups of 3 bytes, and when the input length is not a multiple of 3, one or two = characters fill out the last 4-character group. One leftover byte gives ==, two give =. Some formats drop the padding; this decoder adds it back.</p></details>
+<details><summary>Can I decode a Base64 image here?</summary><p>No. This tool decodes Base64 to text and reports an error when the bytes are not valid UTF-8, which is the case for images and other binary files. To view a Base64 image, put it in a data: URL in an img tag, or decode it with a script and save the bytes to a file.</p></details>
+<details><summary>Is my data uploaded when I decode?</summary><p>No. Encoding and decoding run in JavaScript in your browser, with no network request and no storage, so the text you paste never reaches a server. You can confirm it in your browser’s developer tools on the Network tab. Still, avoid pasting live credentials: Base64 hides nothing, and copied text can linger in clipboard history.</p></details>
+</div>
+<h2>Sources</h2>
+<ul class="sources">
+<li><a href="https://www.rfc-editor.org/rfc/rfc8259" rel="nofollow noopener">IETF RFC 8259 — The JSON Data Interchange Format</a></li>
+<li><a href="https://www.rfc-editor.org/rfc/rfc7519" rel="nofollow noopener">IETF RFC 7519 — JSON Web Token (JWT)</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions" rel="nofollow noopener">MDN — Regular expressions</a></li>
+<li><a href="https://www.rfc-editor.org/rfc/rfc4648" rel="nofollow noopener">IETF RFC 4648 — The Base16, Base32, and Base64 Data Encodings (October 2006)</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/atob" rel="nofollow noopener">MDN — Window: atob() method</a></li>
+</ul>
+<h2>Related tools</h2>
+<ul>
+<li><a href="/jwt-decoder/">JWT Decoder</a></li>
+<li><a href="/json-to-csv/">JSON to CSV Converter</a></li>
+<li><a href="/json-to-yaml/">JSON to YAML and XML Converter</a></li>
+<li><a href="/url-encode-decode/">URL Encode and Decode</a></li>
+<li><a href="/hash-generator/">Hash Generator</a></li>
+<li><a href="/json-formatter/">JSON Formatter &amp; Validator</a></li>
+<li><a href="/unix-timestamp-converter/">Unix Timestamp Converter</a></li>
+<li><a href="/json-viewer/">JSON Viewer</a></li>
+</ul>
+<p class="disclaimer">Tools run locally in your browser. Provided as-is.</p>
+</div></main>
+<footer class="site"><div class="wrap">
+<p><a href="/json-formatter/">JSON Formatter &amp; Validator</a> <a href="/base64-decode/">Base64 Decode and Encode</a> <a href="/unix-timestamp-converter/">Unix Timestamp Converter</a> <a href="/json-viewer/">JSON Viewer</a> <a href="/diff-checker/">Diff Checker</a> <a href="/url-encode-decode/">URL Encode and Decode</a> <a href="/">All tools</a></p>
+<p><a href="/about/">About</a><a href="/methodology/">Methodology</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></p>
+<p>Tools run locally in your browser. Provided as-is.</p>
+<p>© <span id="y"></span> Quick JSON Tools</p>
+</div></footer>
+<script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+</body>
+</html>

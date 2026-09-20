@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JSON Formatter &amp; Validator — Private, In-Browser</title>
+<meta name="description" content="Format, minify and validate JSON with the exact line and column of any error. Runs entirely in your browser; nothing you paste is uploaded.">
+<link rel="canonical" href="https://quickjsontools.com/json-formatter/">
+<meta property="og:title" content="JSON Formatter &amp; Validator — Private, In-Browser">
+<meta property="og:description" content="Format, minify and validate JSON with the exact line and column of any error. Runs entirely in your browser; nothing you paste is uploaded.">
+<meta property="og:url" content="https://quickjsontools.com/json-formatter/">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://quickjsontools.com/assets/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://quickjsontools.com/assets/og-image.png">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="icon" type="image/png" href="/assets/favicon.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<style>:root{--brand:#4338ca;--font:ui-sans-serif, system-ui, "Segoe UI", sans-serif}</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://quickjsontools.com/#org","name":"Quick JSON Tools","url":"https://quickjsontools.com/","description":"Quick JSON Tools is a set of free developer utilities that run entirely in the browser, so pasted data is never uploaded."},{"@type":"WebApplication","name":"JSON Formatter & Validator","url":"https://quickjsontools.com/json-formatter/","description":"Format, minify and validate JSON with the exact line and column of any error. Runs entirely in your browser; nothing you paste is uploaded.","applicationCategory":"DeveloperApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@id":"https://quickjsontools.com/#org"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Quick JSON Tools","item":"https://quickjsontools.com/"},{"@type":"ListItem","position":2,"name":"JSON Formatter & Validator","item":"https://quickjsontools.com/json-formatter/"}]}]}</script>
+
+<script src="/assets/calculator.js" defer></script>
+<script src="/assets/calc-core.js" defer></script>
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="logo" href="/"><img src="/assets/logo.png" alt="Quick JSON Tools" width="60" height="34"></a><nav class="site"><a href="/json-formatter/">JSON Formatter</a><a href="/base64-decode/">Base64 Decode and Encode</a><a href="/unix-timestamp-converter/">Unix Timestamp Converter</a><a href="/json-viewer/">JSON Viewer</a></nav></div></header>
+<main><div class="wrap">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Quick JSON Tools</a> › JSON Formatter &amp; Validator</nav>
+<h1>JSON Formatter &amp; Validator</h1>
+<p class="answer">A <strong>JSON formatter</strong> parses your JSON and prints it back with consistent indentation, so nested objects and arrays are easy to read. This one also minifies, counts keys and, when the text is invalid, gives the line and column of the error. It follows <a href="https://www.rfc-editor.org/rfc/rfc8259" rel="nofollow noopener">RFC 8259</a> (December 2017) and runs entirely in your browser.</p>
+<p class="updated">Updated <time datetime="2026-09-20">September 20, 2026</time> · By <a href="/about/">Quick JSON Tools</a></p>
+<div id="calculator" data-calc="jsonFormatter"><noscript>This tool needs JavaScript turned on.</noscript></div>
+<div class="ad-slot"><!-- Ad slot 1 (below the tool). Empty until the ad network is approved; reserve its height in CSS first. --></div>
+<h2>How do I format JSON?</h2>
+<p>Paste your JSON into the box, pick 2 spaces, 4 spaces or tabs, and press <strong>Format</strong>. The tool parses the text with the browser’s own <code>JSON.parse</code> and writes it back out with <code>JSON.stringify</code>, so the result is exactly what a JavaScript program would read. Press <strong>Minify</strong> for the same data on one line, then <strong>Copy</strong>.</p><p>Here is the worked example from the tool’s test suite. The input <code>{"a":1,"b":{"c":[1,2]}}</code> becomes nine lines with 2-space indentation:</p><pre><code>{
+  "a": 1,
+  "b": {
+    "c": [
+      1,
+      2
+    ]
+  }
+}</code></pre><p>The summary reads Valid JSON, 3 keys and a minified size of 23 bytes. The key count adds up object keys at every depth (a, b and c), not array items, and the size is measured in UTF-8 bytes.</p><p>Formatting re-serializes the data, so a few things can change. Numbers are normalized: <code>1.0</code> prints as <code>1</code> and <code>1e3</code> as <code>1000</code>. Integers larger than JavaScript can hold exactly lose precision, which <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse" rel="nofollow noopener">MDN’s JSON.parse reference</a> (updated July 20, 2025) warns about: <code>12345678901234567890</code> comes back as <code>12345678901234567000</code>. If a key appears twice in one object, only the last value survives. If any of that matters, keep the original text and use the formatter only to read it.</p>
+<h2>Why is my JSON invalid?</h2>
+<p>JSON is stricter than JavaScript. RFC 8259 allows no comments, no trailing commas and no single-quoted strings, and the only literal names are lowercase true, false and null. When parsing fails, the formatter shows the parser’s message with a line and column, so you can go straight to the character that stopped it.</p><div class="table-wrap"><table class="data"><thead><tr><th>Error</th><th>Invalid</th><th>Valid</th></tr></thead><tbody><tr><td>Trailing comma</td><td><code>{"a": 1,}</code></td><td><code>{"a": 1}</code></td></tr><tr><td>Single quotes</td><td><code>{'a': 1}</code></td><td><code>{"a": 1}</code></td></tr><tr><td>Unquoted key</td><td><code>{a: 1}</code></td><td><code>{"a": 1}</code></td></tr><tr><td>Missing comma</td><td><code>{"a": 1 "b": 2}</code></td><td><code>{"a": 1, "b": 2}</code></td></tr><tr><td>Leading zero</td><td><code>{"a": 01}</code></td><td><code>{"a": 1}</code></td></tr><tr><td>Not a JSON value</td><td><code>{"a": NaN}</code>, <code>undefined</code></td><td><code>{"a": null}</code></td></tr><tr><td>Comment</td><td><code>{"a": 1 // note}</code></td><td>Remove it, or use a separate field</td></tr><tr><td>Capitalized literal</td><td><code>{"ok": True}</code></td><td><code>{"ok": true}</code></td></tr></tbody></table></div><p>Engines word their messages differently, and the tool reads either style. In Chrome’s V8 engine, <code>{"a":1,}</code> fails with “Expected double-quoted property name in JSON at position 7 (line 1 column 8)”, and the tool reports line 1, column 8. Where the engine gives no position at all, the tool scans the text itself. In the test case below, it points to line 3, column 8, the brace where a value should be:</p><pre><code>{
+  "a": 1,
+  "b": }</code></pre><p>The reported position is where the parser gave up, which can be just after the real mistake. A missing comma, for example, is reported at the opening quote of the next key. Look one token to the left if the flagged character seems fine. If you only need a pass/fail check, the <a href="/json-validator/">JSON validator</a> does the same parse without reformatting.</p>
+<h2>What is the JSON file format?</h2>
+<p>JSON is a plain-text format for structured data, defined by RFC 8259. A JSON text is one value: an object, an array, a string, a number, true, false or null. Objects hold name and value pairs with string names; arrays hold ordered lists. Anything else, such as dates or binary data, has to be encoded as one of those types.</p><p>The grammar uses six structural characters: the two kinds of brackets, the colon and the comma. Space, tab, line feed and carriage return are allowed around them and carry no meaning, which is why indenting a file never changes its data.</p><p>RFC 8259 adds a few rules worth knowing. JSON exchanged between systems that are not part of a closed ecosystem must be UTF-8, without a byte order mark. Names within an object should be unique. A bare value such as <code>42</code> or <code>"hello"</code> is a complete JSON text. The RFC also notes that parsers differ on whether they expose the order of object members, so code should not depend on key order. That is why the <a href="/json-diff/">JSON diff</a> tool compares objects by key rather than by position.</p>
+<h2>Is it safe to paste JSON into an online formatter?</h2>
+<p>It depends on where the work happens. On this page, parsing and formatting run in your browser in JavaScript. The tool makes no network request with your text and does not store it, so nothing you paste reaches a server. You can confirm this yourself in about a minute.</p><p>Open your browser’s developer tools, select the Network tab, then paste and format a document. No request carrying your text will appear. Other web tools may process input on a server; unless a tool says clearly what it does, assume anything you paste could be transmitted or logged.</p><p>Even with a local tool, keep production secrets out of any web page: API keys, access tokens, passwords and customer personal data. Browser extensions you have installed may be able to read what is on a page, and copied text stays in your clipboard history. Replace secret values with placeholders before you paste. The <a href="/methodology/">methodology page</a> lists what each tool runs and where.</p>
+<h2>Frequently asked questions</h2>
+<div class="faq">
+<details><summary>What is a JSON formatter?</summary><p>A JSON formatter is a tool that rewrites compact or messy JSON with line breaks and indentation so people can read it. Because it must parse the text first, it also works as a validator: if the JSON is broken, formatting fails and the tool tells you where. Most formatters, including this one, can also minify JSON back to a single line.</p></details>
+<details><summary>How do I convert JSON into a readable format?</summary><p>Paste it into the formatter above and press Format; 2-space indentation suits most files. For deeply nested data, the <a href="/json-viewer/">JSON viewer</a> shows the same document as a collapsible tree, so you can open only the branches you need. Neither tool changes the data itself.</p></details>
+<details><summary>How can I beautify JSON code?</summary><p>In a browser or Node.js, <code>JSON.stringify(JSON.parse(text), null, 2)</code> returns indented JSON; the last argument sets the indent. In Python, <code>python -m json.tool file.json</code> prints the file with 4-space indentation. Online, paste the text here and choose your indent. All three parse first, so invalid JSON is reported rather than beautified.</p></details>
+<details><summary>Which JSON formatter is the best?</summary><p>The best choice is one that fits your data and your security needs. Check that it processes text locally rather than uploading it, reports the exact line and column of errors, copes with the file sizes you work with, and tells you when re-serializing changes numbers. For confidential data, a local tool you can verify in the Network tab is the safer option.</p></details>
+</div>
+<h2>Sources</h2>
+<ul class="sources">
+<li><a href="https://www.rfc-editor.org/rfc/rfc8259" rel="nofollow noopener">IETF RFC 8259 — The JSON Data Interchange Format</a></li>
+<li><a href="https://www.rfc-editor.org/rfc/rfc7519" rel="nofollow noopener">IETF RFC 7519 — JSON Web Token (JWT)</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions" rel="nofollow noopener">MDN — Regular expressions</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse" rel="nofollow noopener">MDN — JSON.parse()</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify" rel="nofollow noopener">MDN — JSON.stringify()</a></li>
+</ul>
+<h2>Related tools</h2>
+<ul>
+<li><a href="/json-validator/">JSON Validator</a></li>
+<li><a href="/json-viewer/">JSON Viewer</a></li>
+<li><a href="/json-diff/">JSON Diff</a></li>
+<li><a href="/json-stringify/">JSON Stringify and Escape</a></li>
+<li><a href="/json-schema-generator/">JSON Schema Generator</a></li>
+<li><a href="/base64-decode/">Base64 Decode and Encode</a></li>
+<li><a href="/unix-timestamp-converter/">Unix Timestamp Converter</a></li>
+<li><a href="/diff-checker/">Diff Checker</a></li>
+</ul>
+<p class="disclaimer">Tools run locally in your browser. Provided as-is.</p>
+</div></main>
+<footer class="site"><div class="wrap">
+<p><a href="/json-formatter/">JSON Formatter &amp; Validator</a> <a href="/base64-decode/">Base64 Decode and Encode</a> <a href="/unix-timestamp-converter/">Unix Timestamp Converter</a> <a href="/json-viewer/">JSON Viewer</a> <a href="/diff-checker/">Diff Checker</a> <a href="/url-encode-decode/">URL Encode and Decode</a> <a href="/">All tools</a></p>
+<p><a href="/about/">About</a><a href="/methodology/">Methodology</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></p>
+<p>Tools run locally in your browser. Provided as-is.</p>
+<p>© <span id="y"></span> Quick JSON Tools</p>
+</div></footer>
+<script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+</body>
+</html>

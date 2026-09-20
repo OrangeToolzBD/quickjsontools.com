@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Case Converter — Title, camelCase, snake_case</title>
+<meta name="description" content="Change text to UPPER, lower, Title Case, Sentence case, camelCase, PascalCase, snake_case, kebab-case or CONSTANT_CASE in one click.">
+<link rel="canonical" href="https://quickjsontools.com/case-converter/">
+<meta property="og:title" content="Case Converter — Title, camelCase, snake_case">
+<meta property="og:description" content="Change text to UPPER, lower, Title Case, Sentence case, camelCase, PascalCase, snake_case, kebab-case or CONSTANT_CASE in one click.">
+<meta property="og:url" content="https://quickjsontools.com/case-converter/">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://quickjsontools.com/assets/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://quickjsontools.com/assets/og-image.png">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="icon" type="image/png" href="/assets/favicon.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<style>:root{--brand:#4338ca;--font:ui-sans-serif, system-ui, "Segoe UI", sans-serif}</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://quickjsontools.com/#org","name":"Quick JSON Tools","url":"https://quickjsontools.com/","description":"Quick JSON Tools is a set of free developer utilities that run entirely in the browser, so pasted data is never uploaded."},{"@type":"WebApplication","name":"Case Converter","url":"https://quickjsontools.com/case-converter/","description":"Change text to UPPER, lower, Title Case, Sentence case, camelCase, PascalCase, snake_case, kebab-case or CONSTANT_CASE in one click.","applicationCategory":"DeveloperApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@id":"https://quickjsontools.com/#org"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Quick JSON Tools","item":"https://quickjsontools.com/"},{"@type":"ListItem","position":2,"name":"Case Converter","item":"https://quickjsontools.com/case-converter/"}]}]}</script>
+
+<script src="/assets/calculator.js" defer></script>
+<script src="/assets/calc-core.js" defer></script>
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="logo" href="/"><img src="/assets/logo.png" alt="Quick JSON Tools" width="60" height="34"></a><nav class="site"><a href="/json-formatter/">JSON Formatter</a><a href="/base64-decode/">Base64 Decode and Encode</a><a href="/unix-timestamp-converter/">Unix Timestamp Converter</a><a href="/json-viewer/">JSON Viewer</a></nav></div></header>
+<main><div class="wrap">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Quick JSON Tools</a> › Case Converter</nav>
+<h1>Case Converter</h1>
+<p class="answer">A <strong>case converter</strong> rewrites text in a different capitalization style with one click: UPPER, lower, Title Case, Sentence case, camelCase, PascalCase, snake_case, kebab-case or CONSTANT_CASE. For example, “hello world of code” becomes “Hello World of Code” in title case and helloWorldOfCode in camelCase. Conversion runs in your browser.</p>
+<p class="updated">Updated <time datetime="2026-09-20">September 20, 2026</time> · By <a href="/about/">Quick JSON Tools</a></p>
+<div id="calculator" data-calc="caseConverter"><noscript>This tool needs JavaScript turned on.</noscript></div>
+<div class="ad-slot"><!-- Ad slot 1 (below the tool). Empty until the ad network is approved; reserve its height in CSS first. --></div>
+<h2>How do I convert text to title case?</h2>
+<p>Paste your text and press <strong>Title Case</strong>. The tool lowercases everything, then capitalizes the first letter of each word, except short function words such as “of”, “the” and “and”, which stay lowercase unless they are the first or last word.</p><p>Worked examples:</p><div class="table-wrap"><table class="data"><thead><tr><th>Input</th><th>Title Case</th></tr></thead><tbody><tr><td>hello world of code</td><td>Hello World of Code</td></tr><tr><td>the lord of the rings</td><td>The Lord of the Rings</td></tr><tr><td>what is it for</td><td>What Is It For</td></tr><tr><td>NASA launches e-mail tool</td><td>Nasa Launches E-mail Tool</td></tr></tbody></table></div><p>The last row shows the two limits to watch. Because the text is lowercased first, acronyms lose their capitals, so fix NASA, API or JSON by hand. Words are split on spaces only, so in a hyphenated word only the first part is capitalized.</p><p><strong>Sentence case</strong> works the same way but capitalizes only the first letter of the text and the first letter after a period, exclamation mark or question mark: “hello. world! ok” becomes “Hello. World! Ok”. Proper nouns end up lowercase, so read the result before using it.</p>
+<h2>camelCase vs snake_case vs kebab-case</h2>
+<p>All three join several words into one identifier. camelCase capitalizes each word after the first, snake_case joins lowercase words with underscores, and kebab-case joins them with hyphens. Which you use depends on the language, framework or file format, so follow the convention already in your codebase.</p><div class="table-wrap"><table class="data"><thead><tr><th>Style</th><th>user id value</th><th>Often seen in</th></tr></thead><tbody><tr><td>camelCase</td><td><code>userIdValue</code></td><td>JavaScript variables and JSON keys</td></tr><tr><td>PascalCase</td><td><code>UserIdValue</code></td><td>Class and type names</td></tr><tr><td>snake_case</td><td><code>user_id_value</code></td><td>Python names and database columns</td></tr><tr><td>kebab-case</td><td><code>user-id-value</code></td><td>URLs, CSS classes and file names</td></tr><tr><td>CONSTANT_CASE</td><td><code>USER_ID_VALUE</code></td><td>Constants and environment variables</td></tr></tbody></table></div><p>The converter finds word boundaries at spaces, underscores, hyphens and a lowercase letter followed by a capital. That lets you convert between code styles directly: the test case turns helloWorldOfCode into hello_world_of_code, and “my-var_name here” becomes MyVarNameHere.</p><p>Two cases need a manual check:</p><ul><li>Runs of capitals are not split: parseHTTPResponse becomes parse_httpresponse, not parse_http_response.</li><li>Punctuation is kept inside words, so “don’t stop” becomes a camelCase value containing an apostrophe, which is not a valid identifier. Remove punctuation first.</li></ul><p>For JSON keys, convert the names here, then check the file in the <a href="/json-formatter/">JSON formatter</a>.</p>
+<h2>Which words stay lowercase in title case?</h2>
+<p>This tool keeps these words lowercase in the middle of a title: a, an, and, as, at, but, by, for, in, nor, of, on, or, per, the, to, up, via, vs and yet. They are articles, short conjunctions and short prepositions. The first and last words are always capitalized, whatever they are.</p><p>Style guides do not fully agree on this list. They differ on details such as whether longer prepositions like “with”, “from” or “about” should be capitalized; this tool capitalizes them. If you follow a specific house style, check the result against it and adjust the few words that differ.</p><p>A few habits that avoid surprises:</p><ul><li>Capitalize the word after a colon if your style requires it; the tool treats it like any other word.</li><li>Restore brand names with unusual capitals, such as iPhone or GitHub, after converting.</li><li>For headings in code or documentation, consider sentence case, which is easier to apply consistently.</li></ul><p>To compare your edited title with the original, paste both into the <a href="/diff-checker/">diff checker</a>.</p>
+<h2>Frequently asked questions</h2>
+<div class="faq">
+<details><summary>Why did my acronym turn lowercase?</summary><p>Title Case and Sentence case lowercase the whole text before capitalizing, so NASA becomes Nasa and API becomes Api. The tool cannot tell an acronym from a word typed in capitals. Restore acronyms and brand names by hand after converting, or convert the surrounding text and leave those words as they were.</p></details>
+<details><summary>Can I convert camelCase to snake_case?</summary><p>Yes. Paste the camelCase name and press snake_case; the tool splits at each change from a lowercase letter or digit to a capital, so helloWorldOfCode becomes hello_world_of_code. Names with runs of capitals, such as HTTPServer, are not split and need a manual fix, as does any name containing punctuation.</p></details>
+<details><summary>Is my text stored or sent anywhere?</summary><p>No. The conversion happens in JavaScript in your browser, and nothing you type is uploaded, logged or saved, which you can check in the Network tab of your browser’s developer tools. The <a href="/methodology/">methodology page</a> describes what each tool runs and where.</p></details>
+</div>
+<h2>Sources</h2>
+<ul class="sources">
+<li><a href="https://www.rfc-editor.org/rfc/rfc8259" rel="nofollow noopener">IETF RFC 8259 — The JSON Data Interchange Format</a></li>
+<li><a href="https://www.rfc-editor.org/rfc/rfc7519" rel="nofollow noopener">IETF RFC 7519 — JSON Web Token (JWT)</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions" rel="nofollow noopener">MDN — Regular expressions</a></li>
+</ul>
+<h2>Related tools</h2>
+<ul>
+<li><a href="/diff-checker/">Diff Checker</a></li>
+<li><a href="/regex-tester/">Regex Tester</a></li>
+<li><a href="/yaml-validator/">YAML Validator</a></li>
+<li><a href="/xml-formatter/">XML Formatter</a></li>
+<li><a href="/sql-formatter/">SQL Formatter</a></li>
+<li><a href="/html-beautifier/">HTML Beautifier</a></li>
+<li><a href="/json-formatter/">JSON Formatter &amp; Validator</a></li>
+<li><a href="/base64-decode/">Base64 Decode and Encode</a></li>
+</ul>
+<p class="disclaimer">Tools run locally in your browser. Provided as-is.</p>
+</div></main>
+<footer class="site"><div class="wrap">
+<p><a href="/json-formatter/">JSON Formatter &amp; Validator</a> <a href="/base64-decode/">Base64 Decode and Encode</a> <a href="/unix-timestamp-converter/">Unix Timestamp Converter</a> <a href="/json-viewer/">JSON Viewer</a> <a href="/diff-checker/">Diff Checker</a> <a href="/url-encode-decode/">URL Encode and Decode</a> <a href="/">All tools</a></p>
+<p><a href="/about/">About</a><a href="/methodology/">Methodology</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></p>
+<p>Tools run locally in your browser. Provided as-is.</p>
+<p>© <span id="y"></span> Quick JSON Tools</p>
+</div></footer>
+<script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+</body>
+</html>

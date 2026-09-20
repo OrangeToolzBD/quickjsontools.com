@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>XML Formatter — Pretty Print and Minify XML</title>
+<meta name="description" content="Format or minify XML with consistent indentation and spot mismatched tags. Works offline in your browser.">
+<link rel="canonical" href="https://quickjsontools.com/xml-formatter/">
+<meta property="og:title" content="XML Formatter — Pretty Print and Minify XML">
+<meta property="og:description" content="Format or minify XML with consistent indentation and spot mismatched tags. Works offline in your browser.">
+<meta property="og:url" content="https://quickjsontools.com/xml-formatter/">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://quickjsontools.com/assets/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://quickjsontools.com/assets/og-image.png">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="icon" type="image/png" href="/assets/favicon.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<style>:root{--brand:#4338ca;--font:ui-sans-serif, system-ui, "Segoe UI", sans-serif}</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://quickjsontools.com/#org","name":"Quick JSON Tools","url":"https://quickjsontools.com/","description":"Quick JSON Tools is a set of free developer utilities that run entirely in the browser, so pasted data is never uploaded."},{"@type":"WebApplication","name":"XML Formatter","url":"https://quickjsontools.com/xml-formatter/","description":"Format or minify XML with consistent indentation and spot mismatched tags. Works offline in your browser.","applicationCategory":"DeveloperApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@id":"https://quickjsontools.com/#org"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Quick JSON Tools","item":"https://quickjsontools.com/"},{"@type":"ListItem","position":2,"name":"XML Formatter","item":"https://quickjsontools.com/xml-formatter/"}]}]}</script>
+
+<script src="/assets/calculator.js" defer></script>
+<script src="/assets/calc-core.js" defer></script>
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="logo" href="/"><img src="/assets/logo.png" alt="Quick JSON Tools" width="60" height="34"></a><nav class="site"><a href="/json-formatter/">JSON Formatter</a><a href="/base64-decode/">Base64 Decode and Encode</a><a href="/unix-timestamp-converter/">Unix Timestamp Converter</a><a href="/json-viewer/">JSON Viewer</a></nav></div></header>
+<main><div class="wrap">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Quick JSON Tools</a> › XML Formatter</nav>
+<h1>XML Formatter</h1>
+<p class="answer">An <strong>XML formatter</strong> re-indents XML so every element starts on its own line, one level deeper than its parent. Paste XML, pick 2 spaces, 4 spaces or tabs, and press Format, or press Minify to strip the whitespace between tags. It also checks that each closing tag matches, following <a href="https://www.w3.org/TR/xml/" rel="nofollow noopener">XML 1.0</a> (Fifth Edition, 2008), in your browser.</p>
+<p class="updated">Updated <time datetime="2026-09-20">September 20, 2026</time> · By <a href="/about/">Quick JSON Tools</a></p>
+<div id="calculator" data-calc="xmlFormatter"><noscript>This tool needs JavaScript turned on.</noscript></div>
+<div class="ad-slot"><!-- Ad slot 1 (below the tool). Empty until the ad network is approved; reserve its height in CSS first. --></div>
+<h2>How do I format XML?</h2>
+<p>Paste the XML and press <strong>Format</strong>. Each start tag, end tag, comment, CDATA section, processing instruction and DOCTYPE goes on its own line, indented by depth. An element that holds only text stays on one line, so <code>&lt;b x="1"&gt;t&lt;/b&gt;</code> is not split into three.</p><p>The tool’s test case:</p><pre><code>&lt;a&gt;&lt;b x="1"&gt;t&lt;/b&gt;&lt;c/&gt;&lt;/a&gt;
+
+&lt;a&gt;
+  &lt;b x="1"&gt;t&lt;/b&gt;
+  &lt;c/&gt;
+&lt;/a&gt;</code></pre><p>Self-closing tags such as <code>&lt;c/&gt;</code> are kept as they are, and attributes are left untouched. <strong>Minify</strong> does the reverse: it removes the whitespace-only text between tags and joins everything onto one line.</p><p>Formatting changes whitespace, and in some XML that matters. When an element mixes text and child elements, the formatter puts each piece on its own line:</p><pre><code>&lt;p&gt;Hello &lt;b&gt;world&lt;/b&gt; again&lt;/p&gt;
+
+&lt;p&gt;
+  Hello
+  &lt;b&gt;world&lt;/b&gt;
+  again
+&lt;/p&gt;</code></pre><p>For a document where spacing is meaningful, such as one marked <code>xml:space="preserve"</code> (which the XML specification uses to signal that whitespace should be kept), read the formatted copy but keep the original file.</p>
+<h2>Why does my XML fail to format?</h2>
+<p>The formatter stops when tags do not pair up. You will see “Closing tag &lt;/x&gt; does not match an open tag” when an end tag closes the wrong element, and “Unclosed tag &lt;x&gt;” when an element is never closed. The usual causes are a typo, mismatched letter case or a missing end tag.</p><div class="table-wrap"><table class="data"><thead><tr><th>Input</th><th>Result</th></tr></thead><tbody><tr><td><code>&lt;a&gt;&lt;b&gt;&lt;/a&gt;</code></td><td>Closing tag &lt;/a&gt; does not match an open tag</td></tr><tr><td><code>&lt;a&gt;&lt;b&gt;</code></td><td>Unclosed tag &lt;b&gt;</td></tr><tr><td><code>&lt;Note&gt;&lt;/note&gt;</code></td><td>Closing tag &lt;/note&gt; does not match (names are case-sensitive)</td></tr><tr><td><code>&lt;a&gt;1 &lt; 2&lt;/a&gt;</code></td><td>Fails with an unclear error: escape the <code>&lt;</code> as <code>&amp;lt;</code></td></tr></tbody></table></div><p>The W3C specification treats names as case-sensitive and says a literal <code>&amp;</code> or <code>&lt;</code> may appear only as markup, so in text you must write <code>&amp;amp;</code> and <code>&amp;lt;</code>. This formatter stops with a clear message on both: <code>&lt;a&gt;AT&amp;T&lt;/a&gt;</code> is rejected until the ampersand is written as <code>&amp;amp;</code>.</p><pre><code>&lt;company&gt;AT&amp;amp;T&lt;/company&gt;
+&lt;rule&gt;1 &amp;lt; 2&lt;/rule&gt;
+&lt;code&gt;&lt;![CDATA[if (a &lt; b &amp;&amp; c) {}]]&gt;&lt;/code&gt;</code></pre><p>A CDATA section, as in the last line, lets you include code without escaping each character.</p>
+<h2>XML formatting vs validation</h2>
+<p>Formatting only changes layout. Validation checks rules. XML 1.0 separates two levels: a well-formed document follows the syntax rules, including a single root element and properly nested tags, while a valid document also has a document type declaration and obeys it. This tool checks tag syntax, nesting, bare <code>&amp;</code> and <code>&lt;</code> in text, and that there is a single root element, so it catches the common well-formedness errors, but it is not a full parser and not a validator.</p><p>What the formatter does not check: attribute quoting and duplicate attributes, character validity, or any DTD or XML Schema. For a real well-formedness check in a browser, the built-in XML parser reports errors:</p><pre><code>const doc = new DOMParser().parseFromString(text, "application/xml");
+const err = doc.querySelector("parsererror");
+console.log(err ? err.textContent : "well-formed");</code></pre><p>Checking against a schema needs a validating parser with the schema file. If your data started life as JSON, the <a href="/json-to-yaml/">JSON to XML converter</a> produces nested elements you can paste here, and the <a href="/diff-checker/">diff checker</a> compares two formatted versions line by line.</p>
+<h2>Frequently asked questions</h2>
+<div class="faq">
+<details><summary>How can I format an XML file?</summary><p>Open the file in a text editor, copy the contents, paste them above and press Format. Choose the indent you prefer, then Copy the result back into the file. The formatting happens in your browser, so the file is not uploaded.</p></details>
+<details><summary>How do I convert XML into a readable format?</summary><p>Indent it so each element sits on its own line under its parent; that is what the Format button does. If the XML came minified from an API or log, formatting is usually enough to read it. For very large files, a code editor with XML folding is easier to navigate.</p></details>
+<details><summary>Does formatting change my XML data?</summary><p>It changes only whitespace between and around elements. Tag names, attributes and text are kept, but text inside elements that also contain child elements is trimmed and moved onto separate lines. That matters only where whitespace is significant, so keep the original for such documents.</p></details>
+</div>
+<h2>Sources</h2>
+<ul class="sources">
+<li><a href="https://www.rfc-editor.org/rfc/rfc8259" rel="nofollow noopener">IETF RFC 8259 — The JSON Data Interchange Format</a></li>
+<li><a href="https://www.rfc-editor.org/rfc/rfc7519" rel="nofollow noopener">IETF RFC 7519 — JSON Web Token (JWT)</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions" rel="nofollow noopener">MDN — Regular expressions</a></li>
+<li><a href="https://www.w3.org/TR/xml/" rel="nofollow noopener">W3C — Extensible Markup Language (XML) 1.0, Fifth Edition (November 26, 2008)</a></li>
+</ul>
+<h2>Related tools</h2>
+<ul>
+<li><a href="/diff-checker/">Diff Checker</a></li>
+<li><a href="/regex-tester/">Regex Tester</a></li>
+<li><a href="/yaml-validator/">YAML Validator</a></li>
+<li><a href="/case-converter/">Case Converter</a></li>
+<li><a href="/sql-formatter/">SQL Formatter</a></li>
+<li><a href="/html-beautifier/">HTML Beautifier</a></li>
+<li><a href="/json-formatter/">JSON Formatter &amp; Validator</a></li>
+<li><a href="/base64-decode/">Base64 Decode and Encode</a></li>
+</ul>
+<p class="disclaimer">Tools run locally in your browser. Provided as-is.</p>
+</div></main>
+<footer class="site"><div class="wrap">
+<p><a href="/json-formatter/">JSON Formatter &amp; Validator</a> <a href="/base64-decode/">Base64 Decode and Encode</a> <a href="/unix-timestamp-converter/">Unix Timestamp Converter</a> <a href="/json-viewer/">JSON Viewer</a> <a href="/diff-checker/">Diff Checker</a> <a href="/url-encode-decode/">URL Encode and Decode</a> <a href="/">All tools</a></p>
+<p><a href="/about/">About</a><a href="/methodology/">Methodology</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></p>
+<p>Tools run locally in your browser. Provided as-is.</p>
+<p>© <span id="y"></span> Quick JSON Tools</p>
+</div></footer>
+<script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+</body>
+</html>

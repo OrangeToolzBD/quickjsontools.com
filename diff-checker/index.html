@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Diff Checker — Compare Two Texts Line by Line</title>
+<meta name="description" content="Compare two versions of text, code or JSON and see every added and removed line. Runs in your browser, so private files never leave your machine.">
+<link rel="canonical" href="https://quickjsontools.com/diff-checker/">
+<meta property="og:title" content="Diff Checker — Compare Two Texts Line by Line">
+<meta property="og:description" content="Compare two versions of text, code or JSON and see every added and removed line. Runs in your browser, so private files never leave your machine.">
+<meta property="og:url" content="https://quickjsontools.com/diff-checker/">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://quickjsontools.com/assets/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://quickjsontools.com/assets/og-image.png">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="icon" type="image/png" href="/assets/favicon.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<style>:root{--brand:#4338ca;--font:ui-sans-serif, system-ui, "Segoe UI", sans-serif}</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://quickjsontools.com/#org","name":"Quick JSON Tools","url":"https://quickjsontools.com/","description":"Quick JSON Tools is a set of free developer utilities that run entirely in the browser, so pasted data is never uploaded."},{"@type":"WebApplication","name":"Diff Checker","url":"https://quickjsontools.com/diff-checker/","description":"Compare two versions of text, code or JSON and see every added and removed line. Runs in your browser, so private files never leave your machine.","applicationCategory":"DeveloperApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@id":"https://quickjsontools.com/#org"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Quick JSON Tools","item":"https://quickjsontools.com/"},{"@type":"ListItem","position":2,"name":"Diff Checker","item":"https://quickjsontools.com/diff-checker/"}]}]}</script>
+
+<script src="/assets/calculator.js" defer></script>
+<script src="/assets/calc-core.js" defer></script>
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="logo" href="/"><img src="/assets/logo.png" alt="Quick JSON Tools" width="60" height="34"></a><nav class="site"><a href="/json-formatter/">JSON Formatter</a><a href="/base64-decode/">Base64 Decode and Encode</a><a href="/unix-timestamp-converter/">Unix Timestamp Converter</a><a href="/json-viewer/">JSON Viewer</a></nav></div></header>
+<main><div class="wrap">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Quick JSON Tools</a> › Diff Checker</nav>
+<h1>Diff Checker</h1>
+<p class="answer">A <strong>diff checker</strong> compares two versions of a text and marks every line that was added or removed. Paste the original on the left and the changed version on the right, then press Compare. The comparison runs in your browser with a longest-common-subsequence line diff, so private files are never uploaded.</p>
+<p class="updated">Updated <time datetime="2026-09-20">September 20, 2026</time> · By <a href="/about/">Quick JSON Tools</a></p>
+<div id="calculator" data-calc="diffChecker"><noscript>This tool needs JavaScript turned on.</noscript></div>
+<div class="ad-slot"><!-- Ad slot 1 (below the tool). Empty until the ad network is approved; reserve its height in CSS first. --></div>
+<h2>How do I compare two text files?</h2>
+<p>Open both files, paste the original into “Original text” and the new version into “Changed text”, then press <strong>Compare</strong>. The result starts with a count of added and removed lines, followed by the merged listing: unchanged lines, lines only in the original (marked with a minus) and lines only in the new version (marked with a plus).</p><p>Each marked line carries its line number from its own file, so -2 means line 2 of the original and +2 means line 2 of the changed text. The tool’s test case compares three short lines:</p><div class="table-wrap"><table class="data"><thead><tr><th>Original</th><th>Changed</th><th>Result</th></tr></thead><tbody><tr><td><code>a</code></td><td><code>a</code></td><td>unchanged (line 1)</td></tr><tr><td><code>b</code></td><td><code>B</code></td><td><code>-2 b</code> then <code>+2 B</code></td></tr><tr><td><code>c</code></td><td><code>c</code></td><td>unchanged (line 3)</td></tr></tbody></table></div><p>The summary reads 1 line added and 1 line removed. A diff checker sees an edited line as one removal plus one addition; it does not highlight the changed characters within the line.</p><p>Comparison is exact. Trailing spaces, tabs versus spaces and a different letter case all count as changes, even though they look the same on screen. If a line you expected to match is flagged, turn on visible whitespace in your editor, or trim trailing spaces from both versions before pasting.</p><p>Very large inputs are refused rather than frozen: if the line count of one side times the other exceeds 25 million (5,000 lines against 5,000, for example), the tool asks you to split the text.</p>
+<h2>How does a line diff work?</h2>
+<p>A line diff finds the longest sequence of lines that appears, in order, in both texts. Those lines are unchanged. Everything in the original that is not part of that sequence was removed, and everything in the new text that is not part of it was added.</p><p>This tool builds a table of longest-common-subsequence lengths for every pair of line positions, then walks it from the top to produce the output. When two outcomes are equally short, it lists the removal before the addition, which is why an edited line appears as a minus line followed by a plus line.</p><p>Command-line tools use faster algorithms that trade a little precision for speed on large files. The <a href="https://www.gnu.org/software/diffutils/manual/html_node/diff-Performance.html" rel="nofollow noopener">GNU diff manual</a> (Diffutils 3.12, January 2025) says its method finds a “near-minimal set of differences”, and it offers a <code>--minimal</code> option when you need the smallest possible set. For pasted text, the exact method used here is fast enough and always minimal in line count.</p><p>For comparison on the command line:</p><pre><code>diff -u original.txt changed.txt
+git diff --no-index original.txt changed.txt</code></pre><p>Both print a unified diff, the same plus and minus notation used above, with a few lines of context around each change.</p>
+<h2>How do I compare two JSON files?</h2>
+<p>For JSON, a line diff works only if both files are formatted the same way. Format both sides with the same indentation first, or use a structural comparison that ignores formatting and key order. Otherwise a reordered object or a minified file shows as a wall of changes even when the data is identical.</p><p>The quickest route is to run each file through the <a href="/json-formatter/">JSON formatter</a> with 2-space indentation, then paste both results here. That gives a readable line diff.</p><p>The <a href="/json-diff/">JSON diff</a> tool goes further. It parses both documents and compares values by path, so <code>{"a":1,"b":2}</code> and <code>{"b":2,"a":1}</code> count as identical, and a changed value is reported once, with its path, instead of as a removed and an added line.</p>
+<h2>Frequently asked questions</h2>
+<div class="faq">
+<details><summary>Is this diff checker safe for private files?</summary><p>Yes, in the sense that the comparison happens entirely in your browser. The page sends nothing you paste to any server and stores nothing, which you can check in the Network tab of your developer tools. Still avoid pasting live credentials or personal data into any web page, since extensions and clipboard history can expose them.</p></details>
+<details><summary>Where can I find a diff checker online?</summary><p>This page is one: paste two texts and press Compare. If you already use Git, you do not need a browser at all; the command git diff --no-index file1 file2 compares any two files on disk, and most code editors have a built-in compare view.</p></details>
+<details><summary>How do I choose the right diff checker?</summary><p>Match the tool to the data. For plain text and code, a line diff is standard. For JSON, prefer a structural diff that ignores key order, such as the <a href="/json-diff/">JSON diff</a>. For confidential material, choose a tool that runs locally and that you can verify makes no network requests while you compare.</p></details>
+</div>
+<h2>Sources</h2>
+<ul class="sources">
+<li><a href="https://www.rfc-editor.org/rfc/rfc8259" rel="nofollow noopener">IETF RFC 8259 — The JSON Data Interchange Format</a></li>
+<li><a href="https://www.rfc-editor.org/rfc/rfc7519" rel="nofollow noopener">IETF RFC 7519 — JSON Web Token (JWT)</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions" rel="nofollow noopener">MDN — Regular expressions</a></li>
+<li><a href="https://www.gnu.org/software/diffutils/manual/html_node/diff-Performance.html" rel="nofollow noopener">GNU Diffutils manual — diff Performance Tradeoffs</a></li>
+</ul>
+<h2>Related tools</h2>
+<ul>
+<li><a href="/regex-tester/">Regex Tester</a></li>
+<li><a href="/yaml-validator/">YAML Validator</a></li>
+<li><a href="/xml-formatter/">XML Formatter</a></li>
+<li><a href="/case-converter/">Case Converter</a></li>
+<li><a href="/sql-formatter/">SQL Formatter</a></li>
+<li><a href="/html-beautifier/">HTML Beautifier</a></li>
+<li><a href="/json-formatter/">JSON Formatter &amp; Validator</a></li>
+<li><a href="/base64-decode/">Base64 Decode and Encode</a></li>
+</ul>
+<p class="disclaimer">Tools run locally in your browser. Provided as-is.</p>
+</div></main>
+<footer class="site"><div class="wrap">
+<p><a href="/json-formatter/">JSON Formatter &amp; Validator</a> <a href="/base64-decode/">Base64 Decode and Encode</a> <a href="/unix-timestamp-converter/">Unix Timestamp Converter</a> <a href="/json-viewer/">JSON Viewer</a> <a href="/diff-checker/">Diff Checker</a> <a href="/url-encode-decode/">URL Encode and Decode</a> <a href="/">All tools</a></p>
+<p><a href="/about/">About</a><a href="/methodology/">Methodology</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></p>
+<p>Tools run locally in your browser. Provided as-is.</p>
+<p>© <span id="y"></span> Quick JSON Tools</p>
+</div></footer>
+<script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+</body>
+</html>

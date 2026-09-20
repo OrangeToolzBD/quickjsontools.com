@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JSON Schema Generator — Schema From JSON Sample</title>
+<meta name="description" content="Generate a draft 2020-12 JSON Schema from a sample document, with types, nested properties and required fields, then refine it.">
+<link rel="canonical" href="https://quickjsontools.com/json-schema-generator/">
+<meta property="og:title" content="JSON Schema Generator — Schema From JSON Sample">
+<meta property="og:description" content="Generate a draft 2020-12 JSON Schema from a sample document, with types, nested properties and required fields, then refine it.">
+<meta property="og:url" content="https://quickjsontools.com/json-schema-generator/">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://quickjsontools.com/assets/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://quickjsontools.com/assets/og-image.png">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="icon" type="image/png" href="/assets/favicon.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<style>:root{--brand:#4338ca;--font:ui-sans-serif, system-ui, "Segoe UI", sans-serif}</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://quickjsontools.com/#org","name":"Quick JSON Tools","url":"https://quickjsontools.com/","description":"Quick JSON Tools is a set of free developer utilities that run entirely in the browser, so pasted data is never uploaded."},{"@type":"WebApplication","name":"JSON Schema Generator","url":"https://quickjsontools.com/json-schema-generator/","description":"Generate a draft 2020-12 JSON Schema from a sample document, with types, nested properties and required fields, then refine it.","applicationCategory":"DeveloperApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@id":"https://quickjsontools.com/#org"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Quick JSON Tools","item":"https://quickjsontools.com/"},{"@type":"ListItem","position":2,"name":"JSON Schema Generator","item":"https://quickjsontools.com/json-schema-generator/"}]}]}</script>
+
+<script src="/assets/calculator.js" defer></script>
+<script src="/assets/calc-core.js" defer></script>
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="logo" href="/"><img src="/assets/logo.png" alt="Quick JSON Tools" width="60" height="34"></a><nav class="site"><a href="/json-formatter/">JSON Formatter</a><a href="/base64-decode/">Base64 Decode and Encode</a><a href="/unix-timestamp-converter/">Unix Timestamp Converter</a><a href="/json-viewer/">JSON Viewer</a></nav></div></header>
+<main><div class="wrap">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Quick JSON Tools</a> › JSON Schema Generator</nav>
+<h1>JSON Schema Generator</h1>
+<p class="answer">To go from <strong>JSON to schema</strong>, paste a sample document and press Generate schema. The tool writes a draft 2020-12 <a href="https://json-schema.org/specification" rel="nofollow noopener">JSON Schema</a> that records each value’s type, describes nested objects and arrays, and lists every key in the sample as required. Treat it as a starting point to refine, not a finished contract.</p>
+<p class="updated">Updated <time datetime="2026-09-20">September 20, 2026</time> · By <a href="/about/">Quick JSON Tools</a></p>
+<div id="calculator" data-calc="jsonSchema"><noscript>This tool needs JavaScript turned on.</noscript></div>
+<div class="ad-slot"><!-- Ad slot 1 (below the tool). Empty until the ad network is approved; reserve its height in CSS first. --></div>
+<h2>How do I create a JSON Schema from JSON?</h2>
+<p>Paste a representative JSON document and press <strong>Generate schema</strong>. The tool walks the sample and, for each value, writes its type: object, array, string, integer, number, boolean or null. Objects get properties and a required list, and arrays get an items schema built from their contents.</p><p>Worked example from the tool’s tests:</p><pre><code>{"id": 1, "name": "x", "tags": ["a"], "meta": {"ok": true}}</code></pre><p>produces</p><pre><code>{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "id": { "type": "integer" },
+    "name": { "type": "string" },
+    "tags": { "type": "array", "items": { "type": "string" } },
+    "meta": {
+      "type": "object",
+      "properties": { "ok": { "type": "boolean" } },
+      "required": ["ok"]
+    }
+  },
+  "required": ["id", "name", "tags", "meta"]
+}</code></pre><p>(Output shown here in compact form; the tool indents every level.) A single sample cannot show everything, so review these points before using the schema:</p><ul><li>Whole numbers become integer. If the field can hold 1.5, change it to number.</li><li>A null in the sample becomes type null. If the field is usually a string, use <code>["string", "null"]</code>.</li><li>An empty array gets no items schema, so its items are not checked.</li><li>Arrays with mixed items get an anyOf listing each distinct item schema.</li><li>No formats, patterns, enums or length limits are added; write those yourself.</li></ul>
+<h2>What does required mean in JSON Schema?</h2>
+<p>The required keyword lists the property names an object must contain to be valid. It says nothing about their values, which the properties keyword describes. Without required, every property is optional: an object missing all of them still passes.</p><p><a href="https://json-schema.org/understanding-json-schema/reference/object" rel="nofollow noopener">Understanding JSON Schema</a> states that properties defined by the properties keyword are not required by default. It also explains that extra properties are allowed unless you set additionalProperties to false.</p><p>The generator lists every key from your sample as required, because it cannot tell which ones are optional. Remove the keys your data may omit. If you want to reject unknown keys, add additionalProperties yourself:</p><pre><code>{
+  "type": "object",
+  "properties": {
+    "id":   { "type": "integer" },
+    "note": { "type": "string" }
+  },
+  "required": ["id"],
+  "additionalProperties": false
+}</code></pre><p>Against this schema, <code>{"id": 1}</code> is valid, <code>{"note": "x"}</code> fails because id is missing, and <code>{"id": 1, "extra": 2}</code> fails because extra is not listed. Before building a schema, make sure the sample itself parses in the <a href="/json-validator/">JSON validator</a>.</p>
+<h2>Which JSON Schema draft should I use?</h2>
+<p>Use 2020-12, the current version on json-schema.org, unless the validator or platform you depend on supports only an older draft. The generator declares 2020-12 in its $schema line; the output uses only basic keywords, so it usually works with older drafts once you change that line.</p><p>The official specification page lists 2020-12 as the current release, superseding 2019-09, with migration notes for draft-07, draft-06 and draft-04. The specification is split into two documents: Core, which defines the foundation, and Validation, which defines the validation keywords.</p><p>How to choose:</p><ul><li>Check which drafts your validator library supports, and pick the newest one it handles fully.</li><li>Keep the $schema line accurate, because validators use it to decide which rules apply.</li><li>If you use keywords whose meaning changed between drafts, follow the migration notes on json-schema.org before switching.</li></ul><p>The <a href="/json-formatter/">JSON formatter</a> is useful for tidying a schema after you edit it by hand.</p>
+<h2>Frequently asked questions</h2>
+<div class="faq">
+<details><summary>Can JSON have a schema?</summary><p>JSON itself has no built-in schema, but JSON Schema is a vocabulary for describing JSON documents. A schema is itself a JSON document that lists the expected types, properties, required fields and constraints, and a validator checks data against it.</p></details>
+<details><summary>What is the difference between JSON and JSON Schema?</summary><p>JSON is the data format. JSON Schema is a set of rules, written in JSON, that describes what valid data looks like, such as which fields must exist and what type each one has. You use the schema to validate, document or generate code for the data.</p></details>
+<details><summary>Is there an XSD equivalent for JSON?</summary><p>JSON Schema plays that role. Like XSD for XML, it defines types, required fields, allowed values and nesting, and validator libraries check documents against it. It is written in JSON rather than XML, so the same tools that read your data can read the schema, and a generator like this one can draft it from a sample.</p></details>
+<details><summary>What is the JSON Schema format?</summary><p>A JSON Schema is a JSON object whose keywords describe data: $schema names the draft, type sets the kind of value, properties and required describe objects, and items describes array contents. The current specification is 2020-12, published as Core and Validation documents.</p></details>
+</div>
+<h2>Sources</h2>
+<ul class="sources">
+<li><a href="https://www.rfc-editor.org/rfc/rfc8259" rel="nofollow noopener">IETF RFC 8259 — The JSON Data Interchange Format</a></li>
+<li><a href="https://www.rfc-editor.org/rfc/rfc7519" rel="nofollow noopener">IETF RFC 7519 — JSON Web Token (JWT)</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions" rel="nofollow noopener">MDN — Regular expressions</a></li>
+<li><a href="https://json-schema.org/specification" rel="nofollow noopener">JSON Schema — Specification (2020-12)</a></li>
+<li><a href="https://json-schema.org/understanding-json-schema/reference/object" rel="nofollow noopener">JSON Schema — Understanding JSON Schema: object</a></li>
+</ul>
+<h2>Related tools</h2>
+<ul>
+<li><a href="/json-formatter/">JSON Formatter &amp; Validator</a></li>
+<li><a href="/json-validator/">JSON Validator</a></li>
+<li><a href="/json-viewer/">JSON Viewer</a></li>
+<li><a href="/json-diff/">JSON Diff</a></li>
+<li><a href="/json-stringify/">JSON Stringify and Escape</a></li>
+<li><a href="/base64-decode/">Base64 Decode and Encode</a></li>
+<li><a href="/unix-timestamp-converter/">Unix Timestamp Converter</a></li>
+<li><a href="/diff-checker/">Diff Checker</a></li>
+</ul>
+<p class="disclaimer">Tools run locally in your browser. Provided as-is.</p>
+</div></main>
+<footer class="site"><div class="wrap">
+<p><a href="/json-formatter/">JSON Formatter &amp; Validator</a> <a href="/base64-decode/">Base64 Decode and Encode</a> <a href="/unix-timestamp-converter/">Unix Timestamp Converter</a> <a href="/json-viewer/">JSON Viewer</a> <a href="/diff-checker/">Diff Checker</a> <a href="/url-encode-decode/">URL Encode and Decode</a> <a href="/">All tools</a></p>
+<p><a href="/about/">About</a><a href="/methodology/">Methodology</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></p>
+<p>Tools run locally in your browser. Provided as-is.</p>
+<p>© <span id="y"></span> Quick JSON Tools</p>
+</div></footer>
+<script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+</body>
+</html>

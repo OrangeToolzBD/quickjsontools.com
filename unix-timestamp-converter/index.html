@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Unix Timestamp Converter — Epoch to Date</title>
+<meta name="description" content="Convert Unix epoch timestamps to dates and dates to timestamps, in seconds or milliseconds, in UTC and your local time.">
+<link rel="canonical" href="https://quickjsontools.com/unix-timestamp-converter/">
+<meta property="og:title" content="Unix Timestamp Converter — Epoch to Date">
+<meta property="og:description" content="Convert Unix epoch timestamps to dates and dates to timestamps, in seconds or milliseconds, in UTC and your local time.">
+<meta property="og:url" content="https://quickjsontools.com/unix-timestamp-converter/">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://quickjsontools.com/assets/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://quickjsontools.com/assets/og-image.png">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="icon" type="image/png" href="/assets/favicon.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<style>:root{--brand:#4338ca;--font:ui-sans-serif, system-ui, "Segoe UI", sans-serif}</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://quickjsontools.com/#org","name":"Quick JSON Tools","url":"https://quickjsontools.com/","description":"Quick JSON Tools is a set of free developer utilities that run entirely in the browser, so pasted data is never uploaded."},{"@type":"WebApplication","name":"Unix Timestamp Converter","url":"https://quickjsontools.com/unix-timestamp-converter/","description":"Convert Unix epoch timestamps to dates and dates to timestamps, in seconds or milliseconds, in UTC and your local time.","applicationCategory":"DeveloperApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@id":"https://quickjsontools.com/#org"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Quick JSON Tools","item":"https://quickjsontools.com/"},{"@type":"ListItem","position":2,"name":"Unix Timestamp Converter","item":"https://quickjsontools.com/unix-timestamp-converter/"}]}]}</script>
+
+<script src="/assets/calculator.js" defer></script>
+<script src="/assets/calc-core.js" defer></script>
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="logo" href="/"><img src="/assets/logo.png" alt="Quick JSON Tools" width="60" height="34"></a><nav class="site"><a href="/json-formatter/">JSON Formatter</a><a href="/base64-decode/">Base64 Decode and Encode</a><a href="/unix-timestamp-converter/">Unix Timestamp Converter</a><a href="/json-viewer/">JSON Viewer</a></nav></div></header>
+<main><div class="wrap">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Quick JSON Tools</a> › Unix Timestamp Converter</nav>
+<h1>Unix Timestamp Converter</h1>
+<p class="answer">A <strong>Unix timestamp converter</strong> turns seconds since 00:00:00 UTC on January 1, 1970 into a date, and dates back into timestamps. For example, 1700000000 is 2023-11-14T22:13:20Z. The tool also reads milliseconds and microseconds. Under <a href="https://pubs.opengroup.org/onlinepubs/9799919799/basedefs/V1_chap04.html" rel="nofollow noopener">POSIX.1-2024</a>, every day counts as exactly 86,400 seconds, so leap seconds are ignored.</p>
+<p class="updated">Updated <time datetime="2026-09-20">September 20, 2026</time> · By <a href="/about/">Quick JSON Tools</a></p>
+<div id="calculator" data-calc="timestamp"><noscript>This tool needs JavaScript turned on.</noscript></div>
+<div class="ad-slot"><!-- Ad slot 1 (below the tool). Empty until the ad network is approved; reserve its height in CSS first. --></div>
+<h2>How do I convert a Unix timestamp to a date?</h2>
+<p>Paste the number and press <strong>Timestamp → date</strong>. The tool tells you whether it read the value as seconds, milliseconds or microseconds, then shows the date in UTC (ISO 8601), the same moment in your computer’s time zone, and the value in both seconds and milliseconds.</p><p>Worked example from the tool’s tests:</p><pre><code>Read as seconds
+UTC:        2023-11-14T22:13:20.000Z
+Seconds:    1700000000
+Millis:     1700000000000</code></pre><p>Entering 1700000000000 gives the same date, read as milliseconds. To go the other way, type a date such as <code>2023-11-14T22:13:20Z</code> and press <strong>Date → timestamp</strong>; the result is 1700000000. Include Z or an offset such as +02:00. In JavaScript, which this tool uses, a date and time without one is read in your local time zone. Press <strong>Now</strong> for the current timestamp.</p><pre><code>// JavaScript
+new Date(1700000000 * 1000).toISOString()   // "2023-11-14T22:13:20.000Z"
+Math.floor(Date.now() / 1000)                // now, in seconds
+
+# Python
+from datetime import datetime, timezone
+datetime.fromtimestamp(1700000000, tz=timezone.utc)
+
+# GNU date
+date -u -d @1700000000</code></pre><p>JWT exp and iat claims are Unix seconds; the <a href="/jwt-decoder/">JWT decoder</a> converts them for you.</p>
+<h2>Seconds or milliseconds: how can I tell?</h2>
+<p>Count the digits. A present-day timestamp has 10 digits in seconds, 13 in milliseconds and 16 in microseconds. This tool applies the same idea: values of 100 billion (10¹¹) or more are read as milliseconds, and values of 100 trillion (10¹⁴) or more as microseconds.</p><div class="table-wrap"><table class="data"><thead><tr><th>Value</th><th>Read as</th><th>Date (UTC)</th></tr></thead><tbody><tr><td>1700000000</td><td>seconds</td><td>2023-11-14 22:13:20</td></tr><tr><td>1700000000000</td><td>milliseconds</td><td>2023-11-14 22:13:20</td></tr><tr><td>1700000000000000</td><td>microseconds</td><td>2023-11-14 22:13:20</td></tr></tbody></table></div><p>The cut-off works because 10¹¹ seconds would be in the year 5138, far beyond any date you are likely to store. The one blind spot is the other end: 10¹¹ milliseconds is March 3, 1973, so a millisecond value for a date before then is read as seconds. Check the “Read as” line when handling old dates.</p><p>Languages differ in their defaults. <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" rel="nofollow noopener">MDN</a> (updated December 8, 2025) confirms that JavaScript’s Date.now() returns milliseconds, while POSIX time and JWT claims count in seconds. Mixing them up gives dates in 1970 or tens of thousands of years ahead.</p>
+<h2>What is the year 2038 problem?</h2>
+<p>Systems that store Unix time in a signed 32-bit integer run out at 2,147,483,647 seconds, which is 03:14:07 UTC on January 19, 2038. One second later the counter overflows to −2,147,483,648, which such a system reads as 20:45:52 UTC on December 13, 1901. Moving to 64-bit time values removes the limit.</p><p>Both dates are exact calculations from the timestamp definition, and you can confirm them in this tool by entering 2147483647 and -2147483648.</p><p>Where to look for the problem in your own work:</p><ul><li>Database columns, file formats and network protocols that store time in 32 bits.</li><li>Older embedded devices and C code built with a 32-bit time_t.</li><li>Anything that computes dates in the future, such as certificate expiry or 20-year schedules, which can fail before 2038 arrives.</li></ul><p>JavaScript is not affected: MDN gives the Date range as ±8,640,000,000,000,000 milliseconds, about 100 million days either side of 1970. Version 7 UUIDs are safe too, since they store 48 bits of milliseconds; the <a href="/uuid-generator/">UUID generator</a> explains the layout.</p>
+<h2>Frequently asked questions</h2>
+<div class="faq">
+<details><summary>What is the current Unix timestamp?</summary><p>Press Now in the converter. It shows the current time in seconds and milliseconds along with the UTC date, taken from your computer’s clock, so it is only as accurate as that clock. In code, Math.floor(Date.now() / 1000) gives the same value in seconds in JavaScript.</p></details>
+<details><summary>Does Unix time count leap seconds?</summary><p>No. POSIX defines every day as exactly 86,400 seconds, so leap seconds are not counted, and a Unix timestamp is not a true count of the seconds elapsed since 1970. JavaScript dates follow the same rule, which keeps date arithmetic simple at the cost of that small difference.</p></details>
+<details><summary>Does a Unix timestamp depend on the time zone?</summary><p>No. A timestamp identifies one instant, the same everywhere on Earth. Time zones only affect how that instant is displayed, which is why the converter shows both UTC and your local time for the same value. Store timestamps or UTC dates, and convert to local time only for display.</p></details>
+</div>
+<h2>Sources</h2>
+<ul class="sources">
+<li><a href="https://www.rfc-editor.org/rfc/rfc8259" rel="nofollow noopener">IETF RFC 8259 — The JSON Data Interchange Format</a></li>
+<li><a href="https://www.rfc-editor.org/rfc/rfc7519" rel="nofollow noopener">IETF RFC 7519 — JSON Web Token (JWT)</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions" rel="nofollow noopener">MDN — Regular expressions</a></li>
+<li><a href="https://pubs.opengroup.org/onlinepubs/9799919799/basedefs/V1_chap04.html" rel="nofollow noopener">The Open Group — POSIX.1-2024 Base Definitions, chapter 4 (Seconds Since the Epoch)</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" rel="nofollow noopener">MDN — Date</a></li>
+</ul>
+<h2>Related tools</h2>
+<ul>
+<li><a href="/uuid-generator/">UUID Generator</a></li>
+<li><a href="/cron-expression-generator/">Cron Expression Generator</a></li>
+<li><a href="/json-formatter/">JSON Formatter &amp; Validator</a></li>
+<li><a href="/base64-decode/">Base64 Decode and Encode</a></li>
+<li><a href="/json-viewer/">JSON Viewer</a></li>
+<li><a href="/diff-checker/">Diff Checker</a></li>
+<li><a href="/url-encode-decode/">URL Encode and Decode</a></li>
+<li><a href="/case-converter/">Case Converter</a></li>
+</ul>
+<p class="disclaimer">Tools run locally in your browser. Provided as-is.</p>
+</div></main>
+<footer class="site"><div class="wrap">
+<p><a href="/json-formatter/">JSON Formatter &amp; Validator</a> <a href="/base64-decode/">Base64 Decode and Encode</a> <a href="/unix-timestamp-converter/">Unix Timestamp Converter</a> <a href="/json-viewer/">JSON Viewer</a> <a href="/diff-checker/">Diff Checker</a> <a href="/url-encode-decode/">URL Encode and Decode</a> <a href="/">All tools</a></p>
+<p><a href="/about/">About</a><a href="/methodology/">Methodology</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></p>
+<p>Tools run locally in your browser. Provided as-is.</p>
+<p>© <span id="y"></span> Quick JSON Tools</p>
+</div></footer>
+<script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+</body>
+</html>

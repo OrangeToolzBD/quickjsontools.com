@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JSON Viewer — Explore JSON as a Tree</title>
+<meta name="description" content="Open JSON as a collapsible tree to explore nested objects and arrays. Everything you paste stays in your browser.">
+<link rel="canonical" href="https://quickjsontools.com/json-viewer/">
+<meta property="og:title" content="JSON Viewer — Explore JSON as a Tree">
+<meta property="og:description" content="Open JSON as a collapsible tree to explore nested objects and arrays. Everything you paste stays in your browser.">
+<meta property="og:url" content="https://quickjsontools.com/json-viewer/">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://quickjsontools.com/assets/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://quickjsontools.com/assets/og-image.png">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="icon" type="image/png" href="/assets/favicon.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<style>:root{--brand:#4338ca;--font:ui-sans-serif, system-ui, "Segoe UI", sans-serif}</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://quickjsontools.com/#org","name":"Quick JSON Tools","url":"https://quickjsontools.com/","description":"Quick JSON Tools is a set of free developer utilities that run entirely in the browser, so pasted data is never uploaded."},{"@type":"WebApplication","name":"JSON Viewer","url":"https://quickjsontools.com/json-viewer/","description":"Open JSON as a collapsible tree to explore nested objects and arrays. Everything you paste stays in your browser.","applicationCategory":"DeveloperApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@id":"https://quickjsontools.com/#org"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Quick JSON Tools","item":"https://quickjsontools.com/"},{"@type":"ListItem","position":2,"name":"JSON Viewer","item":"https://quickjsontools.com/json-viewer/"}]}]}</script>
+
+<script src="/assets/calculator.js" defer></script>
+<script src="/assets/calc-core.js" defer></script>
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="logo" href="/"><img src="/assets/logo.png" alt="Quick JSON Tools" width="60" height="34"></a><nav class="site"><a href="/json-formatter/">JSON Formatter</a><a href="/base64-decode/">Base64 Decode and Encode</a><a href="/unix-timestamp-converter/">Unix Timestamp Converter</a><a href="/json-viewer/">JSON Viewer</a></nav></div></header>
+<main><div class="wrap">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Quick JSON Tools</a> › JSON Viewer</nav>
+<h1>JSON Viewer</h1>
+<p class="answer">A <strong>JSON viewer</strong> turns a JSON document into a collapsible tree, so you can explore nested objects and arrays one branch at a time. Paste your JSON and press View tree: each object shows its key count in braces, each array its length in brackets, and every value appears beside its key. The data stays in your browser.</p>
+<p class="updated">Updated <time datetime="2026-09-20">September 20, 2026</time> · By <a href="/about/">Quick JSON Tools</a></p>
+<div id="calculator" data-calc="jsonViewer"><noscript>This tool needs JavaScript turned on.</noscript></div>
+<div class="ad-slot"><!-- Ad slot 1 (below the tool). Empty until the ad network is approved; reserve its height in CSS first. --></div>
+<h2>How do I view a JSON file?</h2>
+<p>Open the file in any text editor, copy everything, paste it into the box above and press <strong>View tree</strong>. The viewer parses the text and draws it as a tree that starts fully expanded. Click any branch to fold it, or press <strong>Collapse all</strong> to fold everything and then open only what you need.</p><p>For example, <code>{"users":[{"id":1}]}</code> displays as:</p><pre><code>root {1}
+  users [1]
+    0 {1}
+      id: 1</code></pre><p>The root object has one key, users is an array of one item, item 0 is an object with one key, and id holds 1. Values are shown as JSON, so strings keep their quotes and you can tell <code>"1"</code> from <code>1</code>.</p><p>If the text is not valid JSON, the viewer shows the parser’s message instead of a tree. For the exact line and column, run the same text through the <a href="/json-validator/">JSON validator</a>.</p><p>A .json file is plain text, so no special software is needed to open one. On a computer, any text or code editor will do; on a phone, a text-editor app can open it. The tree view simply makes the structure easier to follow.</p>
+<h2>How do I read nested JSON?</h2>
+<p>Read nested JSON as a path: start at the root, follow object keys by name and array items by position, counting from 0. The tree shows those steps as nested branches, and the counts in braces and brackets tell you how big each level is before you open it.</p><p>Once you have found a value, write its path in code. For the example above, the id is at users, item 0, key id:</p><pre><code>// JavaScript
+const id = data.users[0].id;          // 1
+const safe = data.users?.[0]?.id;     // undefined instead of an error if missing
+
+# Python
+id = data["users"][0]["id"]</code></pre><p>Two habits help with deep documents. First, collapse everything and open one level at a time, noting the path as you go. Second, check array lengths before indexing: a count of [0] means the array is empty, and code that reads item 0 will fail.</p><p>When you need to see what changed between two nested documents, the <a href="/json-diff/">JSON diff</a> lists each difference with a path in the form <code>$.users[0].id</code>.</p>
+<h2>How do I open a large JSON file?</h2>
+<p>For large files, paste only if your browser copes comfortably; the viewer builds every branch at once, so very big documents make the page slow. For multi-megabyte files, a code editor or a command-line tool is the better choice, and it keeps the data on your machine as well.</p><p>Practical options, from lightest to heaviest:</p><ul><li>Pretty-print on the command line and page through it: <code>python -m json.tool big.json | less</code>.</li><li>Open the file in a code editor, which can fold nested blocks much like this tree.</li><li>Extract just the part you need with a short script, then paste that part here.</li><li>If the file is a list of records, convert it to a table with the <a href="/json-to-csv/">JSON to CSV converter</a> and open it in a spreadsheet.</li></ul><pre><code># Python: print only the first record of a large array
+import json
+with open("big.json", encoding="utf-8") as f:
+    data = json.load(f)
+print(json.dumps(data[0], indent=2))</code></pre><p>Loading the whole file this way still needs enough memory for all of it. If a file is too big for that, look for a streaming JSON parser for your language.</p>
+<h2>Frequently asked questions</h2>
+<div class="faq">
+<details><summary>How do I view a JSON file?</summary><p>Copy the file’s contents, paste them into the viewer above and press View tree. You will see the document as a collapsible tree with key counts and array lengths. Because a JSON file is plain text, you can also open it in any text editor if you only need to read it.</p></details>
+<details><summary>How do I convert a JSON file to a readable format?</summary><p>Either format it or view it as a tree. Formatting adds line breaks and indentation and keeps the text form; the tree view lets you fold sections you do not need. Both leave the data unchanged. For tabular records, converting to CSV and opening the result in a spreadsheet is often the most readable form.</p></details>
+<details><summary>What is a JSON viewer used for?</summary><p>A JSON viewer is used to inspect structured data such as API responses, configuration files and exported records. It helps you find where a value lives, see how many items an array holds, spot unexpected nulls or types, and work out the path you need to write in code.</p></details>
+</div>
+<h2>Sources</h2>
+<ul class="sources">
+<li><a href="https://www.rfc-editor.org/rfc/rfc8259" rel="nofollow noopener">IETF RFC 8259 — The JSON Data Interchange Format</a></li>
+<li><a href="https://www.rfc-editor.org/rfc/rfc7519" rel="nofollow noopener">IETF RFC 7519 — JSON Web Token (JWT)</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions" rel="nofollow noopener">MDN — Regular expressions</a></li>
+</ul>
+<h2>Related tools</h2>
+<ul>
+<li><a href="/json-formatter/">JSON Formatter &amp; Validator</a></li>
+<li><a href="/json-validator/">JSON Validator</a></li>
+<li><a href="/json-diff/">JSON Diff</a></li>
+<li><a href="/json-stringify/">JSON Stringify and Escape</a></li>
+<li><a href="/json-schema-generator/">JSON Schema Generator</a></li>
+<li><a href="/base64-decode/">Base64 Decode and Encode</a></li>
+<li><a href="/unix-timestamp-converter/">Unix Timestamp Converter</a></li>
+<li><a href="/diff-checker/">Diff Checker</a></li>
+</ul>
+<p class="disclaimer">Tools run locally in your browser. Provided as-is.</p>
+</div></main>
+<footer class="site"><div class="wrap">
+<p><a href="/json-formatter/">JSON Formatter &amp; Validator</a> <a href="/base64-decode/">Base64 Decode and Encode</a> <a href="/unix-timestamp-converter/">Unix Timestamp Converter</a> <a href="/json-viewer/">JSON Viewer</a> <a href="/diff-checker/">Diff Checker</a> <a href="/url-encode-decode/">URL Encode and Decode</a> <a href="/">All tools</a></p>
+<p><a href="/about/">About</a><a href="/methodology/">Methodology</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></p>
+<p>Tools run locally in your browser. Provided as-is.</p>
+<p>© <span id="y"></span> Quick JSON Tools</p>
+</div></footer>
+<script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JSON Diff — Compare Two JSON Documents</title>
+<meta name="description" content="Compare two JSON documents by structure, not text: see every added, removed and changed value with its path, ignoring key order.">
+<link rel="canonical" href="https://quickjsontools.com/json-diff/">
+<meta property="og:title" content="JSON Diff — Compare Two JSON Documents">
+<meta property="og:description" content="Compare two JSON documents by structure, not text: see every added, removed and changed value with its path, ignoring key order.">
+<meta property="og:url" content="https://quickjsontools.com/json-diff/">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://quickjsontools.com/assets/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://quickjsontools.com/assets/og-image.png">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="icon" type="image/png" href="/assets/favicon.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<style>:root{--brand:#4338ca;--font:ui-sans-serif, system-ui, "Segoe UI", sans-serif}</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://quickjsontools.com/#org","name":"Quick JSON Tools","url":"https://quickjsontools.com/","description":"Quick JSON Tools is a set of free developer utilities that run entirely in the browser, so pasted data is never uploaded."},{"@type":"WebApplication","name":"JSON Diff","url":"https://quickjsontools.com/json-diff/","description":"Compare two JSON documents by structure, not text: see every added, removed and changed value with its path, ignoring key order.","applicationCategory":"DeveloperApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@id":"https://quickjsontools.com/#org"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Quick JSON Tools","item":"https://quickjsontools.com/"},{"@type":"ListItem","position":2,"name":"JSON Diff","item":"https://quickjsontools.com/json-diff/"}]}]}</script>
+
+<script src="/assets/calculator.js" defer></script>
+<script src="/assets/calc-core.js" defer></script>
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="logo" href="/"><img src="/assets/logo.png" alt="Quick JSON Tools" width="60" height="34"></a><nav class="site"><a href="/json-formatter/">JSON Formatter</a><a href="/base64-decode/">Base64 Decode and Encode</a><a href="/unix-timestamp-converter/">Unix Timestamp Converter</a><a href="/json-viewer/">JSON Viewer</a></nav></div></header>
+<main><div class="wrap">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Quick JSON Tools</a> › JSON Diff</nav>
+<h1>JSON Diff</h1>
+<p class="answer">A <strong>JSON diff</strong> compares two documents by their data, not their text. This one parses both sides and lists every value that was added, removed or changed, each with its path such as $.user.name. Key order and whitespace are ignored, so reformatting a file produces no differences. The comparison runs in your browser.</p>
+<p class="updated">Updated <time datetime="2026-09-20">September 20, 2026</time> · By <a href="/about/">Quick JSON Tools</a></p>
+<div id="calculator" data-calc="jsonDiff"><noscript>This tool needs JavaScript turned on.</noscript></div>
+<div class="ad-slot"><!-- Ad slot 1 (below the tool). Empty until the ad network is approved; reserve its height in CSS first. --></div>
+<h2>How do I compare two JSON files?</h2>
+<p>Paste the original document on the left, the changed one on the right, and press <strong>Compare JSON</strong>. Both sides must be valid JSON. The result either says the documents are identical, with key order ignored, or gives a table of differences with the path, the kind of change and the values before and after.</p><p>Worked example from the tool’s tests:</p><pre><code>Original: {"x": 1, "y": [1, 2], "z": {"k": "v"}}
+Changed:  {"x": 2, "y": [1, 2, 3], "w": true}</code></pre><div class="table-wrap"><table class="data"><thead><tr><th>Path</th><th>Change</th><th>Before</th><th>After</th></tr></thead><tbody><tr><td><code>$.x</code></td><td>changed</td><td><code>1</code></td><td><code>2</code></td></tr><tr><td><code>$.y[2]</code></td><td>added</td><td></td><td><code>3</code></td></tr><tr><td><code>$.z</code></td><td>removed</td><td><code>{"k":"v"}</code></td><td></td></tr><tr><td><code>$.w</code></td><td>added</td><td></td><td><code>true</code></td></tr></tbody></table></div><p>That is 4 differences: 1 changed, 2 added and 1 removed. A removed or added object is reported once at its own path, not once per key inside it.</p><p>Paths start at <code>$</code> for the root, add <code>.key</code> for object members and <code>[n]</code> for array positions. A change of type counts as a change: <code>1</code> and <code>"1"</code> differ. Two numbers that parse to the same value are equal, so <code>1.0</code> and <code>1</code> match.</p><p>If a side will not parse, the tool says “Both sides must be valid JSON” with the parser’s message. <a href="/json-validator/">Validate each document</a> to find the line.</p>
+<h2>Why does a text diff show false differences for JSON?</h2>
+<p>A text diff compares lines, and JSON can express the same data with different lines. Changing indentation, minifying, or writing keys in another order changes every affected line while the data stays the same. A structural diff parses first and compares values, so those changes vanish.</p><p><a href="https://www.rfc-editor.org/rfc/rfc8259" rel="nofollow noopener">RFC 8259</a> treats the whitespace between tokens as insignificant and notes that JSON libraries differ in whether they preserve the order of object members. Two programs can therefore serialize identical data differently, and a text diff will flag every line that moved.</p><pre><code>A: {"id": 7, "tags": ["x"]}
+B: {
+     "tags": ["x"],
+     "id": 7
+   }</code></pre><p>A line diff reports every line of these as changed. This tool reports that the documents are identical. Use the <a href="/diff-checker/">line diff checker</a> when layout matters, for example when reviewing a hand-edited configuration file, and this tool when only the data matters, such as comparing two API responses.</p>
+<h2>How are arrays compared?</h2>
+<p>Arrays are compared position by position: item 0 with item 0, item 1 with item 1, and so on. Extra items at the end show as added or removed. The tool does not try to match items that moved, so inserting one item at the start makes every later item look changed.</p><p>For example, comparing <code>[1, 2, 3]</code> with <code>[0, 1, 2, 3]</code> gives 4 differences: <code>$[0]</code>, <code>$[1]</code> and <code>$[2]</code> changed, and <code>$[3]</code> added. Order matters for JSON arrays, so this is a real difference, but it may be more noise than you want.</p><p>Ways to get a cleaner result when order does not matter to you:</p><ul><li>Sort both arrays the same way before comparing, for example by an id field.</li><li>Convert arrays of records into objects keyed by id, so each record is compared with its partner.</li><li>Compare one record at a time when only a few changed.</li></ul><pre><code>// JavaScript: key records by id before diffing
+const byId = arr =&gt; Object.fromEntries(arr.map(r =&gt; [r.id, r]));
+const a = byId(original.items), b = byId(changed.items);</code></pre><p>With records keyed by id, a moved record produces no difference, and an edited one shows only the fields that changed.</p>
+<h2>Frequently asked questions</h2>
+<div class="faq">
+<details><summary>Does key order matter in a JSON diff?</summary><p>Not in this tool. Objects are compared key by key, so the same keys in a different order produce no differences. Array order does matter, because arrays are ordered lists in JSON, and each item is compared with the item in the same position.</p></details>
+<details><summary>Can I compare JSON that has comments?</summary><p>No. Both sides are parsed as standard JSON, which does not allow comments or trailing commas, so such a file is rejected with the parser’s error. Remove the comments first, or use a line diff if you want to compare the files exactly as written.</p></details>
+<details><summary>Is my JSON uploaded when I compare?</summary><p>No. Both documents are parsed and compared by JavaScript in your browser, and nothing is sent to a server or stored. You can confirm this in the Network tab of your browser’s developer tools while you press Compare JSON. Even so, replace tokens and personal data with placeholders before pasting.</p></details>
+</div>
+<h2>Sources</h2>
+<ul class="sources">
+<li><a href="https://www.rfc-editor.org/rfc/rfc8259" rel="nofollow noopener">IETF RFC 8259 — The JSON Data Interchange Format</a></li>
+<li><a href="https://www.rfc-editor.org/rfc/rfc7519" rel="nofollow noopener">IETF RFC 7519 — JSON Web Token (JWT)</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions" rel="nofollow noopener">MDN — Regular expressions</a></li>
+</ul>
+<h2>Related tools</h2>
+<ul>
+<li><a href="/json-formatter/">JSON Formatter &amp; Validator</a></li>
+<li><a href="/json-validator/">JSON Validator</a></li>
+<li><a href="/json-viewer/">JSON Viewer</a></li>
+<li><a href="/json-stringify/">JSON Stringify and Escape</a></li>
+<li><a href="/json-schema-generator/">JSON Schema Generator</a></li>
+<li><a href="/base64-decode/">Base64 Decode and Encode</a></li>
+<li><a href="/unix-timestamp-converter/">Unix Timestamp Converter</a></li>
+<li><a href="/diff-checker/">Diff Checker</a></li>
+</ul>
+<p class="disclaimer">Tools run locally in your browser. Provided as-is.</p>
+</div></main>
+<footer class="site"><div class="wrap">
+<p><a href="/json-formatter/">JSON Formatter &amp; Validator</a> <a href="/base64-decode/">Base64 Decode and Encode</a> <a href="/unix-timestamp-converter/">Unix Timestamp Converter</a> <a href="/json-viewer/">JSON Viewer</a> <a href="/diff-checker/">Diff Checker</a> <a href="/url-encode-decode/">URL Encode and Decode</a> <a href="/">All tools</a></p>
+<p><a href="/about/">About</a><a href="/methodology/">Methodology</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></p>
+<p>Tools run locally in your browser. Provided as-is.</p>
+<p>© <span id="y"></span> Quick JSON Tools</p>
+</div></footer>
+<script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+</body>
+</html>

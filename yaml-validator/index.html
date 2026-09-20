@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>YAML Validator — Check YAML Syntax Online</title>
+<meta name="description" content="Check YAML for syntax errors with the line and column of each problem, and see the parsed result. Private: nothing is uploaded.">
+<link rel="canonical" href="https://quickjsontools.com/yaml-validator/">
+<meta property="og:title" content="YAML Validator — Check YAML Syntax Online">
+<meta property="og:description" content="Check YAML for syntax errors with the line and column of each problem, and see the parsed result. Private: nothing is uploaded.">
+<meta property="og:url" content="https://quickjsontools.com/yaml-validator/">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://quickjsontools.com/assets/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://quickjsontools.com/assets/og-image.png">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="icon" type="image/png" href="/assets/favicon.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<style>:root{--brand:#4338ca;--font:ui-sans-serif, system-ui, "Segoe UI", sans-serif}</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://quickjsontools.com/#org","name":"Quick JSON Tools","url":"https://quickjsontools.com/","description":"Quick JSON Tools is a set of free developer utilities that run entirely in the browser, so pasted data is never uploaded."},{"@type":"WebApplication","name":"YAML Validator","url":"https://quickjsontools.com/yaml-validator/","description":"Check YAML for syntax errors with the line and column of each problem, and see the parsed result. Private: nothing is uploaded.","applicationCategory":"DeveloperApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@id":"https://quickjsontools.com/#org"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Quick JSON Tools","item":"https://quickjsontools.com/"},{"@type":"ListItem","position":2,"name":"YAML Validator","item":"https://quickjsontools.com/yaml-validator/"}]}]}</script>
+
+<script src="/assets/vendor/js-yaml.min.js" defer></script>
+<script src="/assets/calculator.js" defer></script>
+<script src="/assets/calc-core.js" defer></script>
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="logo" href="/"><img src="/assets/logo.png" alt="Quick JSON Tools" width="60" height="34"></a><nav class="site"><a href="/json-formatter/">JSON Formatter</a><a href="/base64-decode/">Base64 Decode and Encode</a><a href="/unix-timestamp-converter/">Unix Timestamp Converter</a><a href="/json-viewer/">JSON Viewer</a></nav></div></header>
+<main><div class="wrap">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Quick JSON Tools</a> › YAML Validator</nav>
+<h1>YAML Validator</h1>
+<p class="answer">A <strong>YAML validator</strong> parses your YAML and reports the line and column of the first syntax error, or shows the parsed data if the file is valid. This one uses the MIT-licensed js-yaml parser, which follows the <a href="https://yaml.org/spec/1.2.2/" rel="nofollow noopener">YAML 1.2 specification</a> (version 1.2.2, October 1, 2021), and runs in your browser.</p>
+<p class="updated">Updated <time datetime="2026-09-20">September 20, 2026</time> · By <a href="/about/">Quick JSON Tools</a></p>
+<div id="calculator" data-calc="yamlValidator"><noscript>This tool needs JavaScript turned on.</noscript></div>
+<div class="ad-slot"><!-- Ad slot 1 (below the tool). Empty until the ad network is approved; reserve its height in CSS first. --></div>
+<h2>How do I validate a YAML file?</h2>
+<p>Paste the YAML and press <strong>Validate</strong>. If it parses, the tool says “Valid YAML” and shows the result as JSON. If not, you get a message such as “Invalid YAML at line 2, column 7: bad indentation of a mapping entry”. Fix that spot and validate again.</p><p>Reading the JSON output is the real check. It shows exactly what a program will receive, so you can see whether a value became a string, a number, a boolean or null, and whether items landed under the parent you intended.</p><pre><code>name: app
+port: 8080
+debug: false
+zip: "02134"
+
+{"name": "app", "port": 8080, "debug": false, "zip": "02134"}</code></pre><p>Things this validator does and does not do:</p><ul><li>It checks YAML syntax, not whether the file suits a particular program. A configuration file can be valid YAML and still have a misspelled key.</li><li>It reads one document. A file with several documents separated by <code>---</code> gives “expected a single document in the stream, but found more”; paste each document on its own.</li><li>Comments start with <code>#</code> and are dropped from the output. The specification requires whitespace before a trailing comment, which is why <code>http://x.com/#frag</code> stays part of the value.</li></ul><p>To convert the result or write YAML from JSON, use the <a href="/json-to-yaml/">JSON to YAML converter</a>.</p>
+<h2>What are common YAML indentation errors?</h2>
+<p>YAML uses indentation to show structure, so most errors are spacing mistakes: a line indented under a key that already has a value, sibling keys at different depths, list items out of line, or tab characters. The YAML specification forbids tabs for indentation because systems display them differently.</p><div class="table-wrap"><table class="data"><thead><tr><th>Input</th><th>js-yaml error</th></tr></thead><tbody><tr><td><code>name: app</code> then <code>  port: 80</code></td><td>line 2, column 7: bad indentation of a mapping entry</td></tr><tr><td>a list line indented with a tab</td><td>tab characters must not be used in indentation</td></tr><tr><td><code>a: b: c</code></td><td>line 1, column 5: bad indentation of a mapping entry</td></tr><tr><td><code>key: "unclosed</code></td><td>unexpected end of the stream within a double quoted scalar</td></tr></tbody></table></div><p>These messages come from js-yaml 4.1.1 on the inputs shown. How to avoid them:</p><ul><li>Indent with spaces only, and set your editor to insert spaces for the Tab key.</li><li>Keep sibling keys at exactly the same indentation.</li><li>A key either has a value on its own line or children beneath it, not both.</li><li>Quote any value containing <code>: </code> or <code> #</code>, so <code>a: "b: c"</code>.</li><li>List items under a key can sit at the key’s indentation or deeper, but all items in one list must line up.</li></ul><pre><code># wrong: "port" is indented under a key that already has a value
+name: app
+  port: 80
+
+# right
+name: app
+port: 80</code></pre><p>The column in an error points where the parser noticed the problem, which may be the line after the real mistake.</p>
+<h2>Why do yes, no and on become booleans?</h2>
+<p>Because YAML 1.1 treated words such as yes, no, on and off as booleans, and parsers built on 1.1 still do. YAML 1.2’s core schema only recognizes true and false (in lowercase, capitalized or uppercase forms). This validator follows 1.2, so yes and no stay strings here, but other tools may disagree.</p><p>The <a href="https://yaml.org/type/bool.html" rel="nofollow noopener">YAML 1.1 boolean type</a> (working draft, January 18, 2005) lists y, yes, true and on, in several capitalizations, as true, and n, no, false and off as false. The <a href="https://github.com/nodeca/js-yaml/blob/master/CHANGELOG.md" rel="nofollow noopener">js-yaml changelog</a> records that y, yes, n, no, on and off are no longer converted to booleans. The specification’s core schema also resolves null, Null, NULL, ~ and an empty value to null. Here is what this validator returns:</p><pre><code>enabled: yes
+country: no
+switch: on
+ok: True
+nothing: ~
+zip: 007
+
+{"enabled": "yes", "country": "no", "switch": "on", "ok": true, "nothing": null, "zip": 7}</code></pre><p>Two lessons. First, a file that works here can be read differently by a YAML 1.1 parser, where yes becomes true and a country code of no becomes false. Second, 1.2 still types numbers, so a ZIP code of 007 becomes 7.</p><p>The fix is the same in both cases: quote values that must stay strings, such as <code>country: "no"</code> and <code>zip: "007"</code>, and use true and false for real booleans.</p>
+<h2>Frequently asked questions</h2>
+<div class="faq">
+<details><summary>How do I add a comment in YAML?</summary><p>Start the comment with #. It can take a whole line or follow a value, but a trailing comment needs a space before the #. YAML has no block-comment syntax, so comment out several lines by putting # at the start of each one.</p></details>
+<details><summary>Does this validator check Kubernetes or CI configuration files?</summary><p>It checks that the file is valid YAML, which catches indentation and quoting mistakes, but it does not know any program’s schema. A misspelled key or a wrong value type will still pass. Use the target tool’s own validation for that.</p></details>
+<details><summary>Is JSON valid YAML?</summary><p>Yes for YAML 1.2, which the specification defines as a strict superset of JSON. You can paste JSON here and it will validate, and the output will be the same data. For JSON-specific error messages, use the <a href="/json-validator/">JSON validator</a> instead.</p></details>
+</div>
+<h2>Sources</h2>
+<ul class="sources">
+<li><a href="https://www.rfc-editor.org/rfc/rfc8259" rel="nofollow noopener">IETF RFC 8259 — The JSON Data Interchange Format</a></li>
+<li><a href="https://www.rfc-editor.org/rfc/rfc7519" rel="nofollow noopener">IETF RFC 7519 — JSON Web Token (JWT)</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions" rel="nofollow noopener">MDN — Regular expressions</a></li>
+<li><a href="https://yaml.org/spec/1.2.2/" rel="nofollow noopener">YAML Language Development Team — YAML Ain’t Markup Language version 1.2.2 (October 1, 2021)</a></li>
+<li><a href="https://yaml.org/type/bool.html" rel="nofollow noopener">YAML 1.1 — Boolean Language-Independent Type (working draft, January 18, 2005)</a></li>
+<li><a href="https://github.com/nodeca/js-yaml" rel="nofollow noopener">js-yaml — YAML parser for JavaScript (MIT license)</a></li>
+<li><a href="https://github.com/nodeca/js-yaml/blob/master/CHANGELOG.md" rel="nofollow noopener">js-yaml — changelog</a></li>
+</ul>
+<h2>Related tools</h2>
+<ul>
+<li><a href="/diff-checker/">Diff Checker</a></li>
+<li><a href="/regex-tester/">Regex Tester</a></li>
+<li><a href="/xml-formatter/">XML Formatter</a></li>
+<li><a href="/case-converter/">Case Converter</a></li>
+<li><a href="/sql-formatter/">SQL Formatter</a></li>
+<li><a href="/html-beautifier/">HTML Beautifier</a></li>
+<li><a href="/json-formatter/">JSON Formatter &amp; Validator</a></li>
+<li><a href="/base64-decode/">Base64 Decode and Encode</a></li>
+</ul>
+<p class="disclaimer">Tools run locally in your browser. Provided as-is.</p>
+</div></main>
+<footer class="site"><div class="wrap">
+<p><a href="/json-formatter/">JSON Formatter &amp; Validator</a> <a href="/base64-decode/">Base64 Decode and Encode</a> <a href="/unix-timestamp-converter/">Unix Timestamp Converter</a> <a href="/json-viewer/">JSON Viewer</a> <a href="/diff-checker/">Diff Checker</a> <a href="/url-encode-decode/">URL Encode and Decode</a> <a href="/">All tools</a></p>
+<p><a href="/about/">About</a><a href="/methodology/">Methodology</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></p>
+<p>Tools run locally in your browser. Provided as-is.</p>
+<p>© <span id="y"></span> Quick JSON Tools</p>
+</div></footer>
+<script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+</body>
+</html>

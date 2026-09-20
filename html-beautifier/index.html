@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HTML Beautifier — Format and Minify HTML</title>
+<meta name="description" content="Indent messy HTML so it is readable, or strip whitespace between tags to minify it. Nothing is uploaded.">
+<link rel="canonical" href="https://quickjsontools.com/html-beautifier/">
+<meta property="og:title" content="HTML Beautifier — Format and Minify HTML">
+<meta property="og:description" content="Indent messy HTML so it is readable, or strip whitespace between tags to minify it. Nothing is uploaded.">
+<meta property="og:url" content="https://quickjsontools.com/html-beautifier/">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://quickjsontools.com/assets/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://quickjsontools.com/assets/og-image.png">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="icon" type="image/png" href="/assets/favicon.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<style>:root{--brand:#4338ca;--font:ui-sans-serif, system-ui, "Segoe UI", sans-serif}</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://quickjsontools.com/#org","name":"Quick JSON Tools","url":"https://quickjsontools.com/","description":"Quick JSON Tools is a set of free developer utilities that run entirely in the browser, so pasted data is never uploaded."},{"@type":"WebApplication","name":"HTML Beautifier","url":"https://quickjsontools.com/html-beautifier/","description":"Indent messy HTML so it is readable, or strip whitespace between tags to minify it. Nothing is uploaded.","applicationCategory":"DeveloperApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@id":"https://quickjsontools.com/#org"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Quick JSON Tools","item":"https://quickjsontools.com/"},{"@type":"ListItem","position":2,"name":"HTML Beautifier","item":"https://quickjsontools.com/html-beautifier/"}]}]}</script>
+
+<script src="/assets/vendor/beautify-html.min.js" defer></script>
+<script src="/assets/calculator.js" defer></script>
+<script src="/assets/calc-core.js" defer></script>
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="logo" href="/"><img src="/assets/logo.png" alt="Quick JSON Tools" width="60" height="34"></a><nav class="site"><a href="/json-formatter/">JSON Formatter</a><a href="/base64-decode/">Base64 Decode and Encode</a><a href="/unix-timestamp-converter/">Unix Timestamp Converter</a><a href="/json-viewer/">JSON Viewer</a></nav></div></header>
+<main><div class="wrap">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Quick JSON Tools</a> › HTML Beautifier</nav>
+<h1>HTML Beautifier</h1>
+<p class="answer">An <strong>HTML beautifier</strong> re-indents markup so nested elements are easy to follow. This one runs the MIT-licensed <a href="https://github.com/beautifier/js-beautify" rel="nofollow noopener">js-beautify</a> HTML formatter in your browser with a 2- or 4-space indent, and its Minify button removes the whitespace between tags. Nothing you paste is uploaded.</p>
+<p class="updated">Updated <time datetime="2026-09-20">September 20, 2026</time> · By <a href="/about/">Quick JSON Tools</a></p>
+<div id="calculator" data-calc="htmlBeautifier"><noscript>This tool needs JavaScript turned on.</noscript></div>
+<div class="ad-slot"><!-- Ad slot 1 (below the tool). Empty until the ad network is approved; reserve its height in CSS first. --></div>
+<h2>How do I format HTML?</h2>
+<p>Paste the HTML, pick 2 or 4 spaces and press <strong>Beautify</strong>. Block elements move onto their own lines, indented under their parents, while short inline content stays on the line with its element.</p><p>Example, run through js-beautify 1.15.4 with a 2-space indent:</p><pre><code>&lt;div&gt;&lt;p&gt;Hello&lt;/p&gt;&lt;ul&gt;&lt;li&gt;One&lt;/li&gt;&lt;li&gt;Two&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;
+
+&lt;div&gt;
+  &lt;p&gt;Hello&lt;/p&gt;
+  &lt;ul&gt;
+    &lt;li&gt;One&lt;/li&gt;
+    &lt;li&gt;Two&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;</code></pre><p>Content inside a pre element keeps its original spacing, because there the spaces are part of the content.</p><p>The beautifier does not check that your HTML is valid; it reformats what it is given. If the page says the beautifier library is not loaded, the page is missing its vendored copy; nothing is fetched from elsewhere.</p><p>For XML-based markup such as SVG or sitemaps, the <a href="/xml-formatter/">XML formatter</a> also checks that tags pair up.</p>
+<h2>Does minifying HTML speed up a page?</h2>
+<p>A little. Minifying removes characters the browser does not need, so the file is smaller. But servers usually compress HTML with gzip or Brotli, which already shrinks repeated whitespace, so minification adds a smaller gain on top. Do both for production pages, and keep the readable source for editing.</p><p>A <a href="https://web.dev/articles/reduce-network-payloads-using-text-compression" rel="nofollow noopener">web.dev guide</a> (updated December 11, 2023) says compression reaches 70–90% on larger files and that minification is an additive optimization rather than one compression makes pointless.</p><p>This tool’s <strong>Minify (whitespace)</strong> button is deliberately simple: it removes whitespace between a closing <code>&gt;</code> and the next <code>&lt;</code>, and trims the ends. It does not remove comments, shorten attributes or touch inline CSS and JavaScript.</p><pre><code>&lt;div&gt;
+  &lt;p&gt;Hello&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div&gt;&lt;p&gt;Hello&lt;/p&gt;&lt;/div&gt;</code></pre><p>Be careful with inline content. MDN’s whitespace guide explains that whitespace between inline elements is collapsed but still rendered as a space. Removing it can join words or close gaps between buttons and links, so check the page after minifying. It also applies inside pre elements, where whitespace between tags is part of the content.</p>
+<h2>Why does my HTML indentation look wrong?</h2>
+<p>Usually because the markup is not nested the way it looks. An unclosed div, a stray closing tag, or a block element inside a p all shift the indentation of everything after them. The beautifier is showing you the structure it found, which is often the clue to the bug.</p><p>Browsers repair broken markup silently, so a page can look fine while its source is not. <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Whitespace" rel="nofollow noopener">MDN’s whitespace guide</a> (updated December 15, 2025) also explains why spacing in the browser does not always match the source.</p><p>Things to check:</p><ul><li>Every opening tag you expect to close has a matching closing tag.</li><li>Block elements such as div or ul are not inside a p; the browser closes the p early.</li><li>Inline elements such as span and a keep their content on one line, which is intended.</li></ul><pre><code>&lt;p&gt;Intro
+  &lt;div&gt;Block&lt;/div&gt;   &lt;!-- a p cannot contain a div: the p ends before it --&gt;
+&lt;/p&gt;</code></pre><p>To see exactly what changed after a cleanup, paste the before and after into the <a href="/diff-checker/">diff checker</a>.</p>
+<h2>Frequently asked questions</h2>
+<div class="faq">
+<details><summary>How can I beautify my HTML code?</summary><p>Paste it above, choose a 2- or 4-space indent and press Beautify, then Copy the result back into your file. For a whole project, run the same js-beautify library from the command line or use your editor’s format command, so every file follows one style and reviews show only real changes.</p></details>
+<details><summary>How do I make HTML look pretty?</summary><p>Indent nested elements consistently, put block elements such as div, ul and table on their own lines, and keep short inline content together. A beautifier applies those rules automatically. Consistent attribute quoting and lowercase tag names help too, and so does closing every element you open.</p></details>
+<details><summary>Is minified HTML harder to debug?</summary><p>Yes, which is why you minify only the copy you deploy and keep the readable source for editing. Browser developer tools show the parsed page structure regardless of how the file was written, and you can paste minified markup here and press Beautify to read it again.</p></details>
+</div>
+<h2>Sources</h2>
+<ul class="sources">
+<li><a href="https://www.rfc-editor.org/rfc/rfc8259" rel="nofollow noopener">IETF RFC 8259 — The JSON Data Interchange Format</a></li>
+<li><a href="https://www.rfc-editor.org/rfc/rfc7519" rel="nofollow noopener">IETF RFC 7519 — JSON Web Token (JWT)</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions" rel="nofollow noopener">MDN — Regular expressions</a></li>
+<li><a href="https://github.com/beautifier/js-beautify" rel="nofollow noopener">js-beautify — beautifier for JavaScript, CSS and HTML (MIT license)</a></li>
+<li><a href="https://web.dev/articles/reduce-network-payloads-using-text-compression" rel="nofollow noopener">web.dev — Reduce network payloads using text compression (updated December 11, 2023)</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Whitespace" rel="nofollow noopener">MDN — Handling whitespace</a></li>
+</ul>
+<h2>Related tools</h2>
+<ul>
+<li><a href="/diff-checker/">Diff Checker</a></li>
+<li><a href="/regex-tester/">Regex Tester</a></li>
+<li><a href="/yaml-validator/">YAML Validator</a></li>
+<li><a href="/xml-formatter/">XML Formatter</a></li>
+<li><a href="/case-converter/">Case Converter</a></li>
+<li><a href="/sql-formatter/">SQL Formatter</a></li>
+<li><a href="/json-formatter/">JSON Formatter &amp; Validator</a></li>
+<li><a href="/base64-decode/">Base64 Decode and Encode</a></li>
+</ul>
+<p class="disclaimer">Tools run locally in your browser. Provided as-is.</p>
+</div></main>
+<footer class="site"><div class="wrap">
+<p><a href="/json-formatter/">JSON Formatter &amp; Validator</a> <a href="/base64-decode/">Base64 Decode and Encode</a> <a href="/unix-timestamp-converter/">Unix Timestamp Converter</a> <a href="/json-viewer/">JSON Viewer</a> <a href="/diff-checker/">Diff Checker</a> <a href="/url-encode-decode/">URL Encode and Decode</a> <a href="/">All tools</a></p>
+<p><a href="/about/">About</a><a href="/methodology/">Methodology</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></p>
+<p>Tools run locally in your browser. Provided as-is.</p>
+<p>© <span id="y"></span> Quick JSON Tools</p>
+</div></footer>
+<script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+</body>
+</html>

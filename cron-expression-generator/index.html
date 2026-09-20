@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cron Expression Explainer &amp; Next Run Times</title>
+<meta name="description" content="Paste a cron expression to see it in plain English and its next run times. Supports ranges, steps, lists and month and day names.">
+<link rel="canonical" href="https://quickjsontools.com/cron-expression-generator/">
+<meta property="og:title" content="Cron Expression Explainer &amp; Next Run Times">
+<meta property="og:description" content="Paste a cron expression to see it in plain English and its next run times. Supports ranges, steps, lists and month and day names.">
+<meta property="og:url" content="https://quickjsontools.com/cron-expression-generator/">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://quickjsontools.com/assets/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://quickjsontools.com/assets/og-image.png">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="icon" type="image/png" href="/assets/favicon.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<style>:root{--brand:#4338ca;--font:ui-sans-serif, system-ui, "Segoe UI", sans-serif}</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://quickjsontools.com/#org","name":"Quick JSON Tools","url":"https://quickjsontools.com/","description":"Quick JSON Tools is a set of free developer utilities that run entirely in the browser, so pasted data is never uploaded."},{"@type":"WebApplication","name":"Cron Expression Generator","url":"https://quickjsontools.com/cron-expression-generator/","description":"Paste a cron expression to see it in plain English and its next run times. Supports ranges, steps, lists and month and day names.","applicationCategory":"DeveloperApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@id":"https://quickjsontools.com/#org"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Quick JSON Tools","item":"https://quickjsontools.com/"},{"@type":"ListItem","position":2,"name":"Cron Expression Generator","item":"https://quickjsontools.com/cron-expression-generator/"}]}]}</script>
+
+<script src="/assets/calculator.js" defer></script>
+<script src="/assets/calc-core.js" defer></script>
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="logo" href="/"><img src="/assets/logo.png" alt="Quick JSON Tools" width="60" height="34"></a><nav class="site"><a href="/json-formatter/">JSON Formatter</a><a href="/base64-decode/">Base64 Decode and Encode</a><a href="/unix-timestamp-converter/">Unix Timestamp Converter</a><a href="/json-viewer/">JSON Viewer</a></nav></div></header>
+<main><div class="wrap">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Quick JSON Tools</a> › Cron Expression Generator</nav>
+<h1>Cron Expression Generator</h1>
+<p class="answer">A <strong>cron expression generator</strong> helps you write and check the five-field schedules cron uses: minute, hour, day of month, month and day of week. Paste an expression such as */15 9-17 * * 1-5 to see it in plain English and its next five run times in UTC, following <a href="https://man7.org/linux/man-pages/man5/crontab.5.html" rel="nofollow noopener">crontab(5)</a> rules for ranges, steps and lists.</p>
+<p class="updated">Updated <time datetime="2026-09-20">September 20, 2026</time> · By <a href="/about/">Quick JSON Tools</a></p>
+<div id="calculator" data-calc="cron"><noscript>This tool needs JavaScript turned on.</noscript></div>
+<div class="ad-slot"><!-- Ad slot 1 (below the tool). Empty until the ad network is approved; reserve its height in CSS first. --></div>
+<h2>How do cron expressions work?</h2>
+<p>A cron expression is five fields separated by spaces. Each field lists the values at which the job may run, and the job runs at every minute where all fields match. An asterisk means every value; numbers, ranges, lists and steps narrow it down.</p><div class="table-wrap"><table class="data"><thead><tr><th>Field</th><th>Allowed values</th><th>Names</th></tr></thead><tbody><tr><td>Minute</td><td>0–59</td><td></td></tr><tr><td>Hour</td><td>0–23</td><td></td></tr><tr><td>Day of month</td><td>1–31</td><td></td></tr><tr><td>Month</td><td>1–12</td><td>jan–dec</td></tr><tr><td>Day of week</td><td>0–7 (0 and 7 are Sunday)</td><td>sun–sat</td></tr></tbody></table></div><p>Those ranges come from the crontab(5) manual page. Syntax inside a field: a range such as <code>8-11</code>, a list such as <code>1,2,5,9</code>, and a step such as <code>0-23/2</code>. Paste an expression and press <strong>Explain and show next runs</strong>. Worked examples from the tool’s tests, with the explanation it prints:</p><div class="table-wrap"><table class="data"><thead><tr><th>Expression</th><th>Meaning</th><th>Next run after the start time</th></tr></thead><tbody><tr><td><code>0 9 * * 1-5</code></td><td>At 09:00, on Mon, Tue, Wed, Thu, Fri.</td><td>—</td></tr><tr><td><code>0 0 1 * *</code></td><td>At 00:00, on day(s) 1 of the month.</td><td>2026-10-01 00:00 UTC, from September 16, 2026</td></tr><tr><td><code>30 8 * * MON</code></td><td>At 08:30, on Mon.</td><td>2026-09-21 08:30 UTC, from September 16, 2026</td></tr></tbody></table></div><p>Names are case-insensitive, so MON and mon both work. The tool accepts only the standard five fields. It rejects a sixth seconds field, the @daily-style shortcuts and Quartz symbols such as ?, L and #, with a message naming the problem: “60” in the minute field, for example, gives “Value out of range”.</p><p><strong>Time zone:</strong> the tool shows run times in UTC. Your server’s cron uses its own time zone, and the manual page describes a CRON_TZ variable for setting one, so convert before comparing. The <a href="/unix-timestamp-converter/">Unix timestamp converter</a> helps with that.</p>
+<h2>What does */15 mean in cron?</h2>
+<p>*/15 means “every 15th value, starting from the lowest one”. In the minute field it runs at minutes 0, 15, 30 and 45 of each hour. The part before the slash is the range, and * is the whole range, so */15 in the hour field would mean hours 0 and 15.</p><p>The manual page gives the same pattern with 0-23/2 for every other hour and */2 in the hour field. Steps always count from the start of the range, not from when the job was installed.</p><div class="table-wrap"><table class="data"><thead><tr><th>Expression</th><th>Runs</th></tr></thead><tbody><tr><td><code>*/15 * * * *</code></td><td>Every 15 minutes</td></tr><tr><td><code>*/5 * * * *</code></td><td>Every 5 minutes</td></tr><tr><td><code>0 */2 * * *</code></td><td>At minute 0 of every even hour</td></tr><tr><td><code>0 9-17/2 * * *</code></td><td>At 09:00, 11:00, 13:00, 15:00 and 17:00</td></tr><tr><td><code>*/15 9-17 * * 1-5</code></td><td>Every 15 minutes from 09:00 to 17:45, Monday to Friday</td></tr></tbody></table></div><p>The last row is the tool’s business-hours test. Started at 17:50 UTC on Wednesday, September 16, 2026, the next runs are 09:00, 09:15 and 09:30 on Thursday, September 17. Note that 9-17 includes the whole 17:00 hour, so the last run of the day is 17:45; use 9-16 to stop at 16:45.</p><p>A step does not spread evenly when it does not divide the range: */7 in the minute field runs at 0, 7, 14 up to 56, then again at 0, a gap of four minutes.</p>
+<h2>What happens when day-of-month and weekday are both set?</h2>
+<p>The job runs when either one matches, not both. If both the day-of-month and day-of-week fields are restricted, meaning neither is *, crontab(5) says the command runs when either field matches the current time. This tool follows that rule.</p><p>The manual page’s own example is <code>30 4 1,15 * 5</code>: 4:30 AM on the 1st and 15th of each month, and also every Friday. The tool describes it as “At 04:30, on day(s) 1, 15 of the month or on Fri.” and, from September 16, 2026, lists the next runs as September 18, September 25, October 1 and October 2, all at 04:30 UTC.</p><p>This surprises people who want “the first Monday of the month”. Standard cron cannot express that with two fields; the usual workaround is to schedule every Monday and test the date inside the command:</p><pre><code># every Monday at 09:00, but only acts on days 1-7
+0 9 * * 1  [ "$(date +\%d)" -le 07 ] &amp;&amp; /path/to/job.sh</code></pre><p>The backslash before % matters. The manual page explains that an unescaped % in the command is turned into a newline, with the rest passed to the command as input. Test the command in a shell first, then paste the schedule here to confirm its timing. Before replacing a crontab, compare the old and new files in the <a href="/diff-checker/">diff checker</a>.</p>
+<h2>Frequently asked questions</h2>
+<div class="faq">
+<details><summary>How do I run a cron job every 5 minutes?</summary><p>Use */5 * * * *. The step in the minute field runs the job at minutes 0, 5, 10 and so on through 55 of every hour, every day. To limit it to working hours, add an hour range such as */5 9-17 * * 1-5. Paste either expression above to confirm the next run times.</p></details>
+<details><summary>Does this tool support seconds or @daily?</summary><p>No. It reads the standard five-field format only, so a sixth seconds field or an @ shortcut is rejected. For @daily, write 0 0 * * *, which the crontab manual page gives as its equivalent, and for @hourly write 0 * * * *. Schedulers that add seconds or Quartz symbols use a different syntax.</p></details>
+<details><summary>Why did my cron job not run at the time I expected?</summary><p>The most common causes are a time-zone difference between you and the server, a day-of-month and weekday combination matching more days than intended, and an unescaped % in the command. This tool shows times in UTC, so convert them to your server’s zone.</p></details>
+</div>
+<h2>Sources</h2>
+<ul class="sources">
+<li><a href="https://www.rfc-editor.org/rfc/rfc8259" rel="nofollow noopener">IETF RFC 8259 — The JSON Data Interchange Format</a></li>
+<li><a href="https://www.rfc-editor.org/rfc/rfc7519" rel="nofollow noopener">IETF RFC 7519 — JSON Web Token (JWT)</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions" rel="nofollow noopener">MDN — Regular expressions</a></li>
+<li><a href="https://man7.org/linux/man-pages/man5/crontab.5.html" rel="nofollow noopener">Linux man-pages — crontab(5)</a></li>
+</ul>
+<h2>Related tools</h2>
+<ul>
+<li><a href="/unix-timestamp-converter/">Unix Timestamp Converter</a></li>
+<li><a href="/uuid-generator/">UUID Generator</a></li>
+<li><a href="/json-formatter/">JSON Formatter &amp; Validator</a></li>
+<li><a href="/base64-decode/">Base64 Decode and Encode</a></li>
+<li><a href="/json-viewer/">JSON Viewer</a></li>
+<li><a href="/diff-checker/">Diff Checker</a></li>
+<li><a href="/url-encode-decode/">URL Encode and Decode</a></li>
+<li><a href="/case-converter/">Case Converter</a></li>
+</ul>
+<p class="disclaimer">Tools run locally in your browser. Provided as-is.</p>
+</div></main>
+<footer class="site"><div class="wrap">
+<p><a href="/json-formatter/">JSON Formatter &amp; Validator</a> <a href="/base64-decode/">Base64 Decode and Encode</a> <a href="/unix-timestamp-converter/">Unix Timestamp Converter</a> <a href="/json-viewer/">JSON Viewer</a> <a href="/diff-checker/">Diff Checker</a> <a href="/url-encode-decode/">URL Encode and Decode</a> <a href="/">All tools</a></p>
+<p><a href="/about/">About</a><a href="/methodology/">Methodology</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></p>
+<p>Tools run locally in your browser. Provided as-is.</p>
+<p>© <span id="y"></span> Quick JSON Tools</p>
+</div></footer>
+<script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+</body>
+</html>

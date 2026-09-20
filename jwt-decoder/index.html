@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JWT Decoder — Decode a JSON Web Token Safely</title>
+<meta name="description" content="Decode a JWT’s header and payload and see when it expires. Decoding happens in your browser; the token is never sent anywhere.">
+<link rel="canonical" href="https://quickjsontools.com/jwt-decoder/">
+<meta property="og:title" content="JWT Decoder — Decode a JSON Web Token Safely">
+<meta property="og:description" content="Decode a JWT’s header and payload and see when it expires. Decoding happens in your browser; the token is never sent anywhere.">
+<meta property="og:url" content="https://quickjsontools.com/jwt-decoder/">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://quickjsontools.com/assets/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://quickjsontools.com/assets/og-image.png">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="icon" type="image/png" href="/assets/favicon.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<style>:root{--brand:#4338ca;--font:ui-sans-serif, system-ui, "Segoe UI", sans-serif}</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://quickjsontools.com/#org","name":"Quick JSON Tools","url":"https://quickjsontools.com/","description":"Quick JSON Tools is a set of free developer utilities that run entirely in the browser, so pasted data is never uploaded."},{"@type":"WebApplication","name":"JWT Decoder","url":"https://quickjsontools.com/jwt-decoder/","description":"Decode a JWT’s header and payload and see when it expires. Decoding happens in your browser; the token is never sent anywhere.","applicationCategory":"DeveloperApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@id":"https://quickjsontools.com/#org"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Quick JSON Tools","item":"https://quickjsontools.com/"},{"@type":"ListItem","position":2,"name":"JWT Decoder","item":"https://quickjsontools.com/jwt-decoder/"}]}]}</script>
+
+<script src="/assets/calculator.js" defer></script>
+<script src="/assets/calc-core.js" defer></script>
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="logo" href="/"><img src="/assets/logo.png" alt="Quick JSON Tools" width="60" height="34"></a><nav class="site"><a href="/json-formatter/">JSON Formatter</a><a href="/base64-decode/">Base64 Decode and Encode</a><a href="/unix-timestamp-converter/">Unix Timestamp Converter</a><a href="/json-viewer/">JSON Viewer</a></nav></div></header>
+<main><div class="wrap">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Quick JSON Tools</a> › JWT Decoder</nav>
+<h1>JWT Decoder</h1>
+<p class="answer">A <strong>JWT decode</strong> splits the token at its two dots and Base64URL-decodes the first two parts, the header and the payload, which are both JSON. This decoder does that in your browser, shows the algorithm, issued-at and expiry times, and never sends the token anywhere. It does <strong>not</strong> verify the signature. Format per <a href="https://www.rfc-editor.org/rfc/rfc7519" rel="nofollow noopener">RFC 7519</a> (May 2015).</p>
+<p class="updated">Updated <time datetime="2026-09-20">September 20, 2026</time> · By <a href="/about/">Quick JSON Tools</a></p>
+<div id="calculator" data-calc="jwtDecoder"><noscript>This tool needs JavaScript turned on.</noscript></div>
+<div class="ad-slot"><!-- Ad slot 1 (below the tool). Empty until the ad network is approved; reserve its height in CSS first. --></div>
+<h2>How do I decode a JWT?</h2>
+<p>Paste the token into the box and press <strong>Decode</strong>. The tool checks that the token has exactly three dot-separated parts, decodes the header and payload, and shows both as formatted JSON. Above them, it lists the algorithm from the header, the expiry time from exp and the issued-at time from iat, as UTC dates.</p><p>The worked example from the tool’s tests uses this sample token (its signature part is a placeholder, not a real signature):</p><pre><code>eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjMiLCJuYW1lIjoiQW5hIiwiaWF0IjoxNzAwMDAwMDAwLCJleHAiOjE4MDAwMDAwMDB9.sig</code></pre><p>It decodes to:</p><pre><code>Header:  {"alg": "HS256", "typ": "JWT"}
+Payload: {"sub": "123", "name": "Ana", "iat": 1700000000, "exp": 1800000000}
+Issued:  2023-11-14T22:13:20.000Z
+Expires: 2027-01-15T08:00:00.000Z</code></pre><p>The expiry label compares exp with your computer’s clock and adds “(expired)” once that time has passed. If the payload has no exp or iat claim, the tool says so. Common errors and what they mean:</p><ul><li>“A JWT has 3 parts separated by dots; this has 2.” The text was cut off, or it is not a JWT. Copy the whole token, including the part after the last dot.</li><li>“this has 5.” That is an encrypted token (JWE). Its payload cannot be read without the decryption key, so this tool rejects it.</li><li>“Could not decode” usually means stray characters, such as a <code>Bearer </code> prefix or quotation marks copied with the token. Remove them and try again.</li></ul>
+<h2>What is inside a JSON Web Token?</h2>
+<p>A signed JWT has three Base64URL parts joined by dots: a header naming the signing algorithm, a payload of claims, and a signature over the first two. The header and payload are only encoded, not encrypted, so anyone holding the token can read them.</p><p><a href="https://www.rfc-editor.org/rfc/rfc7515" rel="nofollow noopener">RFC 7515</a> (May 2015) defines this compact form, and RFC 7519 registers the standard claim names:</p><div class="table-wrap"><table class="data"><thead><tr><th>Claim</th><th>Meaning</th></tr></thead><tbody><tr><td><code>iss</code></td><td>Issuer: who created the token</td></tr><tr><td><code>sub</code></td><td>Subject: whom the token is about, often a user ID</td></tr><tr><td><code>aud</code></td><td>Audience: the recipients it is meant for</td></tr><tr><td><code>exp</code></td><td>Expiration time: must not be accepted after this</td></tr><tr><td><code>nbf</code></td><td>Not before: must not be accepted before this</td></tr><tr><td><code>iat</code></td><td>Issued at: when it was created</td></tr><tr><td><code>jti</code></td><td>JWT ID: a unique identifier for the token</td></tr></tbody></table></div><p>Times are NumericDate values: seconds since 1970-01-01T00:00:00Z, ignoring leap seconds. They are seconds, not milliseconds, which is a common bug when JavaScript code compares them with <code>Date.now()</code>. To turn any of these values into a date, use the <a href="/unix-timestamp-converter/">Unix timestamp converter</a>.</p><p>In the header, <code>alg</code> names the algorithm, <code>typ</code> is usually “JWT”, and <code>kid</code> hints at which key signed the token. Base64URL is the URL-safe Base64 alphabet without padding; the <a href="/base64-decode/">Base64 decoder</a> accepts it too.</p>
+<h2>Is decoding a JWT the same as verifying it?</h2>
+<p>No. Decoding only reads the header and payload, which anyone can do. Verifying checks the signature with the right key and algorithm, and then checks claims such as exp and aud. Only a verified token can be trusted. This tool decodes; it never tells you a signature is valid.</p><p>Anyone can make a token that decodes to any claims they like, for example <code>"role": "admin"</code>. The signature is what proves the issuer produced it. <a href="https://www.rfc-editor.org/rfc/rfc8725" rel="nofollow noopener">RFC 8725</a>, the JWT best-practice document (2020), describes the attack in which a token’s alg is switched to “none” and a careless library accepts it without any signature check. It says libraries must let the caller fix the set of accepted algorithms.</p><p>On your server, verification should:</p><ul><li>Use a maintained JWT library and pass an explicit list of allowed algorithms.</li><li>Reject “none” unless you deliberately rely on other protection.</li><li>Check that the key belongs to the expected issuer, and check aud when present.</li><li>Check exp and nbf, allowing only a small clock skew.</li></ul><p>Never paste a live production token into any website, including this one. A valid token is a credential: whoever holds it can act as the user until it expires. This page keeps the token in your browser, but screenshots, clipboard history and browser extensions can still leak it. Use expired or test tokens where you can.</p>
+<h2>How do I decode a JWT in JavaScript?</h2>
+<p>In the browser or Node.js, take the second part of the token, convert Base64URL to standard Base64, decode it to bytes, read the bytes as UTF-8 and parse the JSON. That takes a few lines and no library, but it gives you unverified claims only.</p><pre><code>function decodeJwtPart(part) {
+  const b64 = part.replace(/-/g, "+").replace(/_/g, "/")
+    + "===".slice((part.length + 3) % 4);
+  const bytes = Uint8Array.from(atob(b64), c =&gt; c.charCodeAt(0));
+  return JSON.parse(new TextDecoder().decode(bytes));
+}
+const [h, p] = token.split(".");
+const header = decodeJwtPart(h);
+const payload = decodeJwtPart(p);   // NOT verified</code></pre><p>This mirrors what the tool does. The <code>TextDecoder</code> step matters: <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/atob" rel="nofollow noopener">MDN notes</a> (updated June 24, 2025) that <code>atob</code> returns a binary string, one character per byte, so names with accents come out garbled without it.</p><p>Reading claims on the client is fine for display, such as showing a user’s name or when a session ends. Access decisions belong on the server, after the library has verified the signature. In Node.js, use your JWT library’s verify function with the key and an explicit algorithm list rather than a decode-only helper.</p>
+<h2>Frequently asked questions</h2>
+<div class="faq">
+<details><summary>How do I decode a JWT token?</summary><p>Paste it into the decoder above and press Decode. You will see the header, the payload and the issued and expiry times. To do it by hand, split the token at the dots and Base64URL-decode the first two parts; each is a JSON object. Remember that this shows the claims without proving they are genuine.</p></details>
+<details><summary>Is JWT decode safe?</summary><p>Decoding itself is harmless, because it only reads data the token already exposes. The risk is where you paste it. This page decodes in your browser and sends nothing, but a live token is a credential, so avoid pasting production tokens into any site, and never treat decoded claims as trusted without verifying the signature.</p></details>
+<details><summary>Can I decode a JWT without the secret key?</summary><p>Yes. The header and payload of a signed JWT are Base64URL-encoded, not encrypted, so they can be read without any key. The key is needed only to verify the signature, or to decrypt an encrypted JWT (JWE), which has five parts instead of three. Do not put secrets in a signed token’s payload.</p></details>
+<details><summary>How can I decode a JWT in Python?</summary><p>With the PyJWT library, <code>jwt.decode(token, key, algorithms=["HS256"])</code> verifies and decodes in one step. To read claims without verifying, pass <code>options={"verify_signature": False}</code>; the <a href="https://pyjwt.readthedocs.io/en/stable/usage.html" rel="nofollow noopener">PyJWT documentation</a> warns that the claims then cannot be trusted. <code>jwt.get_unverified_header(token)</code> reads the header, for example to find the kid.</p></details>
+</div>
+<h2>Sources</h2>
+<ul class="sources">
+<li><a href="https://www.rfc-editor.org/rfc/rfc8259" rel="nofollow noopener">IETF RFC 8259 — The JSON Data Interchange Format</a></li>
+<li><a href="https://www.rfc-editor.org/rfc/rfc7519" rel="nofollow noopener">IETF RFC 7519 — JSON Web Token (JWT)</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions" rel="nofollow noopener">MDN — Regular expressions</a></li>
+<li><a href="https://www.rfc-editor.org/rfc/rfc7515" rel="nofollow noopener">IETF RFC 7515 — JSON Web Signature (May 2015)</a></li>
+<li><a href="https://www.rfc-editor.org/rfc/rfc8725" rel="nofollow noopener">IETF RFC 8725 — JSON Web Token Best Current Practices (2020)</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/atob" rel="nofollow noopener">MDN — Window: atob() method</a></li>
+<li><a href="https://pyjwt.readthedocs.io/en/stable/usage.html" rel="nofollow noopener">PyJWT documentation — Usage examples</a></li>
+</ul>
+<h2>Related tools</h2>
+<ul>
+<li><a href="/json-to-csv/">JSON to CSV Converter</a></li>
+<li><a href="/json-to-yaml/">JSON to YAML and XML Converter</a></li>
+<li><a href="/base64-decode/">Base64 Decode and Encode</a></li>
+<li><a href="/url-encode-decode/">URL Encode and Decode</a></li>
+<li><a href="/hash-generator/">Hash Generator</a></li>
+<li><a href="/json-formatter/">JSON Formatter &amp; Validator</a></li>
+<li><a href="/unix-timestamp-converter/">Unix Timestamp Converter</a></li>
+<li><a href="/json-viewer/">JSON Viewer</a></li>
+</ul>
+<p class="disclaimer">Tools run locally in your browser. Provided as-is.</p>
+</div></main>
+<footer class="site"><div class="wrap">
+<p><a href="/json-formatter/">JSON Formatter &amp; Validator</a> <a href="/base64-decode/">Base64 Decode and Encode</a> <a href="/unix-timestamp-converter/">Unix Timestamp Converter</a> <a href="/json-viewer/">JSON Viewer</a> <a href="/diff-checker/">Diff Checker</a> <a href="/url-encode-decode/">URL Encode and Decode</a> <a href="/">All tools</a></p>
+<p><a href="/about/">About</a><a href="/methodology/">Methodology</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></p>
+<p>Tools run locally in your browser. Provided as-is.</p>
+<p>© <span id="y"></span> Quick JSON Tools</p>
+</div></footer>
+<script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+</body>
+</html>

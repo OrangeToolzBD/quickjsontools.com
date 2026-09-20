@@ -1,0 +1,35 @@
+# Quick JSON Tools
+
+> Quick JSON Tools is a set of free developer utilities that run entirely in the browser, so pasted data is never uploaded.
+
+## Tools
+- [JSON Formatter & Validator](https://quickjsontools.com/json-formatter/): Format, minify and validate JSON with the exact line and column of any error. Runs entirely in your browser; nothing you paste is uploaded.
+- [Diff Checker](https://quickjsontools.com/diff-checker/): Compare two versions of text, code or JSON and see every added and removed line. Runs in your browser, so private files never leave your machine.
+- [Regex Tester](https://quickjsontools.com/regex-tester/): Test a regular expression against your text and see every match and capture group. JavaScript regex flavor, with a guard against runaway patterns.
+- [JWT Decoder](https://quickjsontools.com/jwt-decoder/): Decode a JWT’s header and payload and see when it expires. Decoding happens in your browser; the token is never sent anywhere.
+- [JSON Validator](https://quickjsontools.com/json-validator/): Validate JSON and see the exact line and column of any syntax error. Runs in your browser, so the data you paste never leaves your machine.
+- [JSON Viewer](https://quickjsontools.com/json-viewer/): Open JSON as a collapsible tree to explore nested objects and arrays. Everything you paste stays in your browser.
+- [JSON Diff](https://quickjsontools.com/json-diff/): Compare two JSON documents by structure, not text: see every added, removed and changed value with its path, ignoring key order.
+- [JSON to CSV Converter](https://quickjsontools.com/json-to-csv/): Convert JSON arrays to CSV for Excel or Sheets, or CSV back to JSON. Nested fields become columns; conversion happens in your browser.
+- [JSON to YAML and XML Converter](https://quickjsontools.com/json-to-yaml/): Convert JSON to YAML or XML, and YAML back to JSON, without uploading your files. Arrays and nested objects are handled.
+- [YAML Validator](https://quickjsontools.com/yaml-validator/): Check YAML for syntax errors with the line and column of each problem, and see the parsed result. Private: nothing is uploaded.
+- [XML Formatter](https://quickjsontools.com/xml-formatter/): Format or minify XML with consistent indentation and spot mismatched tags. Works offline in your browser.
+- [Base64 Decode and Encode](https://quickjsontools.com/base64-decode/): Decode Base64 to text or encode text to Base64, with full UTF-8 support and URL-safe input. Runs locally in your browser.
+- [URL Encode and Decode](https://quickjsontools.com/url-encode-decode/): Encode text for URLs or decode percent-encoded strings, with options for full URLs and plus signs as spaces.
+- [Unix Timestamp Converter](https://quickjsontools.com/unix-timestamp-converter/): Convert Unix epoch timestamps to dates and dates to timestamps, in seconds or milliseconds, in UTC and your local time.
+- [UUID Generator](https://quickjsontools.com/uuid-generator/): Generate random v4 or time-ordered v7 UUIDs in bulk with your browser’s secure random generator, and check any UUID’s version.
+- [Hash Generator](https://quickjsontools.com/hash-generator/): Generate SHA-256, SHA-512, SHA-1 and MD5 hashes of any text in your browser, using the Web Crypto API.
+- [Case Converter](https://quickjsontools.com/case-converter/): Change text to UPPER, lower, Title Case, Sentence case, camelCase, PascalCase, snake_case, kebab-case or CONSTANT_CASE in one click.
+- [SQL Formatter](https://quickjsontools.com/sql-formatter/): Format SQL for PostgreSQL, MySQL, SQL Server, SQLite and BigQuery with consistent indentation and keyword case, in your browser.
+- [HTML Beautifier](https://quickjsontools.com/html-beautifier/): Indent messy HTML so it is readable, or strip whitespace between tags to minify it. Nothing is uploaded.
+- [Cron Expression Generator](https://quickjsontools.com/cron-expression-generator/): Paste a cron expression to see it in plain English and its next run times. Supports ranges, steps, lists and month and day names.
+- [JSON Stringify and Escape](https://quickjsontools.com/json-stringify/): Turn JSON or text into an escaped JSON string, parse an escaped string back, or minify JSON to one line.
+- [JSON Schema Generator](https://quickjsontools.com/json-schema-generator/): Generate a draft 2020-12 JSON Schema from a sample document, with types, nested properties and required fields, then refine it.
+
+## Guides and data
+
+
+## Sources
+- IETF RFC 8259 — The JSON Data Interchange Format: https://www.rfc-editor.org/rfc/rfc8259
+- IETF RFC 7519 — JSON Web Token (JWT): https://www.rfc-editor.org/rfc/rfc7519
+- MDN — Regular expressions: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions

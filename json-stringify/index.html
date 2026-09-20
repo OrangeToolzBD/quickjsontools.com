@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JSON Stringify Online — Escape and Unescape JSON</title>
+<meta name="description" content="Turn JSON or text into an escaped JSON string, parse an escaped string back, or minify JSON to one line.">
+<link rel="canonical" href="https://quickjsontools.com/json-stringify/">
+<meta property="og:title" content="JSON Stringify Online — Escape and Unescape JSON">
+<meta property="og:description" content="Turn JSON or text into an escaped JSON string, parse an escaped string back, or minify JSON to one line.">
+<meta property="og:url" content="https://quickjsontools.com/json-stringify/">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://quickjsontools.com/assets/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://quickjsontools.com/assets/og-image.png">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="icon" type="image/png" href="/assets/favicon.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<style>:root{--brand:#4338ca;--font:ui-sans-serif, system-ui, "Segoe UI", sans-serif}</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://quickjsontools.com/#org","name":"Quick JSON Tools","url":"https://quickjsontools.com/","description":"Quick JSON Tools is a set of free developer utilities that run entirely in the browser, so pasted data is never uploaded."},{"@type":"WebApplication","name":"JSON Stringify and Escape","url":"https://quickjsontools.com/json-stringify/","description":"Turn JSON or text into an escaped JSON string, parse an escaped string back, or minify JSON to one line.","applicationCategory":"DeveloperApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@id":"https://quickjsontools.com/#org"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Quick JSON Tools","item":"https://quickjsontools.com/"},{"@type":"ListItem","position":2,"name":"JSON Stringify and Escape","item":"https://quickjsontools.com/json-stringify/"}]}]}</script>
+
+<script src="/assets/calculator.js" defer></script>
+<script src="/assets/calc-core.js" defer></script>
+</head>
+<body>
+<header class="site"><div class="wrap"><a class="logo" href="/"><img src="/assets/logo.png" alt="Quick JSON Tools" width="60" height="34"></a><nav class="site"><a href="/json-formatter/">JSON Formatter</a><a href="/base64-decode/">Base64 Decode and Encode</a><a href="/unix-timestamp-converter/">Unix Timestamp Converter</a><a href="/json-viewer/">JSON Viewer</a></nav></div></header>
+<main><div class="wrap">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="/">Quick JSON Tools</a> › JSON Stringify and Escape</nav>
+<h1>JSON Stringify and Escape</h1>
+<p class="answer">Use this <strong>JSON stringify online</strong> tool to turn any text into an escaped JSON string, parse an escaped string back to plain text, or minify JSON to one line. Quotes, backslashes and control characters are escaped as <a href="https://www.rfc-editor.org/rfc/rfc8259" rel="nofollow noopener">RFC 8259</a> requires, using the same JSON.stringify your JavaScript code runs, locally in your browser.</p>
+<p class="updated">Updated <time datetime="2026-09-20">September 20, 2026</time> · By <a href="/about/">Quick JSON Tools</a></p>
+<div id="calculator" data-calc="jsonStringify"><noscript>This tool needs JavaScript turned on.</noscript></div>
+<div class="ad-slot"><!-- Ad slot 1 (below the tool). Empty until the ad network is approved; reserve its height in CSS first. --></div>
+<h2>What does JSON.stringify do?</h2>
+<p>JSON.stringify converts a JavaScript value into JSON text. Objects and arrays become JSON syntax, strings are wrapped in double quotes with special characters escaped, and values JSON cannot represent are dropped or replaced. An optional third argument adds indentation.</p><p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify" rel="nofollow noopener">MDN’s reference</a> (updated August 28, 2026) lists the edge cases that catch people out:</p><ul><li>undefined, functions and symbols are left out of objects and become null inside arrays.</li><li>NaN and Infinity become null.</li><li>BigInt values and circular references throw a TypeError.</li><li>Dates are written as ISO strings through their toISOString method.</li><li>A numeric indent is capped at 10 spaces.</li></ul><pre><code>JSON.stringify({ a: undefined, b: [undefined, NaN], c: new Date(0) })
+// '{"b":[null,null],"c":"1970-01-01T00:00:00.000Z"}'
+JSON.stringify("say \"hi\"")
+// '"say \"hi\""' </code></pre><p>On this page, <strong>Stringify</strong> treats whatever you paste as one string and returns it as a JSON string literal. That is what you need to embed text, or a whole JSON document, inside another JSON value.</p>
+<h2>How do I escape quotes and newlines in JSON?</h2>
+<p>Inside a JSON string, write a double quote as \", a backslash as \\, a newline as \n, a carriage return as \r and a tab as \t. RFC 8259 requires escaping quotation marks, backslashes and control characters U+0000 to U+001F; any other character may appear as-is or as a \u escape.</p><p>Paste the raw text and press <strong>Stringify</strong> to have it done for you. For example, these two lines:</p><pre><code>line one
+line "two"</code></pre><p>become</p><pre><code>"line one\nline \"two\""</code></pre><p>Characters outside ASCII, such as é, and the forward slash are left unescaped, which is valid JSON. Common mistakes: escaping a single quote (\' is not a JSON escape), leaving Windows paths with single backslashes, and pasting multi-line text into a string without escaping the line breaks. The <a href="/json-validator/">JSON validator</a> flags all three.</p>
+<h2>How do I unescape a JSON string?</h2>
+<p>Paste the escaped string, including its outer double quotes, and press <strong>Parse a JSON string back</strong>. The tool runs JSON.parse and returns the plain text, with \n turned back into real line breaks and \" into quotes. If the input parses to something other than a string, the tool says so.</p><p>This is handy for double-encoded JSON, where a JSON document was stored as a string inside another document, as in log lines or message queues:</p><pre><code>"{\"id\":7,\"ok\":true}"          ← escaped string
+{"id":7,"ok":true}                ← after "Parse a JSON string back"</code></pre><p>Paste the result back in and press <strong>Minify JSON to one line</strong>, or open it in the <a href="/json-formatter/">JSON formatter</a> to read it. In code, the same unwrapping is two parses:</p><pre><code>const inner = JSON.parse(JSON.parse(escaped));   // JavaScript
+inner = json.loads(json.loads(escaped))          # Python</code></pre>
+<h2>Frequently asked questions</h2>
+<div class="faq">
+<details><summary>What is the difference between JSON.stringify and toString?</summary><p>JSON.stringify produces JSON text that can be parsed back, with quoted strings and nested structure intact. An object’s default toString returns "[object Object]", and an array’s joins its items with commas, losing quotes and nesting. Use JSON.stringify whenever the output must be read by another program.</p></details>
+<details><summary>How do I convert a stringified JSON back into an object?</summary><p>Call JSON.parse on it in JavaScript or json.loads in Python. If the result is still a string that starts with { or [, the JSON was encoded twice, so parse it once more. The Parse button on this page performs one level of unwrapping.</p></details>
+<details><summary>Does JSON.stringify escape Unicode characters?</summary><p>No. Characters such as é stay as they are, which is valid because JSON text is UTF-8. Only quotes, backslashes and control characters must be escaped. If a system needs pure ASCII, it has to convert other characters to \u escapes itself.</p></details>
+</div>
+<h2>Sources</h2>
+<ul class="sources">
+<li><a href="https://www.rfc-editor.org/rfc/rfc8259" rel="nofollow noopener">IETF RFC 8259 — The JSON Data Interchange Format</a></li>
+<li><a href="https://www.rfc-editor.org/rfc/rfc7519" rel="nofollow noopener">IETF RFC 7519 — JSON Web Token (JWT)</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions" rel="nofollow noopener">MDN — Regular expressions</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify" rel="nofollow noopener">MDN — JSON.stringify()</a></li>
+</ul>
+<h2>Related tools</h2>
+<ul>
+<li><a href="/json-formatter/">JSON Formatter &amp; Validator</a></li>
+<li><a href="/json-validator/">JSON Validator</a></li>
+<li><a href="/json-viewer/">JSON Viewer</a></li>
+<li><a href="/json-diff/">JSON Diff</a></li>
+<li><a href="/json-schema-generator/">JSON Schema Generator</a></li>
+<li><a href="/base64-decode/">Base64 Decode and Encode</a></li>
+<li><a href="/unix-timestamp-converter/">Unix Timestamp Converter</a></li>
+<li><a href="/diff-checker/">Diff Checker</a></li>
+</ul>
+<p class="disclaimer">Tools run locally in your browser. Provided as-is.</p>
+</div></main>
+<footer class="site"><div class="wrap">
+<p><a href="/json-formatter/">JSON Formatter &amp; Validator</a> <a href="/base64-decode/">Base64 Decode and Encode</a> <a href="/unix-timestamp-converter/">Unix Timestamp Converter</a> <a href="/json-viewer/">JSON Viewer</a> <a href="/diff-checker/">Diff Checker</a> <a href="/url-encode-decode/">URL Encode and Decode</a> <a href="/">All tools</a></p>
+<p><a href="/about/">About</a><a href="/methodology/">Methodology</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></p>
+<p>Tools run locally in your browser. Provided as-is.</p>
+<p>© <span id="y"></span> Quick JSON Tools</p>
+</div></footer>
+<script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+</body>
+</html>
